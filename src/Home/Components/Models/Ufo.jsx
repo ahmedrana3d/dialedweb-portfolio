@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react-refresh/only-export-components */
 
 
 import React, { useEffect, useImperativeHandle, useRef } from 'react'
