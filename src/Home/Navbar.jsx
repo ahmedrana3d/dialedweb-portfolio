@@ -45,7 +45,7 @@ export default function Navbar() {
         </div>
       </div>
       {/* BELOW CODE FOR SMALLER DEVICE */}
-      <div className="lg:hidden">
+      <div className="lg:hidden absolute z-50">
         <button
           onClick={() => setMenuOpened(!menuOpened)}
           className="z-20 fixed top-12 right-12 p-3  bg-transparent  w-24 h-24 rounded-md"
