@@ -1,0 +1,78 @@
+{
+  "sheetsById": {
+    "Demo Sheet": {
+      "staticOverrides": {
+        "byObject": {
+          "translateX": {
+            "value": -87
+          },
+          "Clouds": {
+            "posZ": -80
+          }
+        }
+      },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 5.9,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "Clouds": {
+            "trackData": {
+              "dtfDAlJlQ0": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Clouds:[\"posZ\"]",
+                "keyframes": [
+                  {
+                    "id": "0WH59bjeFt",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.455,
+                      0.03
+                    ],
+                    "type": "bezier",
+                    "value": 50
+                  },
+                  {
+                    "id": "8uA6ZFW3ER",
+                    "position": 2,
+                    "connectedRight": true,
+                    "handles": [
+                      0.515,
+                      0.955,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -80
+                  }
+                ]
+              },
+              "aVk5T3qLsS": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Clouds:[\"posX\"]",
+                "keyframes": []
+              },
+              "DE-eKZlRu-": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Clouds:[\"posY\"]",
+                "keyframes": []
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"posZ\"]": "dtfDAlJlQ0",
+              "[\"posX\"]": "aVk5T3qLsS",
+              "[\"posY\"]": "DE-eKZlRu-"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitionVersion": "0.4.0",
+  "revisionHistory": [
+    "daYysVKzgfyRKBJR"
+  ]
+}

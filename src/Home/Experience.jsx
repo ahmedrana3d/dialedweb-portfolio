@@ -5,14 +5,15 @@ import { useGLTF, OrbitControls, Sky, Environment, Clouds, Cloud, CameraControls
 import * as THREE from "three"
 import Ufo from './Components/Models/Ufo'
 import { getProject, types } from '@theatre/core'
-import studio from '@theatre/studio'
+// import studio from '@theatre/studio'
 import { useControls } from 'leva'
 import { Howl } from 'howler';
+import DialedWebAnimation from "../../public/animation/cloud-anime.json";
 import { useRecoilState , useRecoilValue } from 'recoil'
 import { loadingProgress , enterClicked } from '../state/atoms';
 import CloudsEnvironment from './Components/CloudsEnvironment'
 
-studio.initialize()
+// studio.initialize()
 
 const Experience = () => {
 
@@ -22,7 +23,7 @@ const [loadProgress , setLoadingProgress] = useRecoilState(loadingProgress)
 const enterExpClicked = useRecoilValue(enterClicked)
 
 
-const sheet = getProject("Demo Project").sheet(
+const sheet = getProject("Demo Project", { state: DialedWebAnimation }).sheet(
     "Demo Sheet"
   );
 
