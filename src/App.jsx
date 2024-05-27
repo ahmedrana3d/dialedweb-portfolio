@@ -1,18 +1,12 @@
-
-import { Canvas } from "@react-three/fiber"
-import Home from "./Home/Home"
-
-
-
+import { Canvas } from "@react-three/fiber";
+import Home from "./Home/Home";
 
 function App() {
-
-
   return (
     <>
-<Home/>
+      <Home />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
