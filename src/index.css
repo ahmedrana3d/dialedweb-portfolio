@@ -1,9 +1,25 @@
+@tailwind utilities;
 @tailwind base;
 @tailwind components;
 
+html,
+body #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+canvas {
+  width: 100vw;
+  height: 100vh;
+}
+
 .cube-loader {
   position: relative;
-/* u can choose any size */
+  /* u can choose any size */
   width: 75px;
   height: 75px;
   transform-style: preserve-3d;
@@ -36,7 +52,7 @@
   height: 100%;
   /* top: 0;
   left: 0; */
-                                     /* width 75px / 2 = 37.5px */
+  /* width 75px / 2 = 37.5px */
   transform: rotateY(calc(90deg * var(--i))) translateZ(37.5px);
   background: linear-gradient(
     to bottom,
@@ -64,30 +80,25 @@
   width: 75px;
   height: 75px;
   background: hsl(330, 3.13%, 25.1%) 0%;
-                      /* width 75px / 2 = 37.5px */
+  /* width 75px / 2 = 37.5px */
   transform: rotateX(90deg) translateZ(37.5px);
   transform-style: preserve-3d;
 }
 
 .cube-top::before {
-  content: '';
+  content: "";
   position: absolute;
-/* u can choose any size */
+  /* u can choose any size */
   width: 75px;
   height: 75px;
   background: hsl(176.61, 42.28%, 40.7%) 19.6%;
   transform: translateZ(-90px);
   filter: blur(10px);
-  box-shadow: 0 0 10px #323232,
-              0 0 20px hsl(176.61, 42.28%, 40.7%) 19.6%,
-              0 0 30px #323232,
-              0 0 40px hsl(176.61, 42.28%, 40.7%) 19.6%;
+  box-shadow: 0 0 10px #323232, 0 0 20px hsl(176.61, 42.28%, 40.7%) 19.6%,
+    0 0 30px #323232, 0 0 40px hsl(176.61, 42.28%, 40.7%) 19.6%;
 }
 
-
 /* Enter Button Loading  */
-
-
 
 #loading-enter-btn {
   color: white;
@@ -96,15 +107,16 @@
   border: none;
   background: none;
   font-weight: 600;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 #loading-enter-btn::before {
   margin-left: auto;
 }
 
-#loading-enter-btn::after, #loading-enter-btn::before {
-  content: '';
+#loading-enter-btn::after,
+#loading-enter-btn::before {
+  content: "";
   width: 0%;
   height: 2px;
   background: #f44336;
@@ -112,20 +124,59 @@
   transition: 0.5s;
 }
 
-#loading-enter-btn:hover::after, #loading-enter-btn:hover::before {
+#loading-enter-btn:hover::after,
+#loading-enter-btn:hover::before {
   width: 100%;
 }
 
-
-@tailwind utilities;
-
-#root{
-  width: 100%;
-  height: 100%;
+.mouse {
+	width: 50px;
+	height: 90px;
+	border: 3px solid #c0c0c0;
+	border-radius: 60px;
+	position: relative;
+	&::before {
+		content: '';
+		width: 12px;
+		height: 12px;
+		position: absolute;
+		top: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: #829190;
+		border-radius: 50%;
+		opacity: 1;
+		animation: wheel 2s infinite;
+		-webkit-animation: wheel 2s infinite;
+	}
 }
 
-canvas{
-  width: 100vw;
-  height: 100vh;
+@keyframes wheel {
+	to {
+		opacity: 0;
+		top: 60px;
+	}
 }
 
+@-webkit-keyframes wheel {
+	to {
+		opacity: 0;
+		top: 60px;
+	}
+}
+
+
+
+#test {
+  font-family: georgia;
+  background: linear-gradient(#33354B, #33354B) left no-repeat, #ffffff;
+  background-size: 0% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 1s ease-in-out;
+}
+
+#test:hover {
+  background-size: 100% 100%;
+}

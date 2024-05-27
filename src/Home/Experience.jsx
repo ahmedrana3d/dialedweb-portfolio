@@ -1,27 +1,19 @@
 // import { OrbitControls, Sky } from '@react-three/drei'
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import {
-  useGLTF,
-  OrbitControls,
   Sky,
-  Environment,
-  Clouds,
-  Cloud,
-  CameraControls,
   Float,
   useProgress,
   StatsGl,
 } from "@react-three/drei";
-import * as THREE from "three";
 import Ufo from "./Components/Models/Ufo";
 import { getProject, types } from "@theatre/core";
 import studio from "@theatre/studio";
-import { useControls } from "leva";
-import { Howl } from "howler";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { loadingProgress, enterClicked } from "../state/atoms";
 import CloudsEnvironment from "./Components/CloudsEnvironment";
+import { easing } from "maath";
 
 studio.initialize();
 
@@ -72,9 +64,9 @@ const Experience = () => {
   const { progress } = useProgress();
 
   setLoadingProgress(progress);
-  useEffect(() => {
-    console.log(loadProgress);
-  }, [loadProgress]);
+  // useEffect(() => {
+  //   console.log(loadProgress);
+  // }, [loadProgress]);
 
   return (
     <div id="canvas-container">
@@ -83,12 +75,14 @@ const Experience = () => {
           id="main-canvas"
           camera={{ fov: 45, near: 0.1, far: 1000, position: [0, 1.5, 26] }}
         >
+          <CameraRig>
+
           <Float
             speed={3} // Animation speed, defaults to 1
             rotationIntensity={0.2} // XYZ rotation intensity, defaults to 1
             floatIntensity={1} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
             floatingRange={[-0.03, 0.05]} // Range of y-axis values the object will float within, defaults to [-0.1
-          >
+            >
             <Ufo ref={ufoRef} />
           </Float>
 
@@ -97,9 +91,10 @@ const Experience = () => {
             bounds={50}
             volume={50}
             position={cloudPosZ}
-          />
+            />
 
           <Sky />
+            </CameraRig>
         </Canvas>
       </Suspense>
     </div>
@@ -107,3 +102,16 @@ const Experience = () => {
 };
 
 export default Experience;
+
+function CameraRig({ children }) {
+  const group = useRef();
+  useFrame((state, delta) => {
+    easing.dampE(
+      group.current.rotation,
+      [0, -state.pointer.x / 10, 0],
+      1.3,
+      delta
+    );
+  });
+  return <group ref={group}>{children}</group>;
+}
