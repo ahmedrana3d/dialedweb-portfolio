@@ -28,12 +28,12 @@ useImperativeHandle(ref, () => ({
   }));
 
 useFrame(()=>{
-    ufo_body.current.rotation.z += 0.007
+    ufo_body.current.rotation.z += 0.004
 })
 
 
   return (
-    <group ref={group}  {...props} dispose={null}>
+    <group ref={group} position={[0, 0.5 , 0]} {...props} dispose={null}>
       <group name="Scene">
         <group
         ref={ufo_body}
