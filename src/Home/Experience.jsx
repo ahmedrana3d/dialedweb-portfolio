@@ -151,9 +151,6 @@ const sheet = getProject("Demo Project", {state : DialedWebAnimation} ).sheet(
            <Stars posY={starsPosY}/> 
 
 
-
-<StatsGl/>
-
         </Canvas>
       </Suspense>
     </div>
