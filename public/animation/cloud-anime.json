@@ -8,12 +8,29 @@
           },
           "Clouds": {
             "posZ": -80
+          },
+          "Sky Color": {
+            "bottomColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "topColor": {
+              "r": 0.2784313725490196,
+              "g": 0.6352941176470588,
+              "b": 0.8392156862745098,
+              "a": 1
+            }
+          },
+          "Stars": {
+            "posY": -700
           }
         }
       },
       "sequence": {
         "subUnitsPerUnit": 30,
-        "length": 5.9,
+        "length": 11.05,
         "type": "PositionalSequence",
         "tracksByObject": {
           "Clouds": {
@@ -47,6 +64,19 @@
                     ],
                     "type": "bezier",
                     "value": -80
+                  },
+                  {
+                    "id": "HAjhSRuUby",
+                    "position": 4,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 60
                   }
                 ]
               },
@@ -66,6 +96,137 @@
               "[\"posX\"]": "aVk5T3qLsS",
               "[\"posY\"]": "DE-eKZlRu-"
             }
+          },
+          "Stars": {
+            "trackData": {
+              "ySj1yvXZKw": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Stars:[\"posY\"]",
+                "keyframes": [
+                  {
+                    "id": "oJIzjaI2IV",
+                    "position": 3.5,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -700
+                  },
+                  {
+                    "id": "k7oUiOZU5r",
+                    "position": 6,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -350
+                  }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"posY\"]": "ySj1yvXZKw"
+            }
+          },
+          "Sky Color": {
+            "trackData": {
+              "PU_Vo3YpkQ": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Sky Color:[\"topColor\"]",
+                "keyframes": [
+                  {
+                    "id": "oU6LKIT4Lb",
+                    "position": 3,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": {
+                      "r": 0.2784313725490196,
+                      "g": 0.6352941176470588,
+                      "b": 0.8392156862745098,
+                      "a": 1
+                    }
+                  },
+                  {
+                    "id": "BUXQgNn92L",
+                    "position": 3.967,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ]
+              },
+              "D_I7jijR0E": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Sky Color:[\"bottomColor\"]",
+                "keyframes": [
+                  {
+                    "id": "rE_vDPbSQp",
+                    "position": 3,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    }
+                  },
+                  {
+                    "id": "9LDo6gwsxs",
+                    "position": 3.967,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"topColor\"]": "PU_Vo3YpkQ",
+              "[\"bottomColor\"]": "D_I7jijR0E"
+            }
           }
         }
       }
@@ -73,6 +234,7 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "SLe5stjnXzOsvwKJ",
     "daYysVKzgfyRKBJR"
   ]
 }

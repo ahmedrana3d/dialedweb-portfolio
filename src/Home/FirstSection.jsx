@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { enterClicked } from "../state/atoms";
 import { useRecoilState } from "recoil";
+import ScrollDetector from "./Components/ScrollDetector";
 
 const FirstSection = () => {
   const enterExpClicked = useRecoilState(enterClicked);
@@ -66,6 +67,7 @@ const FirstSection = () => {
         <div className="mouse opacity-0"></div>
       </div>
       <Experience />
+     <ScrollDetector/>
     </div>
   );
 };
