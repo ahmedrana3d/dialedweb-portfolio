@@ -2,14 +2,12 @@
 @tailwind base;
 @tailwind components;
 
-
-
 @font-face {
-  font-family: 'Horizon';
-  src: url('./fonts/newhorizon.otf') format('opentype');
+  font-family: "Horizon";
+  src: url("./fonts/newhorizon.otf") format("opentype");
 }
 
-.fontHorizon{
+.fontHorizon {
   font-family: Horizon;
 }
 
@@ -141,46 +139,44 @@ canvas {
 }
 
 .mouse {
-	width: 50px;
-	height: 90px;
-	border: 3px solid #0f0f0f;
-	border-radius: 60px;
-	position: relative;
-	&::before {
-		content: '';
-		width: 12px;
-		height: 12px;
-		position: absolute;
-		top: 10px;
-		left: 50%;
-		transform: translateX(-50%);
-		background-color: #000000;
-		border-radius: 50%;
-		opacity: 1;
-		animation: wheel 2s infinite;
-		-webkit-animation: wheel 2s infinite;
-	}
+  width: 50px;
+  height: 90px;
+  border: 3px solid #0f0f0f;
+  border-radius: 60px;
+  position: relative;
+  &::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000000;
+    border-radius: 50%;
+    opacity: 1;
+    animation: wheel 2s infinite;
+    -webkit-animation: wheel 2s infinite;
+  }
 }
 
 @keyframes wheel {
-	to {
-		opacity: 0;
-		top: 60px;
-	}
+  to {
+    opacity: 0;
+    top: 60px;
+  }
 }
 
 @-webkit-keyframes wheel {
-	to {
-		opacity: 0;
-		top: 60px;
-	}
+  to {
+    opacity: 0;
+    top: 60px;
+  }
 }
-
-
 
 #test {
   font-family: Horizon;
-  background: linear-gradient(#33354B, #33354B) left no-repeat, #ffffff;
+  background: linear-gradient(#33354b, #33354b) left no-repeat, #ffffff;
   background-size: 0% 100%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -194,11 +190,10 @@ canvas {
 
 .neonText {
   margin-top: 45vh;
-  color: #8C52FF;
-  font-family: 'Merienda', cursive;
+  color: #8c52ff;
+  font-family: "Merienda", cursive;
   text-shadow: 0px 0px 10px #fff, 0px 0px 10px #2b00ff;
 }
-
 
 @keyframes glow {
   from {
@@ -206,5 +201,40 @@ canvas {
   }
   to {
     text-shadow: 0px 0px 30px #fff, 0px 0px 30px #2900f7;
+  }
+}
+
+.headline-blue {
+  line-height: 80%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  cursor: auto;
+  overflow: hidden;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    90deg,
+    #111111,
+    #bb87fd,
+    #bb87fd,
+    #111111,
+    #bb87fd,
+    #bb87fd,
+    #111111
+  );
+  background-size: 400% 400%;
+  animation: backgroundChange 4s linear infinite alternate;
+  display: inline;
+}
+
+@keyframes backgroundChange {
+  0% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0 0;
   }
 }
