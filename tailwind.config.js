@@ -5,8 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
-    
+    extend: {
+      keyframes: {
+        levitate: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+      },
+      animation: {
+        levitate: 'levitate 3s ease-in-out infinite',
+      },
+    },
   },
   plugins: [],
 }

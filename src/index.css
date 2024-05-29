@@ -174,7 +174,7 @@ canvas {
   }
 }
 
-#test {
+.test {
   font-family: Horizon;
   background: linear-gradient(#33354b, #33354b) left no-repeat, #ffffff;
   background-size: 0% 100%;
@@ -184,7 +184,7 @@ canvas {
   transition: 1s ease-in-out;
 }
 
-#test:hover {
+.test:hover {
   background-size: 100% 100%;
 }
 
@@ -204,9 +204,8 @@ canvas {
   }
 }
 
-.headline-blue {
+.headline-orange {
   line-height: 80%;
-  font-family: Montserrat, sans-serif;
   font-weight: 900;
   text-align: center;
   margin: 0;
@@ -217,18 +216,57 @@ canvas {
   color: transparent;
   background-image: linear-gradient(
     90deg,
-    #111111,
-    #bb87fd,
-    #bb87fd,
-    #111111,
-    #bb87fd,
-    #bb87fd,
-    #111111
+    #ff7e5f,  /* coral */
+    #feb47b,  /* peach */
+    #ff7e5f,  /* coral */
+    #feb47b,  /* peach */
+    #ff7e5f,  /* coral */
+    #feb47b,  /* peach */
+    #ff7e5f   /* coral */
   );
   background-size: 400% 400%;
   animation: backgroundChange 4s linear infinite alternate;
   display: inline;
 }
+
+.headline-dark {
+  line-height: 80%;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  cursor: auto;
+  overflow: hidden;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    90deg,
+    #000000,  /* black */
+    #3333ff,  /* dark blue */
+    #000000,  /* black */
+    #3333ff,  /* dark blue */
+    #000000,  /* black */
+    #3333ff,  /* dark blue */
+    #000000   /* black */
+  );
+  background-size: 400% 400%;
+  animation: backgroundChange 4s linear infinite alternate;
+  display: inline;
+}
+
+@keyframes backgroundChange {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+
+
+
+
 
 @keyframes backgroundChange {
   0% {
