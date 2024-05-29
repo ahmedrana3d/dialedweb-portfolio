@@ -1,15 +1,15 @@
-import React from 'react'
-import FirstSection from './FirstSection'
-import Experience from './Experience'
+import React from "react";
+import Experience from "./Experience";
+import MainSection from "./MainSection";
 
 const Home = () => {
   return (
     <div>
       <Experience />
 
-      <FirstSection/>
+      <MainSection />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
