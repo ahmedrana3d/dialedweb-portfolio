@@ -9,6 +9,10 @@
   src: url('./fonts/newhorizon.otf') format('opentype');
 }
 
+.fontHorizon{
+  font-family: Horizon;
+}
+
 html,
 body #root {
   margin: 0;

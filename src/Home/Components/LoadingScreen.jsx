@@ -50,7 +50,7 @@ const LoadingScreen = () => {
       
   return (
     <div ref={laodingScreenRef} className='bg-black absolute z-50 w-screen h-screen flex justify-center items-center flex-col gap-20 '>
-      <div className="keycaps flex">
+      <div className="keycaps flex w-72 lg:w-[600px]">
         <div onClick={playSound} className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
           <img src="./dialedweb_keys/1.png" alt="" />
         </div>

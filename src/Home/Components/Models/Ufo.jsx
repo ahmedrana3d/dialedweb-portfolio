@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useImperativeHandle, useRef } from 'react'
-import { useGLTF, useAnimations } from '@react-three/drei'
+import { useGLTF, useAnimations, StatsGl } from '@react-three/drei'
 import * as THREE from "three"
 import { useFrame } from '@react-three/fiber'
 export default React.forwardRef(function Ufo(props, ref) {
@@ -28,15 +28,16 @@ useImperativeHandle(ref, () => ({
   }));
 
 useFrame(()=>{
-    ufo_body.current.rotation.z += 0.004
+    ufo_body.current.rotation.z += 0.4
 })
+
 
 
   return (
     <group ref={group} position={[0, 0.5 , 0]} {...props} dispose={null}>
       <group name="Scene">
-        <group
-        ref={ufo_body}
+      <group
+      ref={ufo_body}
           name="Space_ship_1__Copy_"
           position={[19.592, 14.586, -5.837]}
           rotation={[Math.PI / 2, Math.PI / 6, -Math.PI / 2]}
@@ -63,7 +64,7 @@ useFrame(()=>{
               receiveShadow
               geometry={nodes.Disc_1.geometry}
               material={materials['Scratched Silver Metal.001']}
-              position={[-1.498, 4.115, 91.269]}
+              position={[-1.519, 4.138, 90.343]}
               rotation={[Math.PI, 0, 0]}
             />
           </mesh>
