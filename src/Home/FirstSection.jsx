@@ -16,9 +16,20 @@ const FirstSection = () => {
   console.log(snapshot.step);
 
   useGSAP(() => {
-    if (snapshot.step === 0) {
-      const tl = gsap.timeline({ delay: 2 });
-      if (enterExpClicked[0]) {
+    
+    if (enterExpClicked[0]) {
+      if (snapshot.step === 0) {
+        gsap.to(".section2",{
+          opacity: 0,
+          duration: 2,
+        })
+        const tl = gsap.timeline({ delay: 2 });
+        tl.set(".section2",{
+          opacity: 0,
+        })
+        tl.to(".section1",{
+          opacity: 1,
+        })
         tl.from(".anim", {
           y: -500,
           ease: "power4.out",
@@ -34,21 +45,68 @@ const FirstSection = () => {
         });
       }
     }
-    else if(snapshot.step === 1) {
-      gsap.from(".section2",{
-        y: -200,
+    if (snapshot.step === 1) {
+      const t2 = gsap.timeline();
+      t2.to(".section1", {
         opacity: 0,
+        duration: 1,
+        onComplete: () => {
+         gsap.set(".section2",{
+          opacity: 1,
+         })
+        },
+      });
+
+      t2.from(".section2", {
+        y: -210,
         ease: "power1.inOut",
         duration: 3,
         delay: 2,
-      })
+        
+      });
     }
   }, [enterExpClicked[0], snapshot.step]);
 
   return (
     <>
-      <main className="fixed w-full h-screen top-0 left-0 z-10 ">
-        {
+      <main className="fixed w-full h-screen top-0 left-0  ">
+        <Section>
+          <div className="section1 z-[1] absolute bottom-0 left-0  w-full   flex flex-col gap-10 items-center justify-center pb-32 overflow-hidden">
+            <h1 className="lg:text-3xl text-xl flex lg:gap-3 gap-2 font-mono font-semibold text-[#8C52FF] cursor-pointer ">
+              <div className="anim  h-auto">
+                <span className="neonText anim main__scroll-text text-3xl ">
+                  start
+                </span>
+              </div>
+
+              <div className="anim  h-auto">
+                <span className="neonText anim main__scroll-text text-3xl    ">
+                  scrolling
+                </span>
+              </div>
+            </h1>
+
+            <h1 className="lg:text-6xl text-1xl flex lg:gap-3 gap-2 font-mono font-semibold text-white cursor-pointer ">
+              <div className="anim">
+                <span id="test" className="anim ">
+                  BEGIN
+                </span>
+              </div>
+              <div className="anim">
+                <span id="test" className="anim">
+                  YOUR
+                </span>
+              </div>
+              <div className="anim">
+                <span id="test" className="anim">
+                  EXPERINCE
+                </span>
+              </div>
+            </h1>
+            <div className="mouse opacity-0"></div>
+          </div>
+        </Section>
+        {/* {
           snapshot.step === 0 ?
         <Section>
           <div className="absolute bottom-0 left-0 z-10 w-full   flex flex-col gap-10 items-center justify-center pb-32 overflow-hidden">
@@ -87,27 +145,16 @@ const FirstSection = () => {
           </div>
         </Section>
         : null
-        }
+        } */}
 
         <Section>
-          <div className="section2 fontHorizon lg:text-7xl text-2xl flex flex-col items-center justify-center pt-20 text-white leading-tight font-bold uppercase opacity-1 ">
-          <p className="">delve into the</p>
-          <p className="">FUTURE</p>
-
+          <div className="section2 fontHorizon z-[2]  lg:text-7xl text-2xl flex flex-col items-center justify-center pt-20 text-white leading-tight font-bold uppercase opacity-0 ">
+            <p className="">delve into the</p>
+            <p className="">FUTURE</p>
           </div>
         </Section>
-        <Section>
-        <div className="bg-red-400 absolute">
-          <h1 className="  text-6xl text-red-900">HEOOO</h1>
-
-          </div>
-        </Section>
-        <Section>
-        <div className="bg-red-400 absolute">
-          <h1 className="  text-6xl text-red-100">HEOOOOO</h1>
-
-          </div>
-        </Section>
+     
+        
       </main>
 
       <ScrollDetector />
@@ -120,7 +167,7 @@ export default FirstSection;
 const Section = ({ children }) => {
   return (
     <>
-      <div className=" w-full h-screen  ">{children}</div>
+      <div className="absolute w-full h-screen top-0 left-0 ">{children}</div>
     </>
   );
 };
