@@ -95,8 +95,8 @@ const FirstSection = () => {
 
         <Section>
           <div className="section2 fontHorizon z-[2]  lg:text-7xl text-2xl flex flex-col items-center justify-center pt-20 text-white leading-tight font-bold uppercase opacity-0 ">
-            <p className="">delve into the</p>
-            <p className="">FUTURE</p>
+            <p className="headline-blue">delve into the</p>
+            <p className="headline-blue">FUTURE</p>
           </div>
         </Section>
      
