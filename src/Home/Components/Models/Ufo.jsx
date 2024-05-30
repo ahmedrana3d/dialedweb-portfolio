@@ -4,7 +4,7 @@ import React, { useEffect, useImperativeHandle, useRef } from 'react'
 import { useGLTF, useAnimations, StatsGl } from '@react-three/drei'
 import * as THREE from "three"
 import { useFrame } from '@react-three/fiber'
-export default React.forwardRef(function Ufo(props, ref) {
+export default React.forwardRef(function Ufo(props, ref ) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('models/UFO-v1.glb')
   const { actions, names } = useAnimations(animations, group)

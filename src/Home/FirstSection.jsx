@@ -9,7 +9,6 @@ import { useRef } from "react";
 const FirstSection = () => {
   const sec2 = useRef()
   const snapshot = useSnapshot(state);
-;
   const enterExpClicked = snapshot.enterClicked;
 
   const animateSection1 = () => {

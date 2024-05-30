@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import AnimatedLinks from "../Home/Components/AnimatedLinks.jsx";
 import { useSnapshot } from "valtio";
 import state from "../state/state.js";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export default function Navbar() {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -22,12 +24,20 @@ export default function Navbar() {
       path: "/projects",
     },
   ];
-  // style={{ display: (snapshot.step ===1 ? "block": "none")}}
+
+  useGSAP(() => {
+    if (snapshot.step === 0) {
+      gsap.from(".nav", {
+        y: -200,
+        duration: 3,
+      });
+    }
+  }, [snapshot.step]);
 
   return (
     <>
       {snapshot.step === 0 ? (
-        <div className="hidden absolute z-40 w-full h-20  p-6 lg:flex items-center justify-between">
+        <div className="nav hidden absolute z-40 w-full h-20  p-6 lg:flex items-center justify-between">
           <Diallogo />
           <div>
             <ul className="flex text-2xl text-white gap-6 items-center justify-center font-serif font-semibold ">
@@ -46,7 +56,7 @@ export default function Navbar() {
           </div>
         </div>
       ) : (
-        <div className=" absolute z-[999] cursor-pointer">
+        <div className="hidden lg:flex absolute z-[999] cursor-pointer">
           <button
             onClick={() => setMenuOpened(!menuOpened)}
             className="z-20 fixed top-12 right-12 p-3  bg-transparent  w-24 h-24 rounded-md"
@@ -90,36 +100,37 @@ export default function Navbar() {
 
       {/* BELOW CODE FOR SMALLER DEVICE */}
 
-      <div className="lg:hidden absolute z-[999] cursor-pointer">
+      <div className="lg:hidden absolute z-[999] cursor-pointer ">
         <button
           onClick={() => setMenuOpened(!menuOpened)}
-          className="z-20 fixed top-12 right-12 p-3  bg-transparent  w-24 h-24 rounded-md"
+          className="z-20 fixed top-10 right-2 p-3  bg-transparent  w-16  rounded-md"
         >
           <div
             className={`bg-black h-0.5 rounded-md w-full transition-all ${
               menuOpened ? "rotate-45  translate-y-0.5" : ""
             }`}
             style={{ background: snapshot.step === 1 ? "white" : "" }}
-
           />
           <div
             className={`bg-black h-0.5 rounded-md w-full my-3 ${
               menuOpened ? "hidden" : ""
             }`}
             style={{ background: snapshot.step === 1 ? "white" : "" }}
-
           />
           <div
             className={`bg-black h-0.5 rounded-md w-full transition-all ${
               menuOpened ? "-rotate-45" : ""
             }`}
             style={{ background: snapshot.step === 1 ? "white" : "" }}
-
           />
         </button>
         <div
-          className={`z-10 fixed top-0 right-0 bottom-0 bg-white transition-all overflow-hidden flex flex-col
+          className={`z-10 fixed top-0 right-0 bottom-0  transition-all overflow-hidden flex flex-col
       ${menuOpened ? "w-72" : "w-0"}`}
+          style={{
+            background: snapshot.step === 1 ? "black" : "white",
+            color: snapshot.step === 1 ? "white" : "black",
+          }}
         >
           <div className="flex-1 flex items-center justify-center flex-col gap-16 p-8">
             <Diallogo />

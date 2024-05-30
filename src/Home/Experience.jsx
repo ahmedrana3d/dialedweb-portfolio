@@ -179,7 +179,13 @@ LOAD_PROGRESS = progress
             floatIntensity={1} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
             floatingRange={[-0.01, 0.01]} // Range of y-axis values the object will float within, defaults to [-0.1 ]
           >
-            <Ufo ref={ufoRef} position={[0, 0, xPosition]} />
+
+
+            <group position={[0, 0, xPosition]}>
+            <Ufo ref={ufoRef} position={[0, 0, 0]} />
+            </group>
+
+
           </Float>
           <CloudsEnvironment
             seed={10}
