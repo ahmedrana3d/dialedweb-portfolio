@@ -9,8 +9,6 @@ import * as THREE from "three";
 import Ufo from "./Components/Models/Ufo";
 import { getProject, types } from "@theatre/core";
 import DialedWebAnimation from "../../public/animation/cloud-anime.json";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { loadingProgress, enterClicked } from "../state/atoms";
 import CloudsEnvironment from "./Components/CloudsEnvironment";
 import { useSnapshot } from "valtio";
 import state from "../state/state";
@@ -18,30 +16,41 @@ import SkySphere from "./Components/SkySphere";
 import Stars from "./Components/Stars";
 // import studio from "@theatre/studio";
 
+
+
+// const snapshot  = useSnapshot(state);
+// let CLICKED_ENTER = snapshot.step
+
+// CLICKED_ENTER = true
+//   state.enterClicked = CLICKED_ENTER
+
 const Experience = () => {
   // studio.initialize()
 
-  const triggerAnimation = (step) => {
-    // Define your animations based on the step
-    if (step === 0) {
-      sheet.sequence.play({ direction: "reverse", range: [2, 6] });
-      console.log("First Animation");
-    } else if (step === 1) {
-      sheet.sequence.play({ range: [2, 6] });
-      console.log("Second Animation");
-    }
-  };
+
 
   const snapshot = useSnapshot(state);
 
   useEffect(() => {
-    triggerAnimation(snapshot.step);
-  }, [snapshot]);
+    if (snapshot.step === 0) {
+      sheet.sequence.play({ direction: "reverse", range: [2, 6] });
+      console.log("First Animation");
+    } else if (snapshot.step === 1) {
+      sheet.sequence.play({ range: [2, 6] });
+      console.log("Second Animation");
+    }
+  }, [snapshot.step]); // Only re-run effect if `snapshot.step` changes
 
   const ufoRef = useRef(null);
-  const [loadProgress, setLoadingProgress] = useRecoilState(loadingProgress);
 
-  const enterExpClicked = useRecoilValue(enterClicked);
+
+
+let LOAD_PROGRESS = snapshot.loadingProgress
+
+
+
+
+  const enterExpClicked = snapshot.enterClicked
 
   const sheet = getProject("Demo Project", { state: DialedWebAnimation }).sheet(
     "Demo Sheet"
@@ -131,7 +140,8 @@ const [bloomIntensity , setbloomIntensity] = useState(0)
 
   const { progress } = useProgress();
 
-  setLoadingProgress(progress);
+LOAD_PROGRESS = progress
+  state.loadingProgress = LOAD_PROGRESS
 
   const [xPosition, setXPosition] = useState(0);
 

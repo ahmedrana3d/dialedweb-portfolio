@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
 import { Howl } from 'howler';
-import { useRecoilValue, useRecoilState } from 'recoil'
-import { loadingProgress, enterClicked } from '../../state/atoms';
-
+import { useSnapshot } from 'valtio';
+import state from '../../state/state'; // Import the shared state
 
 
 const LoadingScreen = () => {
@@ -11,25 +10,31 @@ const LoadingScreen = () => {
 
 
 
-    const laodingScreenRef = useRef(null);
-    const [enterClick, setEnterClicked] = useRecoilState(enterClicked);
+    const loadingScreenRef = useRef(null);
+
+
+
+    const snapshot  = useSnapshot(state);
+    let CLICKED_ENTER = snapshot.step
+
   
     const handleClick = () => {
-      setEnterClicked(true);
+CLICKED_ENTER = true
+      state.enterClicked = CLICKED_ENTER
   
       // Check if the ref has been initialized and the current property exists
-      if (laodingScreenRef.current && laodingScreenRef.current.style) {
+      if (loadingScreenRef.current && loadingScreenRef.current.style) {
         // Manipulate the translateY property
-        laodingScreenRef.current.style.transform = 'translateY(-100%)';
+        loadingScreenRef.current.style.transform = 'translateY(-100%)';
         
         // Optionally, you can add transition or animation properties here
-        laodingScreenRef.current.style.transition = 'transform 0.3s ease-out';
+        loadingScreenRef.current.style.transition = 'transform 0.3s ease-out';
       }
   
       // Set display to 'none' after some time
       setTimeout(() => {
-        if (laodingScreenRef.current && laodingScreenRef.current.style) {
-          laodingScreenRef.current.style.display = 'none';
+        if (loadingScreenRef.current && loadingScreenRef.current.style) {
+          loadingScreenRef.current.style.display = 'none';
         }
       }, 300); // 300 milliseconds, adjust as needed
     };
@@ -37,7 +42,7 @@ const LoadingScreen = () => {
 
 
 
-    const progress = useRecoilValue(loadingProgress);
+
 
     const playSound = () => {
         const newSound = new Howl({
@@ -49,7 +54,7 @@ const LoadingScreen = () => {
           };
       
   return (
-    <div ref={laodingScreenRef} className='bg-black absolute z-50 w-screen h-screen flex justify-center items-center flex-col gap-20 '>
+    <div ref={loadingScreenRef} className='bg-black absolute z-50 w-screen h-screen flex justify-center items-center flex-col gap-20 '>
       <div className="keycaps flex w-72 lg:w-[600px]">
         <div onClick={playSound} className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
           <img src="./dialedweb_keys/1.png" alt="" />
@@ -91,8 +96,8 @@ const LoadingScreen = () => {
       </div>
     </div>
 
-    <button id='loading-enter-btn' onClick={progress === 100 ? handleClick : null}>
-  {progress === 100 ? "Enter Experience" : Math.floor(progress) + "%"}
+    <button id='loading-enter-btn' onClick={snapshot.loadingProgress === 100 ? handleClick : null}>
+  {snapshot.loadingProgress === 100 ? "Enter Experience" : Math.floor(snapshot.loadingProgress) + "%"}
 </button>
 
 

@@ -1,18 +1,16 @@
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { enterClicked } from "../state/atoms";
-import { useRecoilState } from "recoil";
 import ScrollDetector from "./Components/ScrollDetector";
 import { useSnapshot } from "valtio";
 import state from "../state/state";
 import { useRef } from "react";
 
 const FirstSection = () => {
-  const enterExpClicked = useRecoilState(enterClicked);
-const sec2 = useRef()
+  const sec2 = useRef()
   const snapshot = useSnapshot(state);
-  console.log(snapshot.step);
+;
+  const enterExpClicked = snapshot.enterClicked;
 
   const animateSection1 = () => {
     gsap.to(".section2", {

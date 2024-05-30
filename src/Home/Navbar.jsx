@@ -33,12 +33,9 @@ export default function Navbar() {
             <ul className="flex text-2xl text-white gap-6 items-center justify-center font-serif font-semibold ">
               {navLinks.map((link, i) => {
                 return (
-                  <div key={i} className=" relative font-Anto   ">
+                  <div key={i} >
                     <li
                       to={link.path}
-                      className={({ isActive }) =>
-                        `${isActive ? "text-amber-400" : ""}`
-                      }
                     >
                       <AnimatedLinks title={link.title} />
                     </li>
