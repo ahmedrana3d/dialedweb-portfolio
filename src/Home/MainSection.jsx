@@ -1,16 +1,15 @@
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 
 import ScrollDetector from "./Components/ScrollDetector";
 import { useSnapshot } from "valtio";
 import state from "../state/state";
 import { useEffect, useRef } from "react";
-// import Page1 from "./Pages/Page1";
-// import Page2 from "./Pages/Page2";
+
 import { Page1, Page2, Page3 } from "./Pages";
 
 const MainSection = () => {
   const sec2 = useRef();
+
   const snapshot = useSnapshot(state);
   console.log(snapshot.step);
 
@@ -58,6 +57,9 @@ const MainSection = () => {
   };
 
   const Section3In = () => {
+    gsap.set(".text1", { x: -200, y: -200, autoAlpha: 0 });
+    gsap.set(".text2", { x: 200, y: -200, autoAlpha: 0 });
+    gsap.set(".text3", { x: 0, y: 400, autoAlpha: 0 });
     const tl = gsap.timeline();
     tl.to(".section2", {
       opacity: 0,
@@ -66,16 +68,44 @@ const MainSection = () => {
     tl.to(".section3", {
       opacity: 1,
       duration: 1,
-    }).from(".section3", {
-      y: -270,
-      ease: "power1.inOut",
+    });
+    tl.to([".text1", ".text2", ".text3"], {
       duration: 1.5,
-      delay: 1,
+      x: 0,
+      y: 0,
+      autoAlpha: 1,
+      ease: "elastic.out(1, 0.75)",
+      stagger: 0.2,
     });
   };
 
   const Section3Out = () => {
     const tl = gsap.timeline();
+
+    tl.add(() => {
+      gsap.to(".text1", {
+        x: -200,
+        duration: 1,
+        ease: "power4.in",
+      });
+    });
+
+    tl.add(() => {
+      gsap.to(".text2", {
+        y: 200,
+        duration: 1.5,
+        ease: "power4.in",
+      });
+    }, "-=0.5");
+
+    tl.add(() => {
+      gsap.to(".text3", {
+        x: 200,
+        duration: 1.2,
+        ease: "power4.in",
+      });
+    });
+
     tl.to(".section3", {
       opacity: 0,
       duration: 1,
