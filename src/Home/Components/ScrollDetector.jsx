@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import state from '../../state/state'; // Import the shared state
 
-const MAX_STEPS = 1; // Set the maximum number of steps
+const MAX_STEPS = 2; // Set the maximum number of steps
 
 const ScrollDetector = () => {
   const [scrolling, setScrolling] = useState(false);
@@ -17,17 +17,24 @@ const ScrollDetector = () => {
 
       setScrolling(true);
       let newStep = snapshot.step;
+      let reverseAnimation = snapshot.reverse
 
       if (event.deltaY > 0) {
         // Scrolling down
         newStep = Math.min(newStep + 1, MAX_STEPS);
+        reverseAnimation = false
       } else {
         // Scrolling up
         newStep = Math.max(newStep - 1, 0);
+        reverseAnimation = true
       }
 
       state.step = newStep;
+      state.reverse = reverseAnimation
     //   triggerAnimation(newStep);
+
+
+console.log(state.reverse)
 
       // Prevent further scrolling until animation is complete
       setTimeout(() => {

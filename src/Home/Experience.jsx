@@ -14,7 +14,9 @@ import { useSnapshot } from "valtio";
 import state from "../state/state";
 import SkySphere from "./Components/SkySphere";
 import Stars from "./Components/Stars";
-// import studio from "@theatre/studio";
+import { editable as e, SheetProvider } from '@theatre/r3f'
+import studio from "@theatre/studio";
+
 
 
 
@@ -25,19 +27,28 @@ import Stars from "./Components/Stars";
 //   state.enterClicked = CLICKED_ENTER
 
 const Experience = () => {
-  // studio.initialize()
+  studio.initialize()
 
 
 
   const snapshot = useSnapshot(state);
+  const enterExpClicked = snapshot.enterClicked
 
   useEffect(() => {
-    if (snapshot.step === 0) {
-      sheet.sequence.play({ direction: "reverse", range: [2, 6] });
-      console.log("First Animation");
-    } else if (snapshot.step === 1) {
-      sheet.sequence.play({ range: [2, 6] });
-      console.log("Second Animation");
+    if (enterExpClicked == true) {    
+      if (snapshot.step === 0 && snapshot.reverse === true ) {
+        sheet.sequence.play({ direction: "reverse", range: [2, 6] });
+        console.log("First Animation Reverse");
+      }  else if (snapshot.step === 1 && snapshot.reverse === false) {
+        sheet.sequence.play({ range: [2, 6] });
+        console.log("First Animation");
+      } else if (snapshot.step === 2 && snapshot.reverse === false) {
+        sheet.sequence.play({ range: [6, 9] });
+        console.log("Second Animation");
+      } else if (snapshot.step === 1 && snapshot.reverse === true) {
+        sheet.sequence.play({ direction: "reverse", range: [6, 9] });
+        console.log("Second Animation Reversed");
+      }
     }
   }, [snapshot.step]); // Only re-run effect if `snapshot.step` changes
 
@@ -50,7 +61,6 @@ let LOAD_PROGRESS = snapshot.loadingProgress
 
 
 
-  const enterExpClicked = snapshot.enterClicked
 
   const sheet = getProject("Demo Project", { state: DialedWebAnimation }).sheet(
     "Demo Sheet"
@@ -182,7 +192,11 @@ LOAD_PROGRESS = progress
 
 
             <group position={[0, 0, xPosition]}>
+              <SheetProvider sheet={sheet}>
+              <e.group  theatreKey="Ufo">
             <Ufo ref={ufoRef} position={[0, 0, 0]} />
+              </e.group>
+              </SheetProvider>
             </group>
 
 
