@@ -50,7 +50,7 @@ const Experience = () => {
         console.log("Second Animation Reversed");
       }
     }
-  }, [snapshot.step]); // Only re-run effect if `snapshot.step` changes
+  }, [snapshot.step]); 
 
   const ufoRef = useRef(null);
 
