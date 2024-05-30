@@ -8,7 +8,7 @@ import {
 import * as THREE from "three";
 import Ufo from "./Components/Models/Ufo";
 import { getProject, types } from "@theatre/core";
-import DialedWebAnimation from "../../public/animation/cloud-anime.json";
+import DialedWebAnimation from "../Components/animation/cloud-anime.json";
 import CloudsEnvironment from "./Components/CloudsEnvironment";
 import { useSnapshot } from "valtio";
 import state from "../state/state";
