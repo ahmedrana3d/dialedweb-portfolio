@@ -4,7 +4,7 @@ import Section from "./Section";
 export default function Page3() {
   return (
     <Section>
-      <div className="section3 fontHorizon gap-6  z-[2] lg:text-6xl text-2xl flex   items-center justify-center pt-20 text-white leading-tight font-bold uppercase opacity-0  ">
+      <div className="section3 fontHorizon lg:gap-6  z-[2] lg:text-6xl text-1xl flex gap-3   items-center justify-center pt-20 text-white leading-tight font-bold uppercase opacity-0  ">
 
        
         <div className="text1 headline-orange">
