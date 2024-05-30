@@ -15,7 +15,7 @@ import state from "../state/state";
 import SkySphere from "./Components/SkySphere";
 import Stars from "./Components/Stars";
 import { editable as e, SheetProvider } from '@theatre/r3f'
-import studio from "@theatre/studio";
+// import studio from "@theatre/studio";
 
 
 
@@ -27,7 +27,7 @@ import studio from "@theatre/studio";
 //   state.enterClicked = CLICKED_ENTER
 
 const Experience = () => {
-  studio.initialize()
+  // studio.initialize()
 
 
 
