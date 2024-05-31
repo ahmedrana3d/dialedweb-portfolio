@@ -10,7 +10,7 @@ export default function Page3() {
   }, []);
   return (
     <Section>
-      <div className="section3 fontHorizon lg:gap-6  z-[2] lg:text-6xl text-1xl flex gap-3   items-center justify-center pt-20 text-white leading-tight font-bold uppercase opacity-0  ">
+      <div className="section3 fontHorizon min-w-full  lg:gap-3  z-[2] lg:text-6xl text-1xl flex  items-center justify-center  text-white pt-20 leading-tight font-bold uppercase opacity-0 ">
         {/* <div className="text1 headline-orange">
           <span>ELEVATE</span>
         </div>
@@ -22,28 +22,32 @@ export default function Page3() {
             <span key={index} className="busin inline-block">{char}</span>
           ))}
         </div> */}
-        <h1 className="flex items-center justify-center text-yellow-400  w-full">
-          <span className="letter inline-block">E</span>
-          <span className="letter inline-block">L</span>
-          <span className="letter inline-block">E</span>
-          <span className="letter inline-block">V</span>
-          <span className="letter inline-block">A</span>
-          <span className="letter inline-block">T</span>
-          <span className="letter inline-block mr-3">E</span>
-          <div className="inline-block"></div>
-          <span className="letter inline-block">Y</span>
-          <span className="letter inline-block">O</span>
-          <span className="letter inline-block">U</span>
-          <span className="letter inline-block mr-3">R</span>
-          <div className="inline-block"></div>
-          <span className="letter inline-block">B</span>
-          <span className="letter inline-block">U</span>
-          <span className="letter inline-block">S</span>
-          <span className="letter inline-block">I</span>
-          <span className="letter inline-block">N</span>
-          <span className="letter inline-block">E</span>
-          <span className="letter inline-block">S</span>
-          <span className="letter inline-block">S</span>
+        <h1 className="flex items-center  text-yellow-400  ">
+          <span className="el inline-block">E</span>
+          <span className="el inline-block">L</span>
+          <span className="el inline-block">E</span>
+          <span className="el inline-block">V</span>
+          <span className="el inline-block">A</span>
+          <span className="el inline-block">T</span>
+          <span className="el inline-block ">E</span>
+        </h1>
+        {/* <div className="inline-block"></div> */}
+        <h1 className="flex items-center  text-yellow-400   ">
+          <span className="yo inline-block">Y</span>
+          <span className="yo inline-block">O</span>
+          <span className="yo inline-block">U</span>
+          <span className="yo inline-block">R</span>
+        </h1>
+        {/* <div className="inline-block"></div> */}
+        <h1 className="flex items-center  text-yellow-400  ">
+          <span className="bus inline-block">B</span>
+          <span className="bus inline-block">U</span>
+          <span className="bus inline-block">S</span>
+          <span className="bus inline-block">I</span>
+          <span className="bus inline-block">N</span>
+          <span className="bus inline-block">E</span>
+          <span className="bus inline-block">S</span>
+          <span className="bus inline-block">S</span>
         </h1>
       </div>
     </Section>

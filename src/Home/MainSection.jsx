@@ -72,19 +72,25 @@ const MainSection = () => {
       opacity: 1,
       duration: 1,
     });
-    anime({
-      targets: ".letter",
-      opacity: 1,
-      translateY: 50,
-      rotate: {
-        value: 360,
-        duration: 2000,
-        easing: 'easeInExpo'
-      },
-      scale: anime.stagger([.7, 1], { from: 'center' }),
-      delay: anime.stagger(100, { start: 1000 }),
-      translateX: [-10, 30],
-    });
+    tl.from(".el",{
+      x: -700,
+      duration: 1,
+      ease: "power4.out",
+      stagger: 0.3
+    },0)
+    tl.from(".yo",{
+      y: -300,
+      duration: 1,
+      ease: "power4.out",
+      stagger: 0.3
+    },0)
+    tl.from(".bus",{
+      x: 700,
+      duration: 1,
+      ease: "power4.out",
+      stagger: 0.3
+    },0)
+  
     // tl.to([".text1", ".text2",".text3"], {
     //   duration: 1.5,
     //   x: 0,
