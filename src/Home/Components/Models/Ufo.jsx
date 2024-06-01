@@ -1,19 +1,17 @@
+/* eslint-disable react-refresh/only-export-components */
 
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
+import { useGLTF, useAnimations, StatsGl } from "@react-three/drei";
+import * as THREE from "three";
+import { useFrame } from "@react-three/fiber";
+export default React.forwardRef(function Ufo(props, ref) {
+  const group = useRef();
+  const { nodes, materials, animations } = useGLTF("models/UFO-v1.glb");
+  const { actions, names } = useAnimations(animations, group);
 
-import React, { useEffect, useImperativeHandle, useRef } from 'react'
-import { useGLTF, useAnimations, StatsGl } from '@react-three/drei'
-import * as THREE from "three"
-import { useFrame } from '@react-three/fiber'
-export default React.forwardRef(function Ufo(props, ref ) {
-  const group = useRef()
-  const { nodes, materials, animations } = useGLTF('models/UFO-v1.glb')
-  const { actions, names } = useAnimations(animations, group)
+  const ufo_body = useRef();
 
-const ufo_body = useRef()
-
- 
-
-const playAnimation = () => {
+  const playAnimation = () => {
     if (actions && names.length > 0) {
       const firstAnimation = actions[names[0]];
       firstAnimation.clampWhenFinished = true;
@@ -22,40 +20,40 @@ const playAnimation = () => {
     }
   };
 
-    // Forwarding the ref
-useImperativeHandle(ref, () => ({
-    playAnimation
+  // Forwarding the ref
+  useImperativeHandle(ref, () => ({
+    playAnimation,
   }));
 
-useFrame(()=>{
-    ufo_body.current.rotation.z += 0.4
-})
-
-
+  useFrame(() => {
+    ufo_body.current.rotation.z += 1;
+  });
 
   return (
-    <group ref={group} position={[0, 0.5 , 0]} {...props} dispose={null}>
+    <group ref={group} position={[0, 0.5, 0]} {...props} dispose={null}>
       <group name="Scene">
-      <group
-      ref={ufo_body}
+        <group
+          ref={ufo_body}
           name="Space_ship_1__Copy_"
           position={[19.592, 14.586, -5.837]}
           rotation={[Math.PI / 2, Math.PI / 6, -Math.PI / 2]}
-          scale={0.01}>
+          scale={0.01}
+        >
           <mesh
             name="Subdivision_Surface001"
             castShadow
             receiveShadow
             geometry={nodes.Subdivision_Surface001.geometry}
-            material={materials['Scratched Silver Metal.001']}
+            material={materials["Scratched Silver Metal.001"]}
             position={[0, -0.017, 211.25]}
-            rotation={[0, 0, 2.386]}>
+            rotation={[0, 0, 2.386]}
+          >
             <mesh
               name="Cloner_1"
               castShadow
               receiveShadow
               geometry={nodes.Cloner_1.geometry}
-              material={materials['Material.004']}
+              material={materials["Material.004"]}
               position={[0, 0, 52.725]}
             />
             <mesh
@@ -63,7 +61,7 @@ useFrame(()=>{
               castShadow
               receiveShadow
               geometry={nodes.Disc_1.geometry}
-              material={materials['Scratched Silver Metal.001']}
+              material={materials["Scratched Silver Metal.001"]}
               position={[-1.519, 4.138, 90.343]}
               rotation={[Math.PI, 0, 0]}
             />
@@ -71,7 +69,7 @@ useFrame(()=>{
         </group>
       </group>
     </group>
-  )
-})
+  );
+});
 
-useGLTF.preload('models/UFO-v1.glb')
+useGLTF.preload("models/UFO-v1.glb");

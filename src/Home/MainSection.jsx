@@ -4,11 +4,14 @@ import ScrollDetector from "./Components/ScrollDetector";
 import { useSnapshot } from "valtio";
 import state from "../state/state";
 import { useEffect, useRef } from "react";
+import anime from 'animejs/lib/anime.es.js';
 
 import { Page1, Page2, Page3 } from "./Pages";
 
 const MainSection = () => {
+  
   const sec2 = useRef();
+  
 
   const snapshot = useSnapshot(state);
   console.log(snapshot.step);
@@ -57,9 +60,9 @@ const MainSection = () => {
   };
 
   const Section3In = () => {
-    gsap.set(".text1", { x: -200, y: -200, autoAlpha: 0 });
-    gsap.set(".text2", { x: 200, y: -200, autoAlpha: 0 });
-    gsap.set(".text3", { x: 0, y: 400, autoAlpha: 0 });
+    // gsap.set(".text1", { x: -200, y: -200, autoAlpha: 0 });
+    // gsap.set(".text2", { x: 200, y: -200, autoAlpha: 0 });
+    // gsap.set(".text3", { x: 0, y: 400, autoAlpha: 0 });
     const tl = gsap.timeline();
     tl.to(".section2", {
       opacity: 0,
@@ -69,25 +72,48 @@ const MainSection = () => {
       opacity: 1,
       duration: 1,
     });
-    tl.to([".text1", ".text2", ".text3"], {
-      duration: 1.5,
-      x: 0,
-      y: 0,
-      autoAlpha: 1,
-      ease: "elastic.out(1, 0.75)",
-      stagger: 0.2,
-    });
+    tl.from(".el",{
+      x: -700,
+      duration: 1,
+      ease: "power4.out",
+      stagger: 0.3
+    },0)
+    tl.from(".yo",{
+      y: -300,
+      duration: 1,
+      ease: "power4.out",
+      stagger: 0.3
+    },0)
+    tl.from(".bus",{
+      x: 700,
+      duration: 1,
+      ease: "power4.out",
+      stagger: 0.3
+    },0)
+  
+    // tl.to([".text1", ".text2",".text3"], {
+    //   duration: 1.5,
+    //   x: 0,
+    //   y: 0,
+    //   autoAlpha: 1,
+    //   ease: "elastic.out(1, 0.75)",
+    //   stagger: 0.2,
+    // });
+
   };
+  
 
   const Section3Out = () => {
     const tl = gsap.timeline();
 
     tl.add(() => {
-      gsap.to(".text1", {
+      gsap.to(
+        ".text1", {
         x: -200,
         duration: 1,
         ease: "power4.in",
-      });
+      }
+    );
     });
 
     tl.add(() => {
@@ -139,7 +165,7 @@ const MainSection = () => {
         <Page1 />
 
         <Page2 sec2={sec2} />
-        <Page3 />
+        <Page3  />
       </main>
 
       <ScrollDetector />

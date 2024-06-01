@@ -16,7 +16,7 @@ export default function Navbar() {
       path: "/",
     },
     {
-      title: "LEARN MORE",
+      title: "LEARN",
       path: "/about",
     },
     {
@@ -91,7 +91,7 @@ export default function Navbar() {
             <div className="flex-1 flex items-center justify-center flex-col gap-16 p-8">
               <Diallogo />
               <MenuButton label="PROJECTS" />
-              <MenuButton label="LEARN MORE" />
+              <MenuButton label="LEARN" />
               <MenuButton label="CONTACT" />
             </div>
           </div>
@@ -135,7 +135,7 @@ export default function Navbar() {
           <div className="flex-1 flex items-center justify-center flex-col gap-16 p-8">
             <Diallogo />
             <MenuButton label="PROJECTS" />
-            <MenuButton label="LEARN MORE" />
+            <MenuButton label="LEARN " />
             <MenuButton label="CONTACT" />
           </div>
         </div>
