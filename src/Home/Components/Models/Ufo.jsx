@@ -1,10 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
-import { useGLTF, useAnimations, StatsGl } from "@react-three/drei";
+import React, { useEffect, useImperativeHandle, useRef } from "react";
+import { useGLTF, useAnimations } from "@react-three/drei";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { useControls } from "leva";
 export default React.forwardRef(function Ufo(props, ref) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("models/UFO-v1.glb");
