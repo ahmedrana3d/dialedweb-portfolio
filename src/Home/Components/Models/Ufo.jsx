@@ -4,12 +4,26 @@ import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { useGLTF, useAnimations, StatsGl } from "@react-three/drei";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
+import { useControls } from "leva";
 export default React.forwardRef(function Ufo(props, ref) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("models/UFO-v1.glb");
   const { actions, names } = useAnimations(animations, group);
 
   const ufo_body = useRef();
+  const ufo_disk = useRef()
+  useEffect(()=>{
+  const subDiv_ufo = ufo_disk.current.material
+subDiv_ufo.roughness = 0
+subDiv_ufo.metalness = 1
+subDiv_ufo.color = new THREE.Color("#212121")
+
+console.log(subDiv_ufo.metalness)
+
+// subDiv_ufo.Matalic = Matalic
+},[])
+
+
 
   const playAnimation = () => {
     if (actions && names.length > 0) {
@@ -57,6 +71,7 @@ export default React.forwardRef(function Ufo(props, ref) {
               position={[0, 0, 52.725]}
             />
             <mesh
+            ref={ufo_disk}
               name="Disc_1"
               castShadow
               receiveShadow
