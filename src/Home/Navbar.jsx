@@ -43,10 +43,8 @@ export default function Navbar() {
             <ul className="flex text-2xl text-white gap-6 items-center justify-center font-serif font-semibold ">
               {navLinks.map((link, i) => {
                 return (
-                  <div key={i} >
-                    <li
-                      to={link.path}
-                    >
+                  <div key={i}>
+                    <li to={link.path}>
                       <AnimatedLinks title={link.title} />
                     </li>
                   </div>
@@ -100,32 +98,37 @@ export default function Navbar() {
 
       {/* BELOW CODE FOR SMALLER DEVICE */}
 
-      <div className="lg:hidden absolute z-[999] cursor-pointer ">
-        <button
-          onClick={() => setMenuOpened(!menuOpened)}
-          className="z-20 fixed top-10 right-2 p-3  bg-transparent  w-16  rounded-md"
-        >
-          <div
-            className={`bg-black h-0.5 rounded-md w-full transition-all ${
-              menuOpened ? "rotate-45  translate-y-0.5" : ""
-            }`}
-            style={{ background: snapshot.step === 1 ? "white" : "" }}
-          />
-          <div
-            className={`bg-black h-0.5 rounded-md w-full my-3 ${
-              menuOpened ? "hidden" : ""
-            }`}
-            style={{ background: snapshot.step === 1 ? "white" : "" }}
-          />
-          <div
-            className={`bg-black h-0.5 rounded-md w-full transition-all ${
-              menuOpened ? "-rotate-45" : ""
-            }`}
-            style={{ background: snapshot.step === 1 ? "white" : "" }}
-          />
-        </button>
+      <div className="lg:hidden absolute w-full px-2 py-3 z-10 flex items-center justify-between shadow-lg shadow-white/30 ">
+        <div className="  ">
+          <Diallogo />
+        </div>
+        <div className="z-50">
+          <button
+            onClick={() => setMenuOpened(!menuOpened)}
+            className="  bg-transparent  w-16  rounded-md"
+          >
+            <div
+              className={`bg-black h-0.5 rounded-md w-full transition-all ${
+                menuOpened ? "rotate-45  translate-y-0.5" : ""
+              }`}
+              style={{ background: snapshot.step === 1 ? "white" : "" }}
+            />
+            <div
+              className={`bg-black h-0.5 rounded-md w-full my-3 ${
+                menuOpened ? "hidden" : ""
+              }`}
+              style={{ background: snapshot.step === 1 ? "white" : "" }}
+            />
+            <div
+              className={`bg-black h-0.5 rounded-md w-full transition-all ${
+                menuOpened ? "-rotate-45" : ""
+              }`}
+              style={{ background: snapshot.step === 1 ? "white" : "" }}
+            />
+          </button>
+        </div>
         <div
-          className={`z-10 fixed top-0 right-0 bottom-0  transition-all overflow-hidden flex flex-col
+          className={`z-10 fixed top-0 right-0 bottom-0 transition-all overflow-hidden flex flex-col
       ${menuOpened ? "w-72" : "w-0"}`}
           style={{
             background: snapshot.step === 1 ? "black" : "white",
@@ -133,7 +136,6 @@ export default function Navbar() {
           }}
         >
           <div className="flex-1 flex items-center justify-center flex-col gap-16 p-8">
-            <Diallogo />
             <MenuButton label="PROJECTS" />
             <MenuButton label="LEARN " />
             <MenuButton label="CONTACT" />
@@ -147,7 +149,7 @@ export default function Navbar() {
 const Diallogo = () => {
   return (
     <>
-      <div className="keycaps w-64  flex items-center select-none">
+      <div className="keycaps w-60  flex items-center select-none">
         <div className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
           <img src="./dialedweb_keys/1.png" alt="" />
         </div>
