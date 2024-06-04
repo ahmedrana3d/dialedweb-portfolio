@@ -26,18 +26,17 @@ export default function AnimatedLinks({ title }) {
 }
 
 const titleAnimation = {
-    rest: {
-      transition: {
-        staggerChildren: 0.009,
-      },
+  rest: {
+    transition: {
+      staggerChildren: 0.009,
     },
-    hover: {
-      transition: {
-        staggerChildren: 0.009,
-      },
+  },
+  hover: {
+    transition: {
+      staggerChildren: 0.009,
     },
-  };
-  
+  },
+};
 
 const letterAnimation = {
   rest: {

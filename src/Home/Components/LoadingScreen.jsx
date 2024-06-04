@@ -44,7 +44,6 @@ const LoadingScreen = () => {
       ref={loadingScreenRef}
       className="bg-black absolute z-50 w-screen h-screen flex justify-center items-center flex-col gap-20 "
     >
-      <div className="landingBg ">
         <div className="keycaps flex w-72 lg:w-[600px]">
           <div
             onClick={playSound}
@@ -100,7 +99,6 @@ const LoadingScreen = () => {
           >
             <img src="./dialedweb_keys/9.png" alt="" />
           </div>
-        </div>
       </div>
 
       <button
