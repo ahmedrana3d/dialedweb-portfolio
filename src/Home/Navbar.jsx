@@ -51,69 +51,90 @@ export default function Navbar() {
     }
   }, [snapshot.step]);
 
+  const [xPosition, setXPosition] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Adjust xPosition based on screen size
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 768) {
+        // Adjust this breakpoint according to your design
+        setXPosition(screenWidth < 768);
+      }
+    };
+
+    handleResize(); // Call it once to set initial position
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
-      <div className="nav hidden absolute z-40 w-full h-20  p-6 lg:flex items-center justify-between">
-        <Diallogo />
-        <div>
-          <ul className="flex text-2xl text-white gap-6 items-center justify-center font-serif font-semibold ">
-            {navLinks.map((link, i) => {
-              return (
-                <div key={i}>
-                  <li to={link.path}>
-                    <AnimatedLinks title={link.title} />
-                  </li>
-                </div>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
-      {/* second page */}
-      <div className="hidden secPage absolute top-0 right-0 w-full h-14 px-4  z-10 lg:flex items-center justify-between  ">
-        <div className="  ">
-          <Diallogo />
-        </div>
-        <div className="z-50">
-          <button
-            onClick={() => setMenuOpened(!menuOpened)}
-            className="  bg-transparent  w-16  rounded-md"
-          >
-            <div
-              className={`bg-black h-0.5 rounded-md w-full transition-all ${
-                menuOpened ? "rotate-45  translate-y-0.5" : ""
-              }`}
-              style={{ background: snapshot.step > 0 ? "white" : "" }}
-            />
-            <div
-              className={`bg-black h-0.5 rounded-md w-full my-3 ${
-                menuOpened ? "hidden" : ""
-              }`}
-              style={{ background: snapshot.step > 0 ? "white" : "" }}
-            />
-            <div
-              className={`bg-black h-0.5 rounded-md w-full transition-all ${
-                menuOpened ? "-rotate-45" : ""
-              }`}
-              style={{ background: snapshot.step > 0 ? "white" : "" }}
-            />
-          </button>
-        </div>
-        <div
-          className={`z-10 h-56 fixed top-0 right-0  transition-all overflow-hidden  shadow-lg shadow-orange-400 rounded-3xl
-      ${menuOpened ? "w-96" : "w-0"}`}
-          style={{
-            background: snapshot.step > 0 ? "black" : "white",
-            color: snapshot.step > 0 ? "white" : "black",
-          }}
-        >
-          <div className="absolute w-full h-full flex items-center justify-center flex-col gap-4 ">
-            <MenuButton label="PROJECTS" />
-            <MenuButton label="LEARN " />
-            <MenuButton label="CONTACT" />
+      {xPosition ? null : (
+        <>
+          <div className="nav hidden absolute z-40 w-full h-20  p-6 lg:flex items-center justify-between">
+            <Diallogo />
+            <div>
+              <ul className="flex text-2xl text-white gap-6 items-center justify-center font-serif font-semibold ">
+                {navLinks.map((link, i) => {
+                  return (
+                    <div key={i}>
+                      <li to={link.path}>
+                        <AnimatedLinks title={link.title} />
+                      </li>
+                    </div>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
-        </div>
-      </div>
+          <div className="hidden secPage absolute top-0 right-0 w-full h-14 px-4  z-10 lg:flex items-center justify-between  ">
+            <div className="  ">
+              <Diallogo />
+            </div>
+            <div className="z-50">
+              <button
+                onClick={() => setMenuOpened(!menuOpened)}
+                className="  bg-transparent  w-16  rounded-md"
+              >
+                <div
+                  className={`bg-black h-0.5 rounded-md w-full transition-all ${
+                    menuOpened ? "rotate-45  translate-y-0.5" : ""
+                  }`}
+                  style={{ background: snapshot.step > 0 ? "white" : "" }}
+                />
+                <div
+                  className={`bg-black h-0.5 rounded-md w-full my-3 ${
+                    menuOpened ? "hidden" : ""
+                  }`}
+                  style={{ background: snapshot.step > 0 ? "white" : "" }}
+                />
+                <div
+                  className={`bg-black h-0.5 rounded-md w-full transition-all ${
+                    menuOpened ? "-rotate-45" : ""
+                  }`}
+                  style={{ background: snapshot.step > 0 ? "white" : "" }}
+                />
+              </button>
+            </div>
+            <div
+              className={`z-10 h-56 fixed top-0 right-0  transition-all overflow-hidden  shadow-lg shadow-orange-400 rounded-3xl
+      ${menuOpened ? "w-96" : "w-0"}`}
+              style={{
+                background: snapshot.step > 0 ? "black" : "white",
+                color: snapshot.step > 0 ? "white" : "black",
+              }}
+            >
+              <div className="absolute w-full h-full flex items-center justify-center flex-col gap-4 ">
+                <MenuButton label="PROJECTS" />
+                <MenuButton label="LEARN " />
+                <MenuButton label="CONTACT" />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* BELOW CODE FOR SMALLER DEVICE */}
 
@@ -204,11 +225,11 @@ const Diallogo = () => {
 const MenuButton = (props) => {
   const { label, onClick } = props;
   return (
-    <button
+    <p
       onClick={onClick}
-      className="text-2xl font-bold cursor-pointer hover:text-sky-600 transition-colors"
+      className="text-2xl font-bold cursor-pointer hover:text-orange-400 transition-all"
     >
       {label}
-    </button>
+    </p>
   );
 };
