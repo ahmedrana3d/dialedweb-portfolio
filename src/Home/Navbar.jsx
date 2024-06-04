@@ -4,11 +4,18 @@ import { useSnapshot } from "valtio";
 import state from "../state/state.js";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Contact from "./Contact.jsx";
 
 export default function Navbar() {
   const [menuOpened, setMenuOpened] = useState(false);
 
   const snapshot = useSnapshot(state);
+
+  const [contact, setContact] = useState(false);
+
+  const handleContact = () => {
+    setContact((prev) => !prev);
+  };
 
   const navLinks = [
     {
@@ -21,7 +28,7 @@ export default function Navbar() {
     },
     {
       title: "CONTACT",
-      path: "/projects",
+      path: "/contact",
     },
   ];
 
@@ -81,7 +88,16 @@ export default function Navbar() {
                   return (
                     <div key={i}>
                       <li to={link.path}>
-                        <AnimatedLinks title={link.title} />
+                        <div
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (link.title === "CONTACT") {
+                              handleContact();
+                            }
+                          }}
+                        >
+                          <AnimatedLinks title={link.title} />
+                        </div>
                       </li>
                     </div>
                   );
@@ -129,10 +145,21 @@ export default function Navbar() {
               <div className="absolute w-full h-full flex items-center justify-center flex-col gap-4 ">
                 <MenuButton label="PROJECTS" />
                 <MenuButton label="LEARN " />
-                <MenuButton label="CONTACT" />
+                {/* <MenuButton label="CONTACT" /> */}
+
+                <div
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    handleContact();
+                  }}
+                >
+                  <MenuButton label="CONTACT" />
+                </div>
               </div>
             </div>
           </div>
+          {contact && <Contact contact={contact} setContact={setContact} />}
         </>
       )}
 
@@ -225,11 +252,11 @@ const Diallogo = () => {
 const MenuButton = (props) => {
   const { label, onClick } = props;
   return (
-    <p
+    <div
       onClick={onClick}
       className="text-2xl font-bold cursor-pointer hover:text-orange-400 transition-all"
     >
       {label}
-    </p>
+    </div>
   );
 };
