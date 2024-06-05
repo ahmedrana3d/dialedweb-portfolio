@@ -1,13 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import AnimatedLinks from "../Home/Components/AnimatedLinks.jsx";
 import { useSnapshot } from "valtio";
 import state from "../state/state.js";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Contact from "./Contact.jsx";
 
 export default function Navbar() {
   const [menuOpened, setMenuOpened] = useState(false);
+  useEffect(() => {
+    const navTextElements = document.querySelectorAll(".navText");
+    if (menuOpened) {
+      const mouseMove = (e) => {
+        gsap.to(".cursor", {
+          x: e.clientX,
+          y: e.clientY,
+          duration: 0.1,
+          ease: "Power4.out",
+        });
+      };
+      const mouseEnter = () => {
+
+        gsap.to(".cursor", {
+          scale: 4,
+          mixBlendMode: "difference",
+        });
+      };
+
+      const mouseLeave = () => {
+        gsap.to(".cursor", {
+          scale: 1,
+          background: "white",
+        });
+      };
+      window.addEventListener("mousemove", mouseMove);
+      navTextElements.forEach((element) => {
+        element.addEventListener("mouseenter", mouseEnter);
+        element.addEventListener("mouseleave", mouseLeave);
+      });
+
+      return () => {
+        window.removeEventListener("mousemove", mouseMove);
+        navTextElements.forEach((element) => {
+          element.removeEventListener("mouseenter", mouseEnter);
+          element.removeEventListener("mouseleave", mouseLeave);
+        });
+      };
+    }
+  }, [menuOpened]);
 
   const snapshot = useSnapshot(state);
 
@@ -56,7 +95,26 @@ export default function Navbar() {
         duration: 2,
       });
     }
-  }, [snapshot.step]);
+
+    if (menuOpened === true) {
+      const timeline = gsap.timeline();
+
+      timeline
+        .from(".navLinks", {
+          opacity: 0,
+          y: 50,
+          ease: "power4.out",
+          duration: 2,
+          stagger: { amount: 0.8, from: "start" },
+        })
+        .to(".navLinks", {
+          opacity: 1,
+          y: 0,
+          duration: 2,
+          ease: "power4.out",
+        });
+    }
+  }, [snapshot.step, menuOpened]);
 
   const [xPosition, setXPosition] = useState(window.innerWidth < 768);
 
@@ -105,47 +163,45 @@ export default function Navbar() {
               </ul>
             </div>
           </div>
-          <div className="hidden secPage absolute top-0 right-0 w-full h-14 px-4  z-10 lg:flex items-center justify-between  ">
-            <div className="  ">
-              <Diallogo />
-            </div>
-            <div className="z-50">
+          <div className=" hidden secPage absolute top-5 right-5  h-14 px-4  z-10 lg:flex items-center ">
+            <div className="z-50 ">
               <button
                 onClick={() => setMenuOpened(!menuOpened)}
-                className="  bg-transparent  w-16  rounded-md"
+                className=" hover:bg-black   w-16  rounded-md"
               >
                 <div
-                  className={`bg-black h-0.5 rounded-md w-full transition-all ${
+                  className={`bg-white navText h-0.5 rounded-md w-full transition-all hover:bg-black ${
                     menuOpened ? "rotate-45  translate-y-0.5" : ""
                   }`}
-                  style={{ background: snapshot.step > 0 ? "white" : "" }}
                 />
                 <div
-                  className={`bg-black h-0.5 rounded-md w-full my-3 ${
+                  className={`bg-white navText h-0.5 rounded-md w-full my-3 hover:bg-black ${
                     menuOpened ? "hidden" : ""
                   }`}
-                  style={{ background: snapshot.step > 0 ? "white" : "" }}
                 />
                 <div
-                  className={`bg-black h-0.5 rounded-md w-full transition-all ${
+                  className={`bg-white navText h-0.5 rounded-md w-full transition-all hover:bg-black  ${
                     menuOpened ? "-rotate-45" : ""
                   }`}
-                  style={{ background: snapshot.step > 0 ? "white" : "" }}
                 />
               </button>
             </div>
             <div
-              className={`z-10 h-56 fixed top-0 right-0  transition-all overflow-hidden  shadow-lg shadow-orange-400 rounded-3xl
-      ${menuOpened ? "w-96" : "w-0"}`}
-              style={{
-                background: snapshot.step > 0 ? "black" : "white",
-                color: snapshot.step > 0 ? "white" : "black",
-              }}
+              className={`z-10 h-screen  fixed top-0 right-0  transition-all overflow-hidden duration-1000 bg-black text-white ${
+                menuOpened ? "w-full" : "w-0"
+              }`}
             >
-              <div className="absolute w-full h-full flex items-center justify-center flex-col gap-4 ">
-                <MenuButton label="PROJECTS" />
-                <MenuButton label="LEARN " />
-                {/* <MenuButton label="CONTACT" /> */}
+              <div className="cursor" />
+              <div className="absolute top-3 left-3 z-10">
+                <Diallogo />
+              </div>
+              <div className="absolute w-full h-full flex items-center justify-center  gap-16  ">
+                <p className="navText navLinks text-6xl font-bold fontHorizon cursor-pointer  ">
+                  PROJECTS
+                </p>
+                <p className="navText navLinks text-6xl font-bold fontHorizon cursor-pointer ">
+                  LEARN
+                </p>
 
                 <div
                   onClick={(e) => {
@@ -154,19 +210,21 @@ export default function Navbar() {
                     handleContact();
                   }}
                 >
-                  <MenuButton label="CONTACT" />
+                  <p className="navText navLinks text-6xl font-bold fontHorizon cursor-pointer  ">
+                    CONTACT
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-          {/* {contact && <Contact contact={contact} setContact={setContact} />} */}
+          <Contact contact={contact} setContact={setContact} />
         </>
       )}
 
       {/* BELOW CODE FOR SMALLER DEVICE */}
 
-      <div className="lg:hidden absolute top-0 right-0 w-full h-14 px-1 z-10 flex items-center justify-between ">
-        <div className="  ">
+      <div className="lg:hidden absolute top-0 right-0 w-full h-14 px-1 z-10 flex items-center justify-between  ">
+        <div >
           <Diallogo />
         </div>
         <div className="z-50">
@@ -175,7 +233,7 @@ export default function Navbar() {
             className="  bg-transparent  w-16  rounded-md"
           >
             <div
-              className={`bg-black h-0.5 rounded-md w-full transition-all ${
+              className={`bg-black h-0.5 rounded-md w-full transition-all  ${
                 menuOpened ? "rotate-45  translate-y-0.5" : ""
               }`}
               style={{ background: snapshot.step > 0 ? "white" : "" }}
@@ -195,8 +253,8 @@ export default function Navbar() {
           </button>
         </div>
         <div
-          className={`z-10 fixed top-0 right-0 bottom-0 transition-all overflow-hidden flex flex-col
-      ${menuOpened ? "w-60" : "w-0"}`}
+          className={`z-10 fixed top-0 right-0 bottom-0 transition-all duration-1000 overflow-hidden flex flex-col
+      ${menuOpened ? "w-full" : "w-0"}`}
           style={{
             background: snapshot.step > 0 ? "black" : "white",
             color: snapshot.step > 0 ? "white" : "black",
@@ -250,13 +308,10 @@ const Diallogo = () => {
 };
 
 const MenuButton = (props) => {
-  const { label, onClick } = props;
+  const { label } = props;
   return (
-    <div
-      onClick={onClick}
-      className="text-2xl font-bold cursor-pointer hover:text-orange-400 transition-all"
-    >
+    <p className=" lg:text-6xl text-3xl font-bold fontHorizon cursor-pointer  transition-all">
       {label}
-    </div>
+    </p>
   );
 };
