@@ -159,7 +159,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          {contact && <Contact contact={contact} setContact={setContact} />}
+          {/* {contact && <Contact contact={contact} setContact={setContact} />} */}
         </>
       )}
 
