@@ -310,7 +310,7 @@ const Diallogo = () => {
 const MenuButton = (props) => {
   const { label } = props;
   return (
-    <p className=" lg:text-6xl text-3xl font-bold fontHorizon cursor-pointer  transition-all">
+    <p className="navLinks lg:text-6xl text-3xl font-bold fontHorizon cursor-pointer  transition-all">
       {label}
     </p>
   );
