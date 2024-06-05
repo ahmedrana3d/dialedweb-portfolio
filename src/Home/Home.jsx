@@ -6,8 +6,10 @@ const Home = () => {
   return (
     <div>
       <Experience />
+{/* <div className=" hidden"> */}
 
       <MainSection />
+{/* </div> */}
     </div>
   );
 };

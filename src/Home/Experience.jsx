@@ -1,7 +1,7 @@
 // import { OrbitControls, Sky } from '@react-three/drei'
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState, useFrame } from "react";
-import { Float, useProgress } from "@react-three/drei";
+import { Float, OrbitControls, useDepthBuffer, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import Ufo from "./Components/Models/Ufo";
 import { getProject, types } from "@theatre/core";
@@ -12,6 +12,7 @@ import state from "../state/state";
 import SkySphere from "./Components/SkySphere";
 import Stars from "./Components/Stars";
 import { editable as e, SheetProvider } from "@theatre/r3f";
+import MovingSpot from "./Components/MovingSpot";
 // import studio from "@theatre/studio";
 
 // const snapshot  = useSnapshot(state);
@@ -35,10 +36,10 @@ const Experience = () => {
         sheet.sequence.play({ range: [2, 6] });
         console.log("First Animation");
       } else if (snapshot.step === 2 && snapshot.reverse === false) {
-        sheet.sequence.play({ range: [6, 9] });
+        sheet.sequence.play({ range: [6, 8] });
         console.log("Second Animation");
       } else if (snapshot.step === 1 && snapshot.reverse === true) {
-        sheet.sequence.play({ direction: "reverse", range: [6, 9] });
+        sheet.sequence.play({ direction: "reverse", range: [6, 8] });
         console.log("Second Animation Reversed");
       }
     }
@@ -149,6 +150,12 @@ const Experience = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+
+  // const depthBuffer = useDepthBuffer({ frames: 1 })
+
+
+
+
   return (
     <div id="canvas-container">
       <Suspense fallback={<Experience />}>
@@ -165,11 +172,33 @@ const Experience = () => {
             <group position={[0, 0, xPosition]}>
               <SheetProvider sheet={sheet}>
                 <e.group theatreKey="Ufo">
-                  <Ufo ref={ufoRef} position={[0, 0, 0]} />
+                  <Ufo ref={ufoRef} position={[0,0 , 0]} />
                 </e.group>
+
+
+
+{/* <e.group theatreKey="MovingSpot">
+<MovingSpot color="#0c8cbf" position={[3, 3, 2]} />
+      <MovingSpot color="#b00c3f" position={[1, 3, 0]} />
+</e.group> */}
+
               </SheetProvider>
             </group>
           </Float>
+
+
+{/* <OrbitControls/> */}
+
+
+
+{/* <mesh>
+<boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial  />
+</mesh> */}
+
+      
+     
+
           <CloudsEnvironment
             seed={10}
             bounds={50}

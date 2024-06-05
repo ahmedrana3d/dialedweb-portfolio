@@ -39,7 +39,7 @@ console.log(subDiv_ufo.metalness)
   }));
 
   useFrame(() => {
-    ufo_body.current.rotation.z += 1;
+    ufo_body.current.rotation.z += 0.02;
   });
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSnapshot } from 'valtio';
 import throttle from 'lodash/throttle';
 import state from '../../state/state'; // Import the shared state
@@ -29,52 +29,79 @@ const ScrollDetector = () => {
     state.step = newStep;
     state.reverse = reverseAnimation;
 
-    console.log(state.reverse);
-
     // Prevent further scrolling until animation is complete
     setTimeout(() => {
       setScrolling(false);
     }, 4000); // Adjust based on your animation duration
   }, 1000); // Throttle interval in milliseconds
 
-  const handleTouchStart = (event) => {
-    touchStartY = event.touches[0].clientY;
+  const handleTouchStart = (evt) => {
+    const firstTouch = getTouches(evt)[0];
+    xDownRef.current = firstTouch.clientX;
+    yDownRef.current = firstTouch.clientY;
   };
 
-  const handleTouchMove = throttle((event) => {
-    if (scrolling) return;
+  const handleTouchMove = throttle((evt) => {
+    if (!xDownRef.current || !yDownRef.current) {
+      return;
+    }
 
-    const touchEndY = event.changedTouches[0].clientY;
+    const xUp = evt.touches[0].clientX;
+    const yUp = evt.touches[0].clientY;
+
+    const xDiff = xDownRef.current - xUp;
+    const yDiff = yDownRef.current - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+      // Horizontal swipe - ignored
+      xDownRef.current = null;
+      yDownRef.current = null;
+      return;
+    }
+
     setScrolling(true);
     let newStep = snapshot.step;
 
-    if (touchStartY > touchEndY) {
-      // Scrolling down
+    if (yDiff > 0) {
+      // Swiping up
       newStep = Math.min(newStep + 1, MAX_STEPS);
+      state.reverse = false;
     } else {
-      // Scrolling up
+      // Swiping down
       newStep = Math.max(newStep - 1, 0);
+      state.reverse = true;
     }
 
     state.step = newStep;
 
+    // Reset values
+    xDownRef.current = null;
+    yDownRef.current = null;
+
     // Prevent further scrolling until animation is complete
     setTimeout(() => {
       setScrolling(false);
     }, 4000); // Adjust based on your animation duration
   }, 1000); // Throttle interval in milliseconds
 
-  useEffect(() => {
-    let touchStartY = 0;
+  const getTouches = (evt) => {
+    return evt.touches || evt.originalEvent.touches;
+  };
 
-    window.addEventListener('wheel', handleScroll);
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchmove', handleTouchMove);
+  const xDownRef = useRef(null);
+  const yDownRef = useRef(null);
+
+  useEffect(() => {
+    const handleWheel = (event) => handleScroll(event);
+
+    document.addEventListener('wheel', handleWheel);
+    document.addEventListener('touchstart', handleTouchStart, false);
+    document.addEventListener('touchmove', handleTouchMove, false);
 
     return () => {
-      window.removeEventListener('wheel', handleScroll);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('wheel', handleWheel);
+      document.removeEventListener('touchstart', handleTouchStart, false);
+      document.removeEventListener('touchmove', handleTouchMove, false);
     };
   }, [scrolling, snapshot.step]);
 
