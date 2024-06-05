@@ -19,10 +19,10 @@ export default function Navbar() {
         });
       };
       const mouseEnter = () => {
-
         gsap.to(".cursor", {
           scale: 4,
-          mixBlendMode: "difference",
+          mixBlendMode: "exclusion",
+          backgroundColor: "yellow",
         });
       };
 
@@ -97,7 +97,7 @@ export default function Navbar() {
     }
 
     if (menuOpened === true) {
-      const timeline = gsap.timeline();
+      const timeline = gsap.timeline({ delay: 1 });
 
       timeline
         .from(".navLinks", {
@@ -187,8 +187,8 @@ export default function Navbar() {
               </button>
             </div>
             <div
-              className={`z-10 h-screen  fixed top-0 right-0  transition-all overflow-hidden duration-1000 bg-black text-white ${
-                menuOpened ? "w-full" : "w-0"
+              className={`z-10 w-full  fixed top-0 right-0  transition-all overflow-hidden duration-1000 bg-black text-white ${
+                menuOpened ? "h-screen" : "h-0"
               }`}
             >
               <div className="cursor" />
@@ -196,7 +196,7 @@ export default function Navbar() {
                 <Diallogo />
               </div>
               <div className="absolute w-full h-full flex items-center justify-center  gap-16  ">
-                <p className="navText navLinks text-6xl font-bold fontHorizon cursor-pointer  ">
+                <p className="navText navLinks text-6xl font-bold fontHorizon cursor-pointer   ">
                   PROJECTS
                 </p>
                 <p className="navText navLinks text-6xl font-bold fontHorizon cursor-pointer ">
@@ -224,13 +224,13 @@ export default function Navbar() {
       {/* BELOW CODE FOR SMALLER DEVICE */}
 
       <div className="lg:hidden absolute top-0 right-0 w-full h-14 px-1 z-10 flex items-center justify-between  ">
-        <div >
+        <div>
           <Diallogo />
         </div>
         <div className="z-50">
           <button
             onClick={() => setMenuOpened(!menuOpened)}
-            className="  bg-transparent  w-16  rounded-md"
+            className="  bg-transparent  w-10  rounded-md"
           >
             <div
               className={`bg-black h-0.5 rounded-md w-full transition-all  ${
