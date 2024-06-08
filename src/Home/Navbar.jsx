@@ -4,7 +4,6 @@ import { useSnapshot } from "valtio";
 import state from "../state/state.js";
 import gsap from "gsap";
 import Contact from "./Contact.jsx";
-import ParticlesComponent from "./Components/Particles.jsx";
 
 export default function Navbar() {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -122,13 +121,7 @@ export default function Navbar() {
         },"-=4")
       
     }
-    else{
-      gsap.to("#particles",{
-        opacity: 0,
-        ease: "power4.out",
-        duration: 1,
-      })
-    }
+    
   }, [snapshot.step, menuOpened]);
 
   const [xPosition, setXPosition] = useState(window.innerWidth < 768);
@@ -208,7 +201,6 @@ export default function Navbar() {
             >
               <div className="cursor" />
 
-                  <ParticlesComponent id="particles" />
                
               
 
