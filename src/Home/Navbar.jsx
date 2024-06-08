@@ -4,6 +4,7 @@ import { useSnapshot } from "valtio";
 import state from "../state/state.js";
 import gsap from "gsap";
 import Contact from "./Contact.jsx";
+import ParticlesComponent from "./Components/Particles.jsx";
 
 export default function Navbar() {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -22,7 +23,7 @@ export default function Navbar() {
         gsap.to(".cursor", {
           scale: 4,
           mixBlendMode: "exclusion",
-          backgroundColor: "yellow",
+          backgroundColor: "silver",
         });
       };
 
@@ -54,6 +55,7 @@ export default function Navbar() {
 
   const handleContact = () => {
     setContact((prev) => !prev);
+    setMenuOpened(false);
   };
 
   const navLinks = [
@@ -97,7 +99,7 @@ export default function Navbar() {
     }
 
     if (menuOpened === true) {
-      const timeline = gsap.timeline({ delay: 1 });
+      const timeline = gsap.timeline();
 
       timeline
         .from(".navLinks", {
@@ -112,7 +114,20 @@ export default function Navbar() {
           y: 0,
           duration: 2,
           ease: "power4.out",
-        });
+        })
+        .to("#particles",{
+          opacity: 1,
+          duration: 2,
+          ease:"power4.inOut",
+        },"-=4")
+      
+    }
+    else{
+      gsap.to("#particles",{
+        opacity: 0,
+        ease: "power4.out",
+        duration: 1,
+      })
     }
   }, [snapshot.step, menuOpened]);
 
@@ -189,14 +204,16 @@ export default function Navbar() {
             <div
               className={`z-10 w-full  fixed top-0 right-0  transition-all overflow-hidden duration-1000 bg-black text-white ${
                 menuOpened ? "h-screen" : "h-0"
-              }`}
+                }`}
             >
               <div className="cursor" />
-              <div className="absolute top-3 left-3 z-10">
-                <Diallogo />
-              </div>
-              <div className="absolute w-full h-full flex items-center justify-center  gap-16  ">
-                <p className="navText navLinks text-6xl font-bold fontHorizon cursor-pointer   ">
+
+                  <ParticlesComponent id="particles" />
+               
+              
+
+              <div className="absolute w-full h-full  flex items-center justify-center  gap-16  ">
+                <p className="navText navLinks  text-6xl font-bold fontHorizon cursor-pointer   ">
                   PROJECTS
                 </p>
                 <p className="navText navLinks text-6xl font-bold fontHorizon cursor-pointer ">
@@ -260,13 +277,27 @@ export default function Navbar() {
             color: snapshot.step > 0 ? "white" : "black",
           }}
         >
-          <div className="flex-1 flex items-center justify-center flex-col gap-16 p-8">
-            <MenuButton label="PROJECTS" />
-            <MenuButton label="LEARN " />
-            <MenuButton label="CONTACT" />
+          <div className="flex-1 flex items-center justify-center flex-col gap-16 p-8 ">
+            <div className="navLinks">
+              <MenuButton label="PROJECTS" />
+            </div>
+            <div className="navLinks">
+              <MenuButton label="LEARN " />
+            </div>
+            <div
+              className="navLinks"
+              onClick={(e) => {
+                e.preventDefault();
+
+                handleContact();
+              }}
+            >
+              <MenuButton label="CONTACT" />
+            </div>
           </div>
         </div>
       </div>
+      <Contact contact={contact} setContact={setContact} />
     </>
   );
 }
@@ -310,7 +341,7 @@ const Diallogo = () => {
 const MenuButton = (props) => {
   const { label } = props;
   return (
-    <p className="navLinks lg:text-6xl text-3xl font-bold fontHorizon cursor-pointer  transition-all">
+    <p className=" lg:text-6xl text-3xl font-bold fontHorizon cursor-pointer  transition-all">
       {label}
     </p>
   );
