@@ -4,6 +4,7 @@ import React, { useEffect, useImperativeHandle, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
+import MovingSpot from "../MovingSpot";
 export default React.forwardRef(function Ufo(props, ref) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("models/UFO-v1.glb");
@@ -81,6 +82,12 @@ console.log(subDiv_ufo.metalness)
             />
           </mesh>
         </group>
+
+
+        <MovingSpot color="#0c8cbf" position={[3, 3, 2]} />
+      <MovingSpot color="#b00c3f" position={[1, 3, 0]} />
+
+
       </group>
     </group>
   );

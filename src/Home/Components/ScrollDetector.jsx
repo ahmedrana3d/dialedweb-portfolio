@@ -4,10 +4,20 @@ import throttle from 'lodash/throttle';
 import state from '../../state/state'; // Import the shared state
 
 const MAX_STEPS = 2; // Set the maximum number of steps
+const TIMEOUT_STEP_1 = 4000; // Timeout duration for step 1
+const TIMEOUT_STEP_2 = 2000; // Timeout duration for step 2
 
 const ScrollDetector = () => {
   const [scrolling, setScrolling] = useState(false);
   const snapshot = useSnapshot(state);
+  const xDownRef = useRef(null);
+  const yDownRef = useRef(null);
+
+  const getTimeoutDuration = (step) => {
+    if (step === 1) return TIMEOUT_STEP_1;
+    if (step === 2) return TIMEOUT_STEP_2;
+    return TIMEOUT_STEP_1; // Default timeout for other steps, if needed
+  };
 
   const handleScroll = throttle((event) => {
     if (scrolling) return;
@@ -32,7 +42,8 @@ const ScrollDetector = () => {
     // Prevent further scrolling until animation is complete
     setTimeout(() => {
       setScrolling(false);
-    }, 4000); // Adjust based on your animation duration
+    console.log("YOU CAN SCROLL" , getTimeoutDuration(newStep))
+    }, getTimeoutDuration(newStep));
   }, 1000); // Throttle interval in milliseconds
 
   const handleTouchStart = (evt) => {
@@ -42,7 +53,7 @@ const ScrollDetector = () => {
   };
 
   const handleTouchMove = throttle((evt) => {
-    if (!xDownRef.current || !yDownRef.current) {
+    if (!xDownRef.current || !yDownRef.current || scrolling) {
       return;
     }
 
@@ -81,15 +92,13 @@ const ScrollDetector = () => {
     // Prevent further scrolling until animation is complete
     setTimeout(() => {
       setScrolling(false);
-    }, 4000); // Adjust based on your animation duration
+      console.log("YOU CAN SCROLL")
+    }, getTimeoutDuration(newStep));
   }, 1000); // Throttle interval in milliseconds
 
   const getTouches = (evt) => {
     return evt.touches || evt.originalEvent.touches;
   };
-
-  const xDownRef = useRef(null);
-  const yDownRef = useRef(null);
 
   useEffect(() => {
     const handleWheel = (event) => handleScroll(event);

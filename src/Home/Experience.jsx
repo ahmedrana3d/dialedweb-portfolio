@@ -172,7 +172,11 @@ const Experience = () => {
             <group position={[0, 0, xPosition]}>
               <SheetProvider sheet={sheet}>
                 <e.group theatreKey="Ufo">
-                  <Ufo ref={ufoRef} position={[0,0 , 0]} />
+                  <Ufo ref={ufoRef} position={[0,0 , 0]} >
+
+        
+
+                  </Ufo>
                 </e.group>
 
 

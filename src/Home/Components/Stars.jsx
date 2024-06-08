@@ -38,7 +38,7 @@ export default function Stars ({posY}) {
     for (let i = 0; i < 10000; i++) {
       const x = THREE.MathUtils.randFloatSpread(1000);
       const y = THREE.MathUtils.randFloatSpread(1000);
-      const z = THREE.MathUtils.randFloatSpread(1000);
+      const z = THREE.MathUtils.randFloatSpread(800);
       vertices.push(x, y, z);
     }
 
@@ -46,7 +46,8 @@ export default function Stars ({posY}) {
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-    const material = new THREE.PointsMaterial({ color: 0x888888, size: 1 });
+    const starTexture = new THREE.TextureLoader().load("./textures/star_07.png")
+    const material = new THREE.PointsMaterial({ color: 0x888888, size: 5, map : starTexture, transparent : true, });
 
     // Create points and set reference
     const points = new THREE.Points(geometry, material);
