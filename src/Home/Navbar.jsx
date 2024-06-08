@@ -113,11 +113,8 @@ export default function Navbar() {
           y: 0,
           duration: 2,
           ease: "power4.out",
-        })
-        
-      
+        });
     }
-    
   }, [snapshot.step, menuOpened]);
 
   const [xPosition, setXPosition] = useState(window.innerWidth < 768);
@@ -193,12 +190,9 @@ export default function Navbar() {
             <div
               className={`z-10 w-full  fixed top-0 right-0  transition-all overflow-hidden duration-1000 bg-black text-white ${
                 menuOpened ? "h-screen" : "h-0"
-                }`}
+              }`}
             >
               <div className="cursor" />
-
-               
-              
 
               <div className="absolute w-full h-full  flex items-center justify-center  gap-16  ">
                 <p className="navText navLinks  text-6xl font-bold fontHorizon cursor-pointer   ">
