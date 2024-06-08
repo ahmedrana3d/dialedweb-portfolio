@@ -114,11 +114,7 @@ export default function Navbar() {
           duration: 2,
           ease: "power4.out",
         })
-        .to("#particles",{
-          opacity: 1,
-          duration: 2,
-          ease:"power4.inOut",
-        },"-=4")
+        
       
     }
     
