@@ -1,7 +1,7 @@
 // import { OrbitControls, Sky } from '@react-three/drei'
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useEffect, useRef, useState, useFrame } from "react";
-import { Float, OrbitControls, useDepthBuffer, useProgress } from "@react-three/drei";
+import { Float, OrbitControls, StatsGl, useDepthBuffer, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import Ufo from "./Components/Models/Ufo";
 import { getProject, types } from "@theatre/core";
@@ -180,7 +180,7 @@ const Experience = () => {
                 </e.group>
 
 
-
+<StatsGl/>
 {/* <e.group theatreKey="MovingSpot">
 <MovingSpot color="#0c8cbf" position={[3, 3, 2]} />
       <MovingSpot color="#b00c3f" position={[1, 3, 0]} />
