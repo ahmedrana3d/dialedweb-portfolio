@@ -6,22 +6,15 @@
   font-family: "Horizon";
   src: url("./fonts/newhorizon.otf") format("opentype");
 }
-
-.cursor{
-  background-color: white;
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9999999;
+@font-face {
+  font-family: "CircularXXWeb-Book";
+  src: url("/fonts/CircularXXWeb-Book.woff2") format("woff2");
 }
-
-
 .fontHorizon {
   font-family: Horizon;
+}
+.fontCircular{
+  font-family: CircularXXWeb-Book;
 }
 
 html,
@@ -37,40 +30,6 @@ body #root {
 canvas {
   width: 100vw;
   height: 100vh;
-}
-
-
-
-/* Enter Button Loading  */
-
-
-#loading-enter-btn {
-  color: white;
-  text-decoration: none;
-  font-size: 25px;
-  border: none;
-  background: none;
-  font-weight: 600;
-  font-family: "Poppins", sans-serif;
-}
-
-#loading-enter-btn::before {
-  margin-left: auto;
-}
-
-#loading-enter-btn::after,
-#loading-enter-btn::before {
-  content: "";
-  width: 0%;
-  height: 5px;
-  background: #f44336;
-  display: block;
-  transition: 0.5s;
-}
-
-#loading-enter-btn:hover::after,
-#loading-enter-btn:hover::before {
-  width: 100%;
 }
 
 .mouse {
@@ -108,6 +67,167 @@ canvas {
     top: 60px;
   }
 }
+
+/* Landing Page */
+.ui-btn {
+  --btn-default-bg: rgb(41, 41, 41);
+  --btn-padding: 15px 20px;
+  --btn-hover-bg: rgb(51, 51, 51);
+  --btn-transition: 0.3s;
+  --btn-letter-spacing: 0.1rem;
+  --btn-animation-duration: 1.2s;
+  --btn-shadow-color: rgba(0, 0, 0, 0.137);
+  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+  --hover-btn-color: #fac921;
+  --default-btn-color: #fff;
+  --font-size: 16px;
+  /* 👆 this field should not be empty */
+  --font-weight: 600;
+  --font-family: Menlo, Roboto Mono, monospace;
+  /* 👆 this field should not be empty */
+}
+
+/* button settings 👆 */
+
+.ui-btn {
+  box-sizing: border-box;
+  padding: var(--btn-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--default-btn-color);
+  font: var(--font-weight) var(--font-size) var(--font-family);
+  background: var(--btn-default-bg);
+  border: none;
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+  box-shadow: var(--btn-shadow);
+  border-radius: 1rem;
+}
+
+.ui-btn span {
+  letter-spacing: var(--btn-letter-spacing);
+  transition: var(--btn-transition);
+  box-sizing: border-box;
+  position: relative;
+  background: inherit;
+}
+
+.ui-btn span::before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  background: inherit;
+}
+
+.ui-btn:hover,
+.ui-btn:focus {
+  background: var(--btn-hover-bg);
+}
+
+.ui-btn:hover span,
+.ui-btn:focus span {
+  color: var(--hover-btn-color);
+}
+
+.ui-btn:hover span::before,
+.ui-btn:focus span::before {
+  animation: chitchat linear both var(--btn-animation-duration);
+}
+
+@keyframes chitchat {
+  0% {
+    content: "#";
+  }
+
+  5% {
+    content: ".";
+  }
+
+  10% {
+    content: "^{";
+  }
+
+  15% {
+    content: "-!";
+  }
+
+  20% {
+    content: "#$_";
+  }
+
+  25% {
+    content: "№:0";
+  }
+
+  30% {
+    content: "#{+.";}35%{content: "@}-?";
+  }
+
+  40% {
+    content: "?{4@%";
+  }
+
+  45% {
+    content: "=.,^!";
+  }
+
+  50% {
+    content: "?2@%";
+  }
+
+  55% {
+    content: "\;1}]";
+  }
+
+  60% {
+    content: "?{%:%";
+    right: 0;
+  }
+
+  65% {
+    content: "|{f[4";
+    right: 0;
+  }
+
+  70% {
+    content: "{4%0%";
+    right: 0;
+  }
+
+  75% {
+    content: "'1_0<";
+    right: 0;
+  }
+
+  80% {
+    content: "{0%";
+    right: 0;
+  }
+
+  85% {
+    content: "]>'";
+    right: 0;
+  }
+
+  90% {
+    content: "4";
+    right: 0;
+  }
+
+  95% {
+    content: "2";
+    right: 0;
+  }
+
+  100% {
+    content: "";
+    right: 0;
+  }
+}
+
+
 
 .test {
   font-family: Horizon;
@@ -173,7 +293,16 @@ canvas {
   overflow: hidden;
   -webkit-background-clip: text;
   color: transparent;
-  background-image: linear-gradient(90deg, #111111, #bb87fd, #bb87fd, #111111, #bb87fd, #bb87fd, #111111);
+  background-image: linear-gradient(
+    90deg,
+    #111111,
+    #bb87fd,
+    #bb87fd,
+    #111111,
+    #bb87fd,
+    #bb87fd,
+    #111111
+  );
   background-size: 400% 400%;
   animation: backgroundChange 4s linear infinite alternate;
   display: inline;
@@ -196,3 +325,47 @@ canvas {
     background-position: 0 0;
   }
 }
+
+.CommonButton {
+  background-color: #fcfeea;
+  border-color: #fcfeea;
+  border-radius: 1rem;
+  border: none;
+  padding: 6px 12px;
+  text-transform: uppercase;
+  line-height: 1.33;
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  transition: 0.3s linear;
+}
+
+.CommonButton:hover {
+  box-shadow: 0px 0px 13px 5px rgba(207, 200, 200, 0.678);
+  font-size: 1.1rem;
+}
+
+a {
+  text-decoration: none;
+  list-style: none;
+}
+
+.socialButton {
+  transition: 0.3s linear;
+  border-radius: 12px;
+}
+.socialButton:hover {
+  box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+    inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+  padding: 3px;
+}
+
+.menuOverlay{
+  background: #00000053;
+  backdrop-filter: blur(10px);
+}
+
