@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        horizon: ['Horizon', 'sans-serif'],
+        circular: ['CircularXXWeb-Book', 'sans-serif'],
+      },
       keyframes: {
         levitate: {
           '0%, 100%': { transform: 'translateY(0)' },

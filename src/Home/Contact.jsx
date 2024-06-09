@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import MagneticIcon from "./Components/MagneticIcon";
+import MagneticIcon from "../navbar/components/MagneticIcon";
 
 function Contact({ contact, setContact }) {
   const contactRef = useRef(null);

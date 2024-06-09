@@ -32,7 +32,7 @@ const LoadingScreen = () => {
 
   const playSound = () => {
     const newSound = new Howl({
-      src: ["./audios/click_sound.mp3"],
+      src: ["./audios/click_sound.wav"],
       volume: 0.5,
     });
 
@@ -44,7 +44,8 @@ const LoadingScreen = () => {
       ref={loadingScreenRef}
       className="bg-black absolute z-50 w-screen h-screen flex justify-center items-center flex-col gap-20 "
     >
-   <div className="keycaps flex w-72 lg:w-[600px]">
+
+<div className="keycaps flex w-72 lg:w-[600px]">
   <div
     onClick={playSound}
     className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1"
@@ -101,14 +102,18 @@ const LoadingScreen = () => {
   </div>
 </div>
 
+
+
       <button
-        id="loading-enter-btn"
-        className="text-4xl uppercase fontHorizon"
+        id=""
+        className="text-4xl uppercase fontHorizon ui-btn"
         onClick={snapshot.loadingProgress === 100 ? handleClick : null}
       >
-        {snapshot.loadingProgress === 100
-          ? "Enter Experience"
-          : Math.floor(snapshot.loadingProgress) + "%"}
+        <span>
+          {snapshot.loadingProgress === 100
+            ? "Enter Experience"
+            : Math.floor(snapshot.loadingProgress) + "%"}
+        </span>
       </button>
     </div>
   );
