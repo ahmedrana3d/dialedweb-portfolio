@@ -196,3 +196,8 @@ canvas {
     background-position: 0 0;
   }
 }
+
+
+.glow-effect {
+  filter: drop-shadow(0 0 10px white);
+}
