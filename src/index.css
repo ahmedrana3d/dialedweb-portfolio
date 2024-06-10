@@ -13,8 +13,9 @@
 }
 @font-face {
   font-family: "Helvetic";
-  src: url("/fonts/HelveticaNeueBold.otf") format("otf");
+  src: url("/fonts/HelveticaNeueBold.otf") format("opentype");
 }
+
 .fontHorizon {
   font-family: Horizon;
 }

@@ -71,7 +71,7 @@ const letterAnimationTwo = {
   hover: {
     y: 0,
     color: "#FF8F00",
-    fontFamily: "Helvetic",
+    fontFamily: "circular",
     shadowBlur: 10,
     transition: {
       duration: 0.9,

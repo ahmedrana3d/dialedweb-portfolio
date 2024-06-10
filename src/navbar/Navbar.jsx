@@ -156,12 +156,12 @@ export default function Navbar() {
                     e.preventDefault();
                     handleContact();
                   }}
-                  className="hidden font-circular lg:flex contact ">
+                  className="hidden font-Helvetic lg:flex contact ">
                     CONTACT
                   </button>
                 </div>
 
-                <div className=" w-full p-[100px] text-center flex flex-col sm:flex sm:flex-col lg:flex-row lg:items-center lg:justify-between gap-5 font-circular">
+                <div className=" w-full p-[100px] text-center flex flex-col sm:flex sm:flex-col lg:flex-row lg:items-center lg:justify-between gap-5 font-Helvetic">
                   <p className="navLinks text-4xl glow-effect lg:text-6xl w-73 cursor-pointer tracking-tight ">
                     <AniNavLink title="PROJECTS" />
                   </p>
