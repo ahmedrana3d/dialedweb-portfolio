@@ -65,7 +65,7 @@ const CloudsEnvironment = ({ seed, bounds, volume, position , luminanceThreshold
       <EffectComposer   enabled={enabled}>
         <Bloom
           luminanceThreshold={luminanceThreshold}
-          luminanceSmoothing={1}
+          // luminanceSmoothing={0.55}
           height={300}
           intensity={intensity}
         

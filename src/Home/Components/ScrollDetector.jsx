@@ -3,9 +3,11 @@ import { useSnapshot } from 'valtio';
 import throttle from 'lodash/throttle';
 import state from '../../state/state'; // Import the shared state
 
-const MAX_STEPS = 2; // Set the maximum number of steps
+const MAX_STEPS = 4; // Set the maximum number of steps
 const TIMEOUT_STEP_1 = 4000; // Timeout duration for step 1
 const TIMEOUT_STEP_2 = 2000; // Timeout duration for step 2
+const TIMEOUT_STEP_3 = 1000; // Timeout duration for step 2
+const TIMEOUT_STEP_4 = 1500; // Timeout duration for step 2
 
 const ScrollDetector = () => {
   const [scrolling, setScrolling] = useState(false);
@@ -16,6 +18,8 @@ const ScrollDetector = () => {
   const getTimeoutDuration = (step) => {
     if (step === 1) return TIMEOUT_STEP_1;
     if (step === 2) return TIMEOUT_STEP_2;
+    if (step === 3) return TIMEOUT_STEP_3;
+    if (step === 4) return TIMEOUT_STEP_4;
     return TIMEOUT_STEP_1; // Default timeout for other steps, if needed
   };
 

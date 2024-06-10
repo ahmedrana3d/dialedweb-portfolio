@@ -12,8 +12,8 @@ import state from "../state/state";
 import SkySphere from "./Components/SkySphere";
 import Stars from "./Components/Stars";
 import { editable as e, SheetProvider } from "@theatre/r3f";
-import MovingSpot from "./Components/MovingSpot";
-// import studio from "@theatre/studio";
+import studio from "@theatre/studio";
+import Globe from "./Components/Models/Globe";
 
 // const snapshot  = useSnapshot(state);
 // let CLICKED_ENTER = snapshot.step
@@ -22,7 +22,7 @@ import MovingSpot from "./Components/MovingSpot";
 //   state.enterClicked = CLICKED_ENTER
 
 const Experience = () => {
-  // studio.initialize()
+  studio.initialize()
 
   const snapshot = useSnapshot(state);
   const enterExpClicked = snapshot.enterClicked;
@@ -41,6 +41,18 @@ const Experience = () => {
       } else if (snapshot.step === 1 && snapshot.reverse === true) {
         sheet.sequence.play({ direction: "reverse", range: [6, 8] });
         console.log("Second Animation Reversed");
+      } else if (snapshot.step === 2 && snapshot.reverse === true) {
+        sheet.sequence.play({ direction: "reverse", range: [8, 9] });
+        console.log("Third Animation Reversed");
+      } else if (snapshot.step === 3 && snapshot.reverse === false) {
+        sheet.sequence.play({ range: [8, 9] });
+        console.log("Third Animation ");
+      } else if (snapshot.step === 4 && snapshot.reverse === false) {
+        sheet.sequence.play({ range: [9, 10.5] });
+        console.log("Third Animation ");
+      } else if (snapshot.step === 3 && snapshot.reverse === true) {
+        sheet.sequence.play({ direction: "reverse", range: [9, 10.5] });
+        console.log("Third Animation ");
       }
     }
   }, [snapshot.step]);
@@ -80,6 +92,7 @@ const Experience = () => {
 
   const starsPos = sheet.object("Stars", {
     posY: 0,
+    opacity : 0.8,
   });
 
   const bloomPara = sheet.object("Bloom", {
@@ -103,6 +116,11 @@ const Experience = () => {
   const [bloomEnabled, setbloomEnabled] = useState(false);
   const [bloomThreshold, setbloomThreshold] = useState(0);
   const [bloomIntensity, setbloomIntensity] = useState(0);
+  
+  // Stars ////////////////
+  
+  const [starsOpacity, setstarsOpacity] = useState(0.8);
+  
 
   useEffect(() => {
     cloudsAnimation.onValuesChange((values) => {
@@ -111,6 +129,8 @@ const Experience = () => {
 
     starsPos.onValuesChange((values) => {
       setStarsPosY(values.posY);
+      setstarsOpacity(values.opacity)
+      
     });
 
     skyColor.onValuesChange((colors) => {
@@ -173,32 +193,20 @@ const Experience = () => {
               <SheetProvider sheet={sheet}>
                 <e.group theatreKey="Ufo">
                   <Ufo ref={ufoRef} position={[0,0 , 0]} >
-
-        
-
                   </Ufo>
                 </e.group>
 
-{/* <e.group theatreKey="MovingSpot">
-<MovingSpot color="#0c8cbf" position={[3, 3, 2]} />
-      <MovingSpot color="#b00c3f" position={[1, 3, 0]} />
-</e.group> */}
+
+<e.group theatreKey="Globe" position={[-8.1299, -22 , 0]} scale={[0.45,0.45,0.45]}>
+<Globe/>
+</e.group>
 
               </SheetProvider>
             </group>
           </Float>
 
 
-{/* <OrbitControls/> */}
 
-
-
-{/* <mesh>
-<boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial  />
-</mesh> */}
-
-      
      
 
           <CloudsEnvironment
@@ -217,7 +225,7 @@ const Experience = () => {
             }
           />
 
-          <Stars posY={starsPosY} />
+          <Stars posY={starsPosY} opacity={starsOpacity} />
 
           {/* <StatsGl/> */}
         </Canvas>
