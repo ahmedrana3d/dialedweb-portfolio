@@ -12,7 +12,7 @@ import state from "../state/state";
 import SkySphere from "./Components/SkySphere";
 import Stars from "./Components/Stars";
 import { editable as e, SheetProvider } from "@theatre/r3f";
-import studio from "@theatre/studio";
+// import studio from "@theatre/studio";
 import Globe from "./Components/Models/Globe";
 
 // const snapshot  = useSnapshot(state);
@@ -22,7 +22,7 @@ import Globe from "./Components/Models/Globe";
 //   state.enterClicked = CLICKED_ENTER
 
 const Experience = () => {
-  studio.initialize()
+  // studio.initialize()
 
   const snapshot = useSnapshot(state);
   const enterExpClicked = snapshot.enterClicked;
