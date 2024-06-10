@@ -11,9 +11,9 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
     setContact((prev) => !prev);
     setMenuOpened(false);
   };
-  useEffect(()=>{
+  useEffect(() => {
     if (menuOpened === true) {
-      const timeline = gsap.timeline({delay:0.5});
+      const timeline = gsap.timeline({ delay: 0.5 });
 
       timeline
         .from(".mobileLinks", {
@@ -30,10 +30,10 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
           ease: "power4.out",
         });
     }
-  },[menuOpened])
+  }, [menuOpened]);
   return (
     <>
-      <div className=" lg:hidden flex absolute top-4 left-1  h-14 px-4  z-10  items-center ">
+      <div className=" lg:hidden flex  absolute top-4 left-1  h-14 px-4  z-10  items-center ">
         <div className="z-50 ">
           <button
             onClick={() => setMenuOpened(!menuOpened)}
@@ -52,51 +52,59 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
         >
           <div className=" w-full h-screen  flex flex-col justify-between items-center ">
             <div className="w-full lg:h-20 h-16 pl-5  flex justify-between items-center">
-              <div className="mx-auto lg:scale-150 pl-6">
+              <div className="flex-1 flex justify-center lg:scale-150 pt-24 scale-150 ">
                 <Diallogo />
               </div>
-              <button className="hidden font-circular lg:flex contact ">
-                CONTACT
-              </button>
+              <div className="hidden pr-4 lg:flex">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleContact();
+                  }}
+                  className=" font-Helvetic  getInTouch  "
+                >
+                  <AnimText title="GET IN TOUCH" />
+                </button>
+              </div>
             </div>
 
-            <div className=" w-full p-[100px] text-center flex flex-col sm:flex sm:flex-col lg:flex-row lg:items-center lg:justify-between gap-5 font-circular">
-              <div className="mobileLinks text-4xl lg:text-6xl w-73 cursor-pointer tracking-tight ">
-                <MenuButton label="PROJECTS" />
-              </div>
-              <div className="mobileLinks text-4xl lg:text-6xl w-73 lg:text-start cursor-pointer ">
-                <MenuButton label="LEARN" />
-              </div>
-              <div
+            <div className="  flex flex-col sm:flex sm:flex-col lg:items-center lg:justify-between gap-5 font-Helvetic">
+              <p className=" ml-8 navLinks text-4xl  lg:text-6xl  cursor-pointer  ">
+                <AniNavLink title="PROJECTS" />
+              </p>
+              <p className=" ml-14 navLinks text-4xl lg:text-6xl   lg:text-start cursor-pointer ">
+                <AniNavLink title="LEARN" />
+              </p>
+              <p
                 onClick={(e) => {
                   e.preventDefault();
                   handleContact();
                 }}
-                className="mobileLinks text-4xl lg:text-6xl w-73  cursor-pointer "
+                className="navLinks text-4xl lg:text-6xl  cursor-pointer "
               >
-                <MenuButton label="CONTACT" />
-              </div>
+                <AniNavLink title="GET IN TOUCH" />
+              </p>
             </div>
 
             <div className="w-full flex items-end justify-end text-center  ">
-              <div className="flex items-center justify-center p-3 gap-6 ">
+              <div className="flex items-center justify-center pb-6 pr-6 gap-6 ">
                 <h1 className="text-sm text-cyan-50 text-opacity-40">
-                  FOLLOW US
+                  FIND US
                 </h1>
                 <ul className="flex justify-center text-center gap-6  ">
-                  <div className="socialButton w-10 h-10 flex items-center justify-center">
+                  <div className="socialButton w-8 h-8 flex items-center justify-center">
                     <a href="http://" target="_blank" rel="noopener noreferrer">
-                      <FaInstagram size="30" />
+                      <FaInstagram size="20" />
                     </a>
                   </div>
-                  <div className="socialButton w-10 h-10 flex items-center justify-center">
+                  <div className="socialButton w-8 h-8 flex items-center justify-center">
                     <a href="http://" target="_blank" rel="noopener noreferrer">
-                      <BsTwitterX size="30" />
+                      <BsTwitterX size="20" />
                     </a>
                   </div>
-                  <div className="socialButton w-10 h-10 flex items-center justify-center">
+                  <div className="socialButton w-8 h-8 flex items-center justify-center">
                     <a href="http://" target="_blank" rel="noopener noreferrer">
-                      <BsLinkedin size="30" />
+                      <BsLinkedin size="20" />
                     </a>
                   </div>
                 </ul>

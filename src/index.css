@@ -334,22 +334,43 @@ canvas {
   border-color: #fcfeea;
   border-radius: 1rem;
   border: none;
-  padding: 6px 12px;
+  padding: 6px 16px;
   text-transform: uppercase;
   line-height: 1.33;
   display: inline-flex;
   position: relative;
   align-items: center;
   cursor: pointer;
-  font-weight: 700;
   letter-spacing: 0.5px;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: "Helvetic";
   transition: 0.3s linear;
 }
 
 .CommonButton:hover {
   box-shadow: 0px 0px 13px 5px rgba(207, 200, 200, 0.678);
   font-size: 1.1rem;
+}
+
+.getInTouch {
+  background-color: #00F0FF;
+  color: #000000;
+  border: none;
+  border-radius: 1rem;
+  border: none;
+  padding: 6px 14px;
+  text-transform: uppercase;
+  line-height: 1.33;
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  font-family: "Helvetic";
+  transition: 0.3s linear;
+}
+
+.getInTouch:hover {
+  box-shadow: 0px 0px 13px 5px rgba(66, 205, 239, 0.678);
 }
 
 a {
@@ -359,12 +380,24 @@ a {
 
 .socialButton {
   transition: 0.3s linear;
-  border-radius: 12px;
+  border-radius: 1rem;
 }
 .socialButton:hover {
-  box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
-    inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
-  padding: 3px;
+  background-color: #00F0FF;
+  color: #000000;
+  box-shadow: 0px 0px 13px 5px rgba(66, 205, 239, 0.678);
+  /* padding: 1px; */
+}
+
+.enterButton {
+  transition: 0.3s linear;
+  border-radius: 1rem;
+}
+.enterButton:hover {
+  background-color: #00F0FF;
+  color: #000000;
+  box-shadow: 0px 0px 13px 5px rgba(66, 205, 239, 0.678);
+  /* padding: 1px; */
 }
 
 .menuOverlay {
@@ -376,54 +409,4 @@ a {
   filter: drop-shadow(0 0 10px white);
 }
 
-.contact {
-  font-size: 17px;
-  background: transparent;
-  border: none;
-  padding: 1em 1.5em;
-  color: #ffedd3;
-  text-transform: uppercase;
-  position: relative;
-  transition: 0.5s ease;
-  cursor: pointer;
-  z-index: 2;
-  padding-right: 20px;
-}
 
-.contact::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  width: 0;
-  background-color: #ffc506;
-  transition: 0.5s ease;
-}
-
-.contact:hover {
-  color: #1e1e2b;
-  transition-delay: 0.5s;
-}
-
-.contact:hover::before {
-  width: 100%;
-}
-
-.contact::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 0;
-  width: 100%;
-  background-color: #ffc506;
-  transition: 0.4s ease;
-  z-index: -1;
-}
-
-.contact:hover::after {
-  height: 100%;
-  transition-delay: 0.4s;
-  color: aliceblue;
-}

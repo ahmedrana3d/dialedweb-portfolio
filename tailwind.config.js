@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      color:{
+        aqua: "#00f0ff",
+      },
       fontFamily: {
         horizon: ["Horizon", "sans-serif"],
         circular: ["CircularXXWeb-Book", "sans-serif"],

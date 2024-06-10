@@ -33,7 +33,7 @@ export default function Navbar() {
       path: "/about",
     },
     {
-      title: "CONTACT",
+      title: "GET IN TOUCH",
       path: "/contact",
     },
   ];
@@ -64,7 +64,7 @@ export default function Navbar() {
     }
 
     if (menuOpened === true) {
-      const timeline = gsap.timeline({delay:0.5});
+      const timeline = gsap.timeline({ delay: 0.5 });
 
       timeline
         .from(".navLinks", {
@@ -148,24 +148,27 @@ export default function Navbar() {
             >
               <div className=" w-full h-screen  flex flex-col justify-between items-center ">
                 <div className="w-full lg:h-20 h-16 pl-5  flex justify-between items-center">
-                  <div className="mx-auto lg:scale-150 ">
+                  <div className="flex-1 flex justify-center lg:scale-150 pl-16 ">
                     <Diallogo />
                   </div>
-                  <button 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleContact();
-                  }}
-                  className="hidden font-Helvetic lg:flex contact ">
-                    CONTACT
-                  </button>
+                  <div className="hidden pr-4 lg:flex">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleContact();
+                      }}
+                      className=" font-Helvetic  getInTouch  "
+                    >
+                      <AnimText title="GET IN TOUCH" />
+                    </button>
+                  </div>
                 </div>
 
-                <div className=" w-full p-[100px] text-center flex flex-col sm:flex sm:flex-col lg:flex-row lg:items-center lg:justify-between gap-5 font-Helvetic">
-                  <p className="navLinks text-4xl glow-effect lg:text-6xl w-73 cursor-pointer tracking-tight ">
+                <div className=" w-full p-[100px] text-center flex flex-col sm:flex sm:flex-col lg:items-center lg:justify-between gap-5 font-Helvetic">
+                  <p className="navLinks text-4xl lg:text-6xl w-73 cursor-pointer tracking-tight ">
                     <AniNavLink title="PROJECTS" />
                   </p>
-                  <p className=" navLinks text-4xl lg:text-6xl glow-effect w-73 lg:text-start cursor-pointer ">
+                  <p className=" navLinks text-4xl lg:text-6xl  w-73 lg:text-start cursor-pointer ">
                     <AniNavLink title="LEARN" />
                   </p>
                   <p
@@ -173,43 +176,43 @@ export default function Navbar() {
                       e.preventDefault();
                       handleContact();
                     }}
-                    className="navLinks text-4xl lg:text-6xl w-73 glow-effect  cursor-pointer "
+                    className="navLinks text-4xl lg:text-6xl w-73  cursor-pointer "
                   >
-                    <AniNavLink title="CONTACT" />
+                    <AniNavLink title="GET IN TOUCH" />
                   </p>
                 </div>
 
                 <div className="w-full flex items-end justify-end text-center  ">
-                  <div className="flex items-center justify-center p-3 gap-6 ">
+                  <div className="flex items-center justify-center pb-6 pr-6 gap-6 ">
                     <h1 className="text-sm text-cyan-50 text-opacity-40">
-                      FOLLOW US
+                      FIND US
                     </h1>
                     <ul className="flex justify-center text-center gap-6  ">
-                      <div className="socialButton w-10 h-10 flex items-center justify-center">
+                      <div className="socialButton w-8 h-8 flex items-center justify-center">
                         <a
                           href="http://"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <FaInstagram size="30" />
+                          <FaInstagram size="20" />
                         </a>
                       </div>
-                      <div className="socialButton w-10 h-10 flex items-center justify-center">
+                      <div className="socialButton w-8 h-8 flex items-center justify-center">
                         <a
                           href="http://"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <BsTwitterX size="30" />
+                          <BsTwitterX size="20" />
                         </a>
                       </div>
-                      <div className="socialButton w-10 h-10 flex items-center justify-center">
+                      <div className="socialButton w-8 h-8 flex items-center justify-center">
                         <a
                           href="http://"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <BsLinkedin size="30" />
+                          <BsLinkedin size="20" />
                         </a>
                       </div>
                     </ul>

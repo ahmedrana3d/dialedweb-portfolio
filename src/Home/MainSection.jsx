@@ -5,7 +5,7 @@ import { useSnapshot } from "valtio";
 import state from "../state/state";
 import { useEffect, useRef } from "react";
 
-import { Page1, Page2, Page3 } from "./Pages";
+import { Page1, Page2, Page3, Page4 } from "./Pages";
 
 const MainSection = () => {
   const sec2 = useRef();
@@ -58,7 +58,6 @@ const MainSection = () => {
   };
 
   const Section3In = () => {
-   
     const tl = gsap.timeline();
     tl.to(".section2", {
       opacity: 0,
@@ -67,15 +66,12 @@ const MainSection = () => {
     tl.to(".section3", {
       opacity: 1,
       duration: 1,
-    })
-    .from(".section3", {
+    }).from(".section3", {
       y: -270,
       ease: "power1.inOut",
       duration: 1,
       delay: 0.5,
-     
     });
-   
   };
 
   const Section3Out = () => {
@@ -91,20 +87,47 @@ const MainSection = () => {
     });
   };
 
+  const Section4In = () => {
+    const tl = gsap.timeline();
+
+    tl.to(".section3", {
+      opacity: 0,
+      duration: 1,
+    });
+    tl.to(".section4", {
+      opacity: 1,
+      duration: 1,
+    });
+  };
+
+  const Section4Out = () => {
+    const tl = gsap.timeline();
+
+    tl.to(".section4", {
+      opacity: 0,
+      duration: 1,
+    });
+    tl.to(".section3", {
+      opacity: 1,
+      duration: 1,
+    });
+  };
+
   useEffect(() => {
     if (enterExpClicked && snapshot.step === 0 && !snapshot.reverse) {
       Section1In();
-      console.log("section1 play");
     } else if (snapshot.step === 0 && snapshot.reverse) {
       Section2Out();
-      console.log("section2 reverse");
     } else if (snapshot.step === 1 && !snapshot.reverse) {
       Section2In();
-      console.log("section2 play");
     } else if (snapshot.step === 1 && snapshot.reverse) {
       Section3Out();
     } else if (snapshot.step === 2 && !snapshot.reverse) {
       Section3In();
+    } else if (snapshot.step === 2 && snapshot.reverse) {
+      Section4Out();
+    } else if (snapshot.step === 3 && !snapshot.reverse) {
+      Section4In();
     }
   }, [enterExpClicked, snapshot.step, snapshot.reverse]);
 
@@ -112,9 +135,9 @@ const MainSection = () => {
     <>
       <main className="fixed w-full h-screen top-0 left-0  ">
         <Page1 />
-
         <Page2 sec2={sec2} />
         <Page3 />
+        <Page4 />
       </main>
 
       <ScrollDetector />
