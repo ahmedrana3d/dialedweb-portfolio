@@ -2,6 +2,7 @@
 @tailwind base;
 @tailwind components;
 
+
 @font-face {
   font-family: "Horizon";
   src: url("./fonts/newhorizon.otf") format("opentype");
@@ -10,11 +11,12 @@
   font-family: "CircularXXWeb-Book";
   src: url("/fonts/CircularXXWeb-Book.woff2") format("woff2");
 }
+@font-face {
+  font-family: "Helvetic";
+  src: url("/fonts/HelveticaNeueBold.otf") format("otf");
+}
 .fontHorizon {
   font-family: Horizon;
-}
-.fontCircular{
-  font-family: CircularXXWeb-Book;
 }
 
 html,
@@ -102,7 +104,9 @@ canvas {
   cursor: pointer;
   transition: var(--btn-transition);
   overflow: hidden;
-  box-shadow: var(--btn-shadow);
+  /* box-shadow: var(--btn-shadow); */
+  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #444,
+  inset -5px -5px 10px #222;
   border-radius: 1rem;
 }
 
@@ -226,8 +230,6 @@ canvas {
     right: 0;
   }
 }
-
-
 
 .test {
   font-family: Horizon;
@@ -364,11 +366,63 @@ a {
   padding: 3px;
 }
 
-.menuOverlay{
+.menuOverlay {
   background: #00000053;
   backdrop-filter: blur(10px);
 }
 
 .glow-effect {
   filter: drop-shadow(0 0 10px white);
+}
+
+.contact {
+  font-size: 17px;
+  background: transparent;
+  border: none;
+  padding: 1em 1.5em;
+  color: #ffedd3;
+  text-transform: uppercase;
+  position: relative;
+  transition: 0.5s ease;
+  cursor: pointer;
+  z-index: 2;
+  padding-right: 20px;
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #ffc506;
+  transition: 0.5s ease;
+}
+
+.contact:hover {
+  color: #1e1e2b;
+  transition-delay: 0.5s;
+}
+
+.contact:hover::before {
+  width: 100%;
+}
+
+.contact::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 0;
+  width: 100%;
+  background-color: #ffc506;
+  transition: 0.4s ease;
+  z-index: -1;
+}
+
+.contact:hover::after {
+  height: 100%;
+  transition-delay: 0.4s;
+  color: aliceblue;
 }

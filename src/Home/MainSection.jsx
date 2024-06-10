@@ -71,11 +71,9 @@ const MainSection = () => {
     .from(".section3", {
       y: -270,
       ease: "power1.inOut",
-      duration: 1.5,
-      delay: 1,
-      onComplete: () => {
-        // page3.current.classList.add("animate-levitate");
-      },
+      duration: 1,
+      delay: 0.5,
+     
     });
    
   };
