@@ -14,6 +14,9 @@ import Stars from "./Components/Stars";
 import { editable as e, SheetProvider } from "@theatre/r3f";
 // import studio from "@theatre/studio";
 import Globe from "./Components/Models/Globe";
+import Monitor from "./Components/Models/Monitor";
+import MonitorBox from "./Components/Models/MonitorBox";
+import ChessBoard from "./Components/Models/ChessBoard";
 
 // const snapshot  = useSnapshot(state);
 // let CLICKED_ENTER = snapshot.step
@@ -28,34 +31,31 @@ const Experience = () => {
   const enterExpClicked = snapshot.enterClicked;
 
   useEffect(() => {
-    if (enterExpClicked == true) {
-      if (snapshot.step === 0 && snapshot.reverse === true) {
-        sheet.sequence.play({ direction: "reverse", range: [2, 6] });
-        console.log("First Animation Reverse");
-      } else if (snapshot.step === 1 && snapshot.reverse === false) {
-        sheet.sequence.play({ range: [2, 6] });
-        console.log("First Animation");
-      } else if (snapshot.step === 2 && snapshot.reverse === false) {
-        sheet.sequence.play({ range: [6, 8] });
-        console.log("Second Animation");
-      } else if (snapshot.step === 1 && snapshot.reverse === true) {
-        sheet.sequence.play({ direction: "reverse", range: [6, 8] });
-        console.log("Second Animation Reversed");
-      } else if (snapshot.step === 2 && snapshot.reverse === true) {
-        sheet.sequence.play({ direction: "reverse", range: [8, 9] });
-        console.log("Third Animation Reversed");
-      } else if (snapshot.step === 3 && snapshot.reverse === false) {
-        sheet.sequence.play({ range: [8, 9] });
-        console.log("Third Animation ");
-      } else if (snapshot.step === 4 && snapshot.reverse === false) {
-        sheet.sequence.play({ range: [9, 10.5] });
-        console.log("Third Animation ");
-      } else if (snapshot.step === 3 && snapshot.reverse === true) {
-        sheet.sequence.play({ direction: "reverse", range: [9, 10.5] });
-        console.log("Third Animation ");
+    if (enterExpClicked) {
+      const animations = [
+        { step: 0, reverse: true, direction: "reverse", range: [2, 6], message: "First Animation Reverse" },
+        { step: 1, reverse: false, range: [2, 6], message: "First Animation" },
+        { step: 2, reverse: false, range: [6, 8], message: "Second Animation" },
+        { step: 1, reverse: true, direction: "reverse", range: [6, 8], message: "Second Animation Reversed" },
+        { step: 2, reverse: true, direction: "reverse", range: [8, 9], message: "Third Animation Reversed" },
+        { step: 3, reverse: false, range: [8, 9], message: "Third Animation" },
+        { step: 4, reverse: false, range: [9, 10.5], message: "Third Animation" },
+        { step: 3, reverse: true, direction: "reverse", range: [9, 10.5], message: "Third Animation" },
+        { step: 5, reverse: false, range: [10.5, 12], message: "Third Animation" },
+        { step: 4, reverse: true, direction: "reverse", range: [10.5, 12], message: "Third Animation" },
+        { step: 6, reverse: false, range: [12, 13.5], message: "Third Animation" },
+        { step: 5, reverse: true, direction: "reverse", range: [12, 13.5], message: "Third Animation" },
+      ];
+  
+      const animation = animations.find(anim => anim.step === snapshot.step && anim.reverse === snapshot.reverse);
+  
+      if (animation) {
+        sheet.sequence.play({ direction: animation.direction, range: animation.range });
+        console.log(animation.message);
       }
     }
   }, [snapshot.step]);
+  
 
   const ufoRef = useRef(null);
 
@@ -151,7 +151,7 @@ const Experience = () => {
   state.loadingProgress = LOAD_PROGRESS;
 
   const [xPosition, setXPosition] = useState(0);
-
+const [monitorScale, setMonitorScale] = useState(1)
   useEffect(() => {
     const handleResize = () => {
       // Adjust xPosition based on screen size
@@ -162,6 +162,11 @@ const Experience = () => {
       } else {
         setXPosition(0);
       }
+
+
+
+
+
     };
 
     handleResize(); // Call it once to set initial position
@@ -200,6 +205,24 @@ const Experience = () => {
 <e.group theatreKey="Globe" position={[-8.1299, -22 , 0]} scale={[0.45,0.45,0.45]}>
 <Globe/>
 </e.group>
+
+<group scale={[monitorScale,monitorScale,monitorScale]}>
+<e.group theatreKey="Monitors"  scale={[0,0,0]}>
+  {/* <e.group theatreKey="Monitor"> */}
+<Monitor />
+  {/* </e.group> */}
+  {/* <e.group theatreKey="Monitor Box"> */}
+<MonitorBox />
+  {/* </e.group> */}
+</e.group>
+</group>
+
+<e.group theatreKey="Chess Board" scale={[0,0,0]}>
+<ChessBoard/>
+</e.group>
+
+
+
 
               </SheetProvider>
             </group>

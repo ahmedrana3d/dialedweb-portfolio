@@ -1,7 +1,8 @@
 
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
+import { useControls } from 'leva';
 
 export default function Globe(props) {
   const { nodes, materials } = useGLTF('models/globe-v1.glb')
@@ -17,9 +18,30 @@ export default function Globe(props) {
 
 
 
+  const [xPosition, setXPosition] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Adjust xPosition based on screen size
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 768) {
+        // Adjust this breakpoint according to your design
+        setXPosition(18.4);
+      } else {
+        setXPosition(0);
+      }
+    };
+
+    handleResize(); // Call it once to set initial position
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+
 
   return (
-    <group {...props} ref={globeRef} dispose={null}>
+    <group {...props} ref={globeRef} position={[xPosition, 0 , 0]} dispose={null}>
       <mesh
         castShadow
         receiveShadow
