@@ -10,6 +10,7 @@ export default {
         horizon: ["Horizon", "sans-serif"],
         circular: ["CircularXXWeb-Book", "sans-serif"],
         Helvetic: ["Helvetic"],
+        apline: ["apline"],
       },
       keyframes: {
         levitate: {

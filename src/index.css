@@ -15,6 +15,10 @@
   font-family: "Helvetic";
   src: url("/fonts/HelveticaNeueBold.otf") format("opentype");
 }
+@font-face {
+  font-family: "apline";
+  src: url("/fonts/gt-apline.otf") format("opentype");
+}
 
 .fontHorizon {
   font-family: Horizon;
@@ -408,5 +412,10 @@ a {
 .glow-effect {
   filter: drop-shadow(0 0 10px white);
 }
+
+.glow3d {
+  filter: drop-shadow(0 0 10px rgb(7, 131, 75));
+}
+
 
 

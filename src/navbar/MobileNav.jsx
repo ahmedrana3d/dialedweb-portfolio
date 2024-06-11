@@ -51,7 +51,7 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
           ${menuOpened ? "h-full" : "h-0"} `}
         >
           <div className=" w-full h-screen  flex flex-col justify-between items-center ">
-            <div className="w-full lg:h-20 h-16 pl-5  flex justify-between items-center">
+            <div className="w-full lg:h-20 h-16   flex justify-between items-center">
               <div className="flex-1 flex justify-center lg:scale-150 pt-24 scale-150 ">
                 <Diallogo />
               </div>

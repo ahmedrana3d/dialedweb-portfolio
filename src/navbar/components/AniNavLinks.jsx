@@ -14,7 +14,7 @@ export default function AniNavLink({ title }) {
         animation={letterAnimation}
         isHovered={isHovered}
       />
-      <div className="absolute top-0">
+      <div className="absolute top-0 font-apline">
         <AnimatedWord
           title={title}
           animation={letterAnimationTwo}
@@ -71,7 +71,7 @@ const letterAnimationTwo = {
   hover: {
     y: 0,
     color: "#00f0ff",
-    fontFamily: "circular",
+    // fontFamily: "apline",
     shadowBlur: 10,
     transition: {
       duration: 0.9,
