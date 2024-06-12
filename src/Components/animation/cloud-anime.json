@@ -80,7 +80,7 @@
       },
       "sequence": {
         "subUnitsPerUnit": 30,
-        "length": 13.99,
+        "length": 14.5,
         "type": "PositionalSequence",
         "tracksByObject": {
           "Clouds": {
@@ -1010,6 +1010,19 @@
                     ],
                     "type": "bezier",
                     "value": 1
+                  },
+                  {
+                    "id": "qsTHPqPCOq",
+                    "position": 14.5,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0
                   }
                 ]
               },
@@ -1042,6 +1055,19 @@
                     ],
                     "type": "bezier",
                     "value": 1
+                  },
+                  {
+                    "id": "8xVqLIYrkZ",
+                    "position": 14.5,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0
                   }
                 ]
               },
@@ -1074,6 +1100,19 @@
                     ],
                     "type": "bezier",
                     "value": 1
+                  },
+                  {
+                    "id": "G23XTJhswM",
+                    "position": 14.5,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0
                   }
                 ]
               },
@@ -1106,6 +1145,19 @@
                     ],
                     "type": "bezier",
                     "value": 0.5400000000000003
+                  },
+                  {
+                    "id": "wNDlk7pvK5",
+                    "position": 14.5,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0
                   }
                 ]
               },
@@ -1138,6 +1190,19 @@
                     ],
                     "type": "bezier",
                     "value": 0.8800000000000006
+                  },
+                  {
+                    "id": "V2AnZ0W_85",
+                    "position": 14.5,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0
                   }
                 ]
               },
@@ -1162,6 +1227,7 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "5SUz8N7eCXK4YFZZ",
     "vqIzrd6hkPehTwIW",
     "2Zt5geOhCR5c5GGa",
     "rCgMsMgZ1NBM2fu5",

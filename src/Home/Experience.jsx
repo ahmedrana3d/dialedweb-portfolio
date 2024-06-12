@@ -44,14 +44,17 @@ const Experience = () => {
         { step: 5, reverse: false, range: [10.5, 12], message: "Third Animation" },
         { step: 4, reverse: true, direction: "reverse", range: [10.5, 12], message: "Third Animation" },
         { step: 6, reverse: false, range: [12, 13.5], message: "Third Animation" },
+        { step: 6, reverse: false, range: [12, 13.5], message: "Third Animation" },
         { step: 5, reverse: true, direction: "reverse", range: [12, 13.5], message: "Third Animation" },
+        { step: 7, reverse: false, range: [13.5 , 14.5], message: "Third Animation" },
+        { step: 6, reverse: true, direction: "reverse", range: [13.5 , 14.5], message: "Third Animation" },
       ];
   
       const animation = animations.find(anim => anim.step === snapshot.step && anim.reverse === snapshot.reverse);
   
       if (animation) {
         sheet.sequence.play({ direction: animation.direction, range: animation.range });
-        console.log(animation.message);
+        console.log(snapshot.step , snapshot.reverse);
       }
     }
   }, [snapshot.step]);

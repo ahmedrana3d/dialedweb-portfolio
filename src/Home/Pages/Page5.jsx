@@ -24,7 +24,7 @@ export default function Page5() {
   }, [snapshot.step]);
   return (
     <Section>
-      <div className="section5 flex flex-col justify-end items-center text-start h-[350px] text-white opacity-0 fontHorizon animate-levitate">
+      <div className="section5 flex flex-col justify-end items-center text-start h-[350px] xl:my-6 text-white opacity-0 fontHorizon animate-levitate">
         <h1 className=" headline-orange lg:w-[500px] text-6xl lg:text-8xl glow3d   ">
           {play ? <AnimatedCounter from={0} to={94} /> : "0"}%
         </h1>

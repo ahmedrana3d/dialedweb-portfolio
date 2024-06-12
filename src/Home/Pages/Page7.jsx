@@ -25,11 +25,11 @@ function Page7() {
   }, [snapshot.step]);
   return (
     <Section>
-      <div className="section7 flex flex-col justify-end lg:justify-center items-center text-start h-[400px] lg:h-full lg:w-[90vh] text-white fontHorizon opacity-0  ">
-        <h1 className="animate-levitate headline-orange text-start lg:w-[500px] text-6xl lg:text-8xl glow3d   ">
+      <div className="section7 flex flex-col justify-end lg:justify-center lg:ml-12 lg:pb-52 items-center lg:items-start text-center lg:text-start h-[400px] lg:h-full lg:w-[90vh] text-white fontHorizon opacity-0  ">
+        <h1 className="animate-levitate headline-orange text-start  text-6xl lg:text-9xl glow3d   ">
           {play ? <AnimatedCounter from={0} to={89} /> : "0"}%
         </h1>
-        <h3 className="animate-levitate text-1xl lg:text-2xl text-center pt-6 lg:p-0 ">
+        <h3 className="animate-levitate text-1xl lg:text-2xl text-center lg:text-start pt-6 lg:p-0 ">
           of consumers turn to a competitor after a poor user experience
         </h3>
       </div>
