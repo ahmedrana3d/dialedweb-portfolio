@@ -13,7 +13,7 @@ export default function Page5() {
     if (snapshot.step === 4) {
       timeout = setTimeout(() => {
         setPlay(true);
-      }, 2000);
+      }, 4000);
     } else {
       setPlay(false);
     }
@@ -25,10 +25,10 @@ export default function Page5() {
   return (
     <Section>
       <div className="section5 flex flex-col justify-end items-center text-start h-[350px] text-white opacity-0 fontHorizon animate-levitate">
-        <h1 className=" headline-orange lg:w-[500px] text-8xl lg:text-8xl glow3d   ">
+        <h1 className=" headline-orange lg:w-[500px] text-6xl lg:text-8xl glow3d   ">
           {play ? <AnimatedCounter from={0} to={94} /> : "0"}%
         </h1>
-        <h3 className="text-2xl lg:text-4xl text-center">
+        <h3 className="text-1xl lg:text-4xl text-center">
           Increase in Conversions after implementing{" "}
           <span className="headline-orange glow3d">3D</span>{" "}
         </h3>

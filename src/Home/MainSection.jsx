@@ -5,7 +5,7 @@ import { useSnapshot } from "valtio";
 import state from "../state/state";
 import { useEffect, useRef } from "react";
 
-import { Page1, Page2, Page3, Page4, Page5 } from "./Pages";
+import { Page1, Page2, Page3, Page4, Page5, Page6, Page7 } from "./Pages";
 
 const MainSection = () => {
   const sec2 = useRef();
@@ -98,6 +98,8 @@ const MainSection = () => {
       opacity: 1,
       duration: 1,
     });
+    tl.fromTo(".compet", { opacity: 0 }, { opacity: 1, duration: 0.5 });
+    tl.fromTo(".important", { opacity: 0 }, { opacity: 1, duration: 0.5 });
   };
 
   const Section4Out = () => {
@@ -125,26 +127,25 @@ const MainSection = () => {
       ".compet",
       {
         opacity: 0,
-        duration: 1,
+        // duration: 0.5,
       },
       "-=1"
     );
-    // tl.fromTo(
-    //   ".important",
-    //   {
-    //     opacity: 0,
-    //   },
-    //   { opacity: 1, y: "-70vh", duration: 1 }
-    // );
-    tl.to(".important", {
-      y: "-70vh",
-      duration: 1,
-    });
+    tl.to(
+      ".important",
+      {
+        y: "-60vh",
+        duration: 1,
+        delay: 1,
+      },
+      "-=1"
+    );
     tl.to(
       ".section5",
       {
         opacity: 1,
         duration: 1,
+        delay: 2,
       },
       "-=1"
     );
@@ -165,10 +166,6 @@ const MainSection = () => {
       opacity: 1,
       duration: 1,
     });
-    tl.to(".compet", {
-      opacity: 1,
-      duration: 1,
-    });
     tl.to(
       ".important",
       {
@@ -177,6 +174,73 @@ const MainSection = () => {
       },
       "-=1"
     );
+    tl.to(".compet", {
+      opacity: 1,
+      duration: 1,
+      delay: 1,
+    });
+  };
+
+  const Section6In = () => {
+    const tl = gsap.timeline();
+
+    tl.to(".section5", {
+      opacity: 0,
+      duration: 0.5,
+    });
+    tl.to(".important", {
+      opacity: 0,
+      duration: 0.5,
+    });
+
+    tl.to(".section6", {
+      opacity: 1,
+      duration: 1,
+    });
+  };
+
+  const Section6Out = () => {
+    const tl = gsap.timeline();
+
+    tl.to(".section6", {
+      opacity: 0,
+      duration: 1,
+    });
+    tl.to(".important", {
+      opacity: 1,
+      duration: 1,
+    });
+    tl.to(".section5", {
+      opacity: 1,
+      duration: 1,
+    });
+  };
+
+  const Section7In = () => {
+    const tl = gsap.timeline();
+
+    tl.to(".section6", {
+      opacity: 0,
+      duration: 0.5,
+    });
+
+    tl.to(".section7", {
+      opacity: 1,
+      duration: 1,
+    });
+  };
+  const Section7Out = () => {
+    const tl = gsap.timeline();
+
+    tl.to(".section7", {
+      opacity: 0,
+      duration: 0.5,
+    });
+
+    tl.to(".section6", {
+      opacity: 1,
+      duration: 1,
+    });
   };
 
   useEffect(() => {
@@ -207,6 +271,18 @@ const MainSection = () => {
     } else if (snapshot.step === 4 && !snapshot.reverse) {
       Section5In();
       console.log("scetion5In");
+    } else if (snapshot.step === 4 && snapshot.reverse) {
+      Section6Out();
+      console.log("scetion6Out");
+    } else if (snapshot.step === 5 && !snapshot.reverse) {
+      Section6In();
+      console.log("scetion6In");
+    } else if (snapshot.step === 5 && snapshot.reverse) {
+      Section7Out();
+      console.log("scetion7out");
+    } else if (snapshot.step === 6 && !snapshot.reverse) {
+      Section7In();
+      console.log("scetion7In");
     }
   }, [enterExpClicked, snapshot.step, snapshot.reverse]);
 
@@ -218,6 +294,8 @@ const MainSection = () => {
         <Page3 />
         <Page4 />
         <Page5 />
+        <Page6 />
+        <Page7 />
       </main>
 
       <ScrollDetector />

@@ -2,7 +2,7 @@ import { animate, useInView, useIsomorphicLayoutEffect } from "framer-motion";
 import { useRef } from "react";
 
 const AnimatedCounter = ({ from, to, animationOptions }) => {
-  const ref = useRef( null);
+  const ref = useRef(null);
   const inView = useInView(ref, { once: true });
 
   useIsomorphicLayoutEffect(() => {
@@ -21,7 +21,7 @@ const AnimatedCounter = ({ from, to, animationOptions }) => {
     }
 
     const controls = animate(from, to, {
-      duration: 5,
+      duration: 4,
       ease: "easeOut",
       ...animationOptions,
       onUpdate(value) {
