@@ -129,24 +129,24 @@ const MainSection = () => {
       },
       "-=1"
     );
-    tl.fromTo(
-      ".important",
-      {
-        opacity: 0,
-      },
-      { opacity: 1, y: "-70vh", duration: 1 }
-    );
-    // tl.to(".important", {
-    //   y: "-70vh",
-    //   duration: 1,
-    // });
+    // tl.fromTo(
+    //   ".important",
+    //   {
+    //     opacity: 0,
+    //   },
+    //   { opacity: 1, y: "-70vh", duration: 1 }
+    // );
+    tl.to(".important", {
+      y: "-70vh",
+      duration: 1,
+    });
     tl.to(
       ".section5",
       {
         opacity: 1,
         duration: 1,
       },
-      "-=2"
+      "-=1"
     );
   };
 
