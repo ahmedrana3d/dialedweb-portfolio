@@ -26,28 +26,28 @@ function Page8() {
   return (
     <Section>
       <div className="section8 h-screen w-full  fontHorizon flex flex-col justify-between items-center text-white opacity-0">
-        <div className="flex h-[300px]  items-end">
+        <div className="lg:flex lg:flex-row  flex flex-col pt-20 lg:pt-0 gap-6 lg:gap-0 h-[300px]  items-end">
           <div className="text-center leftCon">
-            <p className="text-2xl leftText">
+            <p className="lg:text-2xl   leftText">
               A well-designed user interface (UI) could boost website
               conversions by:
             </p>
-            <p className="leftText text-7xl headline-orange">
+            <p className="leftText lg:text-7xl text-5xl headline-orange">
               {play ? <AnimatedCounter from={0} to={200} /> : "0"}%
             </p>
           </div>
           <div className="text-center rightCon">
-            <p className="rightText text-2xl">
+            <p className="rightText lg:text-2xl ">
               Better user experience (UX) design could lead to an increase of:
             </p>
-            <p className="rightText text-7xl headline-orange">
+            <p className="rightText lg:text-7xl text-5xl headline-orange">
               {play ? <AnimatedCounter from={0} to={400} /> : "0"}%
             </p>
           </div>
         </div>
 
         <div className=" h-[350px] text-center">
-          <p className="text-8xl headline-orange bigAmount">
+          <p className="lg:text-8xl text-5xl headline-orange bigAmount">
             {play ? <AnimatedCounter from={0} to={252000} /> : "0"}%
           </p>
           <p className="pt-3 text-2xl bigText">

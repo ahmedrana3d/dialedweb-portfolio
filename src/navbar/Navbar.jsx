@@ -25,7 +25,7 @@ export default function Navbar() {
 
   const navLinks = [
     {
-      title: "PORTFOLIO",
+      title: "PROJECTS",
       path: "/",
     },
     {
