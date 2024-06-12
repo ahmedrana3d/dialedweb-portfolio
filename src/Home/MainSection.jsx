@@ -5,7 +5,16 @@ import { useSnapshot } from "valtio";
 import state from "../state/state";
 import { useEffect, useRef } from "react";
 
-import { Page1, Page2, Page3, Page4, Page5, Page6, Page7 } from "./Pages";
+import {
+  Page1,
+  Page2,
+  Page3,
+  Page4,
+  Page5,
+  Page6,
+  Page7,
+  Page8,
+} from "./Pages";
 
 const MainSection = () => {
   const sec2 = useRef();
@@ -186,7 +195,7 @@ const MainSection = () => {
 
     tl.to(".section5", {
       opacity: 0,
-      duration: 0.5,
+      // duration: 0.5,
     });
     tl.to(".important", {
       opacity: 0,
@@ -243,6 +252,78 @@ const MainSection = () => {
     });
   };
 
+  const Section8In = () => {
+    const tl = gsap.timeline();
+
+    tl.to(".section7", {
+      opacity: 0,
+      duration: 0.5,
+    });
+
+    tl.to(".section8", {
+      opacity: 1,
+      duration: 1,
+    });
+
+    tl.from(
+      ".leftCon .leftText",
+      {
+        x: -300,
+        opacity: 0,
+        ease: "power4.out",
+        stagger: 1,
+        duration: 1,
+      },
+      "anim"
+    );
+
+    tl.from(
+      ".rightCon .rightText",
+      {
+        x: 300,
+        opacity: 0,
+        ease: "power4.out",
+        stagger: 1,
+        duration: 1,
+      },
+      "anim"
+    );
+    tl.from(
+      ".bigAmount",
+      {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out",
+      },
+      "anim1"
+    );
+    tl.from(
+      ".bigText",
+      {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out",
+      },
+      "anim1"
+    );
+  };
+
+  const Section8Out = () => {
+    const tl = gsap.timeline();
+
+    tl.to(".section8", {
+      opacity: 0,
+      duration: 0.5,
+    });
+
+    tl.to(".section7", {
+      opacity: 1,
+      duration: 1,
+    });
+  };
+
   useEffect(() => {
     if (enterExpClicked && snapshot.step === 0 && !snapshot.reverse) {
       Section1In();
@@ -283,6 +364,12 @@ const MainSection = () => {
     } else if (snapshot.step === 6 && !snapshot.reverse) {
       Section7In();
       console.log("scetion7In");
+    } else if (snapshot.step === 6 && snapshot.reverse) {
+      Section8Out();
+      console.log("scetion8Out");
+    } else if (snapshot.step === 7 && !snapshot.reverse) {
+      Section8In();
+      console.log("scetion8In");
     }
   }, [enterExpClicked, snapshot.step, snapshot.reverse]);
 
@@ -296,6 +383,7 @@ const MainSection = () => {
         <Page5 />
         <Page6 />
         <Page7 />
+        <Page8 />
       </main>
 
       <ScrollDetector />
