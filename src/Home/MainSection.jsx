@@ -116,31 +116,43 @@ const MainSection = () => {
   const Section5In = () => {
     const tl = gsap.timeline();
 
-    tl.to(".important", {
+    tl.to(".section4", {
       opacity: 1,
-      display: "flex",
+      duration: 1,
     });
+
     tl.to(
-      ".section4",
+      ".compet",
       {
         opacity: 0,
         duration: 1,
       },
       "-=1"
     );
-    tl.to(".section5", {
-      opacity: 1,
-      duration: 1,
-    });
+    tl.fromTo(
+      ".important",
+      {
+        opacity: 0,
+      },
+      { opacity: 1, y: "-70vh", duration: 1 }
+    );
+    // tl.to(".important", {
+    //   y: "-70vh",
+    //   duration: 1,
+    // });
+    tl.to(
+      ".section5",
+      {
+        opacity: 1,
+        duration: 1,
+      },
+      "-=2"
+    );
   };
 
   const Section5Out = () => {
     const tl = gsap.timeline();
-    tl.to(".important", {
-      display: "none",
-      opacity: 0,
-      duration: 1,
-    });
+
     tl.to(
       ".section5",
       {
@@ -153,6 +165,18 @@ const MainSection = () => {
       opacity: 1,
       duration: 1,
     });
+    tl.to(".compet", {
+      opacity: 1,
+      duration: 1,
+    });
+    tl.to(
+      ".important",
+      {
+        y: "3vh",
+        duration: 1,
+      },
+      "-=1"
+    );
   };
 
   useEffect(() => {
