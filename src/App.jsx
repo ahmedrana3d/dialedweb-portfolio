@@ -1,4 +1,4 @@
-import {  Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./Home/Home";
 import Navbar from "./navbar/Navbar";
 import { AnimatePresence } from "framer-motion";
@@ -22,5 +22,3 @@ function App() {
 }
 
 export default App;
-
-

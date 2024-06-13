@@ -12,7 +12,7 @@ export default function Globe(props) {
   useFrame((state) => {
     if (globeRef.current) {
       // pointsRef.current.material.color.setHSL((state.clock.getElapsedTime() * 0.1) % 1, 0.5, 0.5);
-      globeRef.current.rotation.y += 0.006;
+      globeRef.current.rotation.y += 0.001;
     }
   });
 
@@ -28,7 +28,8 @@ export default function Globe(props) {
         // Adjust this breakpoint according to your design
         setXPosition(18.4);
       } else {
-        setXPosition(0);
+        setXPosition(-18);
+        
       }
     };
 
@@ -41,7 +42,7 @@ export default function Globe(props) {
 
 
   return (
-    <group {...props} ref={globeRef} position={[xPosition, 0 , 0]} dispose={null}>
+    <group {...props} ref={globeRef} position={[xPosition, -3 , 0]} scale={[1.3,1.3,1.3]} dispose={null}>
       <mesh
         castShadow
         receiveShadow

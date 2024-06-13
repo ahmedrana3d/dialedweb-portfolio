@@ -2,7 +2,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 
-export default function Stars({ posY, opacity }) {
+export default function Stars({ posY, opacity , StarSize }) {
   const pointsRef = useRef();
   const starsRef = useRef();
   const { size } = useThree();
@@ -22,7 +22,7 @@ export default function Stars({ posY, opacity }) {
 
   useEffect(() => {
     const vertices = [];
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 5000; i++) {
       const x = THREE.MathUtils.randFloatSpread(1000);
       const y = THREE.MathUtils.randFloatSpread(1000);
       const z = THREE.MathUtils.randFloatSpread(800);
@@ -35,7 +35,7 @@ export default function Stars({ posY, opacity }) {
     const starTexture = new THREE.TextureLoader().load('/textures/star_07.png');
     const material = new THREE.PointsMaterial({
       color: 0x888888,
-      size: 5,
+      size: size,
       map: starTexture,
       transparent: true,
       blending: THREE.AdditiveBlending,
@@ -51,6 +51,7 @@ export default function Stars({ posY, opacity }) {
     if (pointsRef.current) {
       // pointsRef.current.material.color.setHSL((state.clock.getElapsedTime() * 0.1) % 1, 0.5, 0.5);
       pointsRef.current.material.opacity = opacity;
+      pointsRef.current.material.size = StarSize;
     }
   });
 

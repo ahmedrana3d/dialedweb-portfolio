@@ -10,18 +10,15 @@ import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 import { useControls } from "leva";
 
-const CloudsEnvironment = ({ seed, bounds, volume, position , luminanceThreshold , intensity , enabled  }) => {
-
-// const EffectComposerParas = useControls("Effect Composer" , {
-//   luminanceThreshold : {min : 0 , max : 1, value : 0.9},
-//  luminanceSmoothing : {min : 0 , max : 0.1, value : 0.05},
-//   height : {min : 0 , max : 500, value : 300},
-//   intensity : {min : 0 , max : 5, value : 1},
-//   enabled : false
-// })
-
-
-
+const CloudsEnvironment = ({
+  seed,
+  bounds,
+  volume,
+  position,
+  luminanceThreshold,
+  intensity,
+  enabled,
+}) => {
   const cloudsRef = useRef();
   const { size } = useThree();
 
@@ -32,7 +29,9 @@ const CloudsEnvironment = ({ seed, bounds, volume, position , luminanceThreshold
         const x = (event.clientX / size.width) * 2 - 1;
         const y = -(event.clientY / size.height) * 2 + 1;
 
-        cloudsRef.current.position.set(-y * 1.5, x * 1.5, 0); // Adjust the scaling factor if needed
+        if (cloudsRef.current) {
+          cloudsRef.current.position.set(-y * 1.5, x * 1.5, 0); // Adjust the scaling factor if needed
+        }
       }
     };
 
@@ -42,6 +41,13 @@ const CloudsEnvironment = ({ seed, bounds, volume, position , luminanceThreshold
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [size.width, size.height]);
+
+  // Dispose EffectComposer if it has cleanup logic
+  useEffect(() => {
+    return () => {
+      // Additional cleanup if needed for EffectComposer
+    };
+  }, []);
 
   return (
     <>
@@ -62,13 +68,11 @@ const CloudsEnvironment = ({ seed, bounds, volume, position , luminanceThreshold
       </Clouds>
       <Environment preset="city" />
 
-      <EffectComposer   enabled={enabled}>
+      <EffectComposer enabled={enabled}>
         <Bloom
           luminanceThreshold={luminanceThreshold}
-          // luminanceSmoothing={0.55}
           height={300}
           intensity={intensity}
-        
         />
       </EffectComposer>
     </>

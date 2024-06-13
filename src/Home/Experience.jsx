@@ -89,13 +89,15 @@ const Experience = () => {
   });
 
   const skyColor = sheet.object("Sky Color", {
-    topColor: types.rgba({ r: 135, g: 206, b: 235, a: 1 }), // Sky blue
-    bottomColor: types.rgba({ r: 255, g: 255, b: 255, a: 1 }), // White
+    topColor: types.rgba({ r: 92, g: 83, b: 204, a: 1 }), // #5C53CC
+    bottomColor: types.rgba({ r: 153, g: 147, b: 223, a: 1 }), // #9993DF
   });
+  
 
   const starsPos = sheet.object("Stars", {
     posY: 0,
     opacity : 0.8,
+    size : 5,
   });
 
   const bloomPara = sheet.object("Bloom", {
@@ -114,6 +116,7 @@ const Experience = () => {
   // Stars Pos
   const [cloudPosZ, setCloudPosZ] = useState(-80);
   const [starsPosY, setStarsPosY] = useState(-700);
+  const [starsSize, setStarsSize] = useState(5);
   // Bloom Para
 
   const [bloomEnabled, setbloomEnabled] = useState(false);
@@ -133,7 +136,7 @@ const Experience = () => {
     starsPos.onValuesChange((values) => {
       setStarsPosY(values.posY);
       setstarsOpacity(values.opacity)
-      
+      setStarsSize(values.size)
     });
 
     skyColor.onValuesChange((colors) => {
@@ -249,11 +252,12 @@ const [monitorScale, setMonitorScale] = useState(1)
             bottomColor={
               new THREE.Color(bottomColor.r, bottomColor.g, bottomColor.b)
             }
+            
           />
 
-          <Stars posY={starsPosY} opacity={starsOpacity} />
+          <Stars posY={starsPosY} opacity={starsOpacity} StarSize={starsSize} />
 
-          {/* <StatsGl/> */}
+          <StatsGl/>
         </Canvas>
       </Suspense>
     </div>
