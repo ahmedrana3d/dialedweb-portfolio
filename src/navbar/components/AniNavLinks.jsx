@@ -70,7 +70,7 @@ const letterAnimationTwo = {
   },
   hover: {
     y: 0,
-    color: "#00f0ff",
+    color: "#AAA3FF",
     // fontFamily: "Opti",
     shadowBlur: 10,
     transition: {

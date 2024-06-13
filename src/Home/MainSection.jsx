@@ -18,7 +18,6 @@ import {
 
 const MainSection = () => {
   const sec2 = useRef();
-  const page3 = useRef();
 
   const snapshot = useSnapshot(state);
   console.log(snapshot.step);
@@ -141,15 +140,6 @@ const MainSection = () => {
       "-=1"
     );
     tl.to(
-      ".important",
-      {
-        y: "-60vh",
-        duration: 1,
-        delay: 1,
-      },
-      "-=1"
-    );
-    tl.to(
       ".section5",
       {
         opacity: 1,
@@ -175,14 +165,6 @@ const MainSection = () => {
       opacity: 1,
       duration: 1,
     });
-    tl.to(
-      ".important",
-      {
-        y: "3vh",
-        duration: 1,
-      },
-      "-=1"
-    );
     tl.to(".compet", {
       opacity: 1,
       duration: 1,

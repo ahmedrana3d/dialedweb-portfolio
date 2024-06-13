@@ -8,8 +8,8 @@ import AniNavLink from "./components/AniNavLinks.jsx";
 import AnimText from "./components/AnimText.jsx";
 import { FaInstagram } from "react-icons/fa";
 import { BsLinkedin, BsTwitterX } from "react-icons/bs";
-import { FaLinkedin } from "react-icons/fa";
 import MobileNav from "./MobileNav.jsx";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -26,11 +26,11 @@ export default function Navbar() {
   const navLinks = [
     {
       title: "PROJECTS",
-      path: "/",
+      path: "/project",
     },
     {
       title: "LEARN",
-      path: "/about",
+      path: "/learn",
     },
     {
       title: "GET IN TOUCH",
@@ -104,13 +104,15 @@ export default function Navbar() {
       {xPosition ? null : (
         <>
           <div className="nav hidden absolute z-40 w-full h-20  p-6 lg:flex items-center justify-between">
-            <Diallogo />
+            <p className="text-2xl text-center font-horizon text-white hover:-translate-y-1 transition-all duration-300">
+              DIALED<span className="text-[#AAA3FF]">WEB</span>
+            </p>
             <div>
               <ul className="flex text-2xl text-white gap-6 items-center justify-center font-serif font-semibold ">
                 {navLinks.map((link, i) => {
                   return (
                     <div key={i}>
-                      <li to={link.path}>
+                      <NavLink to={link.path}>
                         <div
                           onClick={(e) => {
                             e.preventDefault();
@@ -119,9 +121,9 @@ export default function Navbar() {
                             }
                           }}
                         >
-                          <AnimatedLinks title={link.title} />
                         </div>
-                      </li>
+                          <AnimatedLinks title={link.title} />
+                      </NavLink>
                     </div>
                   );
                 })}
@@ -148,8 +150,10 @@ export default function Navbar() {
             >
               <div className=" w-full h-screen  flex flex-col justify-between items-center ">
                 <div className="w-full lg:h-20 h-16 pl-5  flex justify-between items-center ">
-                  <div className="flex-1 flex justify-center lg:scale-150 pl-[6.5rem]  ">
-                    <Diallogo />
+                  <div className="flex-1 flex justify-center items-center text-center  pl-[9rem]  ">
+                    <p className="text-5xl font-horizon text-white hover:-translate-y-1 transition-all duration-300">
+                      DIALED<span className="text-[#AAA3FF]">WEB</span>
+                    </p>
                   </div>
                   <div className="hidden pr-4 lg:flex">
                     <button
@@ -221,7 +225,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <Contact contact={contact} setContact={setContact} />
+          {/* <Contact contact={contact} setContact={setContact} /> */}
         </>
       )}
 

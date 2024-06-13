@@ -33,7 +33,7 @@ function Page8() {
               conversions by:
             </p>
             <p className="leftText lg:text-7xl text-5xl headline-orange">
-              {play ? <AnimatedCounter from={0} to={200} /> : "0"}%
+              200%
             </p>
           </div>
           <div className="text-center rightCon">
@@ -41,7 +41,7 @@ function Page8() {
               Better user experience (UX) design could lead to an increase of:
             </p>
             <p className="rightText lg:text-7xl text-5xl headline-orange">
-              {play ? <AnimatedCounter from={0} to={400} /> : "0"}%
+              400%
             </p>
           </div>
         </div>

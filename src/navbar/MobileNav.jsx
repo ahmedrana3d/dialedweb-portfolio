@@ -15,20 +15,11 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
     if (menuOpened === true) {
       const timeline = gsap.timeline({ delay: 0.5 });
 
-      timeline
-        .from(".mobileLinks", {
-          opacity: 0,
-          x: -50,
-          ease: "power4.out",
-          duration: 2,
-          stagger: { amount: 0.8, from: "start" },
-        })
-        .to(".mobileLinks", {
-          opacity: 1,
-          y: 0,
-          duration: 2,
-          ease: "power4.out",
-        });
+      timeline.fromTo(".mobileLinks",
+        {opacity: 0, duration: 1, x: -100, },
+        {opacity: 1, duration:1, x: 0,  stagger: 0.8, ease: "back.inOut(1.7)"}
+      )
+        
     }
   }, [menuOpened]);
   return (
@@ -37,7 +28,7 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
         <div className="z-50 ">
           <button
             onClick={() => setMenuOpened(!menuOpened)}
-            className="CommonButton "
+            className="menuButton "
           >
             {menuOpened ? (
               <AnimText title="CLOSE" />
@@ -53,26 +44,17 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
           <div className=" w-full h-screen  flex flex-col justify-between items-center ">
             <div className="w-full lg:h-20 h-16   flex justify-between items-center">
               <div className="flex-1 flex justify-center lg:scale-150 pt-24 scale-150 ">
-                <Diallogo />
-              </div>
-              <div className="hidden pr-4 lg:flex">
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleContact();
-                  }}
-                  className=" font-Helvetic  getInTouch  "
-                >
-                  <AnimText title="GET IN TOUCH" />
-                </button>
+                <p className="text-2xl text-center font-horizon text-white hover:-translate-y-1 transition-all duration-300">
+                  DIALED<span className="text-[#AAA3FF]">WEB</span>
+                </p>
               </div>
             </div>
 
             <div className="  flex flex-col sm:flex sm:flex-col lg:items-center lg:justify-between gap-5 font-Helvetic">
-              <p className=" ml-8 navLinks text-4xl  lg:text-6xl  cursor-pointer  ">
+              <p className=" ml-8 mobileLinks text-4xl  lg:text-6xl  cursor-pointer  ">
                 <AniNavLink title="PROJECTS" />
               </p>
-              <p className=" ml-14 navLinks text-4xl lg:text-6xl   lg:text-start cursor-pointer ">
+              <p className=" ml-14 mobileLinks text-4xl lg:text-6xl   lg:text-start cursor-pointer ">
                 <AniNavLink title="LEARN" />
               </p>
               <p
@@ -80,7 +62,7 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
                   e.preventDefault();
                   handleContact();
                 }}
-                className="navLinks text-4xl lg:text-6xl  cursor-pointer "
+                className="mobileLinks text-4xl lg:text-6xl  cursor-pointer "
               >
                 <AniNavLink title="GET IN TOUCH" />
               </p>
@@ -113,7 +95,7 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
           </div>
         </div>
       </div>
-      <Contact contact={contact} setContact={setContact} />
+      {/* <Contact contact={contact} setContact={setContact} /> */}
     </>
   );
 }
