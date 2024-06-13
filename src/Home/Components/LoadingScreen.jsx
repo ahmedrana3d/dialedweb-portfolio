@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Howl } from "howler";
 import { useSnapshot } from "valtio";
 import state from "../../state/state"; // Import the shared state
+import AnimText from "../../navbar/components/AnimText";
 
 const LoadingScreen = () => {
   const loadingScreenRef = useRef(null);
@@ -103,14 +104,16 @@ const LoadingScreen = () => {
 
       <button
         id=""
-        className="text-4xl uppercase font-Helvetic ui-btn"
+        className="text-1xl uppercase font-Helvetic getInTouch"
         onClick={snapshot.loadingProgress === 100 ? handleClick : null}
       >
+        
         <span>
           {snapshot.loadingProgress === 100
-            ? "Enter Experience"
+            ? <AnimText  title="Enter Experience"/>
             : Math.floor(snapshot.loadingProgress) + "%"}
         </span>
+            
       </button>
     </div>
   );

@@ -129,11 +129,11 @@ export default function Navbar() {
             </div>
           </div>
           {/* MENU */}
-          <div className=" hidden secPage absolute top-4 left-1  h-14 px-4  z-10 lg:flex items-center ">
+          <div className=" hidden secPage absolute top-3 left-1  h-14 px-4  z-10 lg:flex items-center ">
             <div className="z-50 ">
               <button
                 onClick={() => setMenuOpened(!menuOpened)}
-                className="CommonButton "
+                className="menuButton "
               >
                 {menuOpened ? (
                   <AnimText title="CLOSE" />
@@ -143,12 +143,12 @@ export default function Navbar() {
               </button>
             </div>
             <div
-              className={` w-full fixed bottom-0 left-0  transition-all overflow-hidden duration-1000 text-white menuOverlay
+              className={` w-full fixed bottom-0 left-0  transition-all overflow-hidden duration-1000 bg-black text-white 
           ${menuOpened ? "h-full" : "h-0"} `}
             >
               <div className=" w-full h-screen  flex flex-col justify-between items-center ">
-                <div className="w-full lg:h-20 h-16 pl-5  flex justify-between items-center">
-                  <div className="flex-1 flex justify-center lg:scale-150 pl-16 ">
+                <div className="w-full lg:h-20 h-16 pl-5  flex justify-between items-center ">
+                  <div className="flex-1 flex justify-center lg:scale-150 pl-[6.5rem]  ">
                     <Diallogo />
                   </div>
                   <div className="hidden pr-4 lg:flex">
@@ -157,18 +157,18 @@ export default function Navbar() {
                         e.preventDefault();
                         handleContact();
                       }}
-                      className=" font-Helvetic  getInTouch  "
+                      className="  getInTouch  "
                     >
                       <AnimText title="GET IN TOUCH" />
                     </button>
                   </div>
                 </div>
 
-                <div className=" w-full p-[100px] text-center flex flex-col sm:flex sm:flex-col lg:items-center lg:justify-between gap-5 font-Helvetic">
-                  <p className="navLinks text-4xl lg:text-6xl w-73 cursor-pointer tracking-tight ">
+                <div className=" w-full  text-center flex flex-col sm:flex sm:flex-col lg:items-center lg:justify-between gap-10 ">
+                  <p className="navLinks text-4xl lg:text-6xl cursor-pointer tracking-tight ">
                     <AniNavLink title="PROJECTS" />
                   </p>
-                  <p className=" navLinks text-4xl lg:text-6xl  w-73 lg:text-start cursor-pointer ">
+                  <p className=" navLinks text-4xl lg:text-6xl   lg:text-start cursor-pointer ">
                     <AniNavLink title="LEARN" />
                   </p>
                   <p
@@ -176,7 +176,7 @@ export default function Navbar() {
                       e.preventDefault();
                       handleContact();
                     }}
-                    className="navLinks text-4xl lg:text-6xl w-73  cursor-pointer "
+                    className="navLinks text-4xl lg:text-6xl  cursor-pointer "
                   >
                     <AniNavLink title="GET IN TOUCH" />
                   </p>
@@ -188,31 +188,31 @@ export default function Navbar() {
                       FIND US
                     </h1>
                     <ul className="flex justify-center text-center gap-6  ">
-                      <div className="socialButton w-8 h-8 flex items-center justify-center">
+                      <div className="socialButton ">
                         <a
                           href="http://"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <FaInstagram size="20" />
+                          <FaInstagram size="35" />
                         </a>
                       </div>
-                      <div className="socialButton w-8 h-8 flex items-center justify-center">
+                      <div className="socialButton  ">
                         <a
                           href="http://"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <BsTwitterX size="20" />
+                          <BsTwitterX size="35" />
                         </a>
                       </div>
-                      <div className="socialButton w-8 h-8 flex items-center justify-center">
+                      <div className="socialButton ">
                         <a
                           href="http://"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <BsLinkedin size="20" />
+                          <BsLinkedin size="35" />
                         </a>
                       </div>
                     </ul>

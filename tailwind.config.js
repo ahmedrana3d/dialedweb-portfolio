@@ -11,6 +11,7 @@ export default {
         circular: ["CircularXXWeb-Book", "sans-serif"],
         Helvetic: ["Helvetic"],
         apline: ["apline"],
+        Opti: ["Opti"],
       },
       keyframes: {
         levitate: {

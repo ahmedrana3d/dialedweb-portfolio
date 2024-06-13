@@ -47,7 +47,7 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
           </button>
         </div>
         <div
-          className={` w-full fixed bottom-0 left-0  transition-all overflow-hidden duration-1000 text-white menuOverlay
+          className={` w-full fixed bottom-0 left-0  transition-all overflow-hidden duration-1000 text-white bg-black
           ${menuOpened ? "h-full" : "h-0"} `}
         >
           <div className=" w-full h-screen  flex flex-col justify-between items-center ">

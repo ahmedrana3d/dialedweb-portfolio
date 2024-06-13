@@ -20,6 +20,15 @@
   src: url("/fonts/gt-apline.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "Opti";
+  src: url("/fonts/OPTIForquetOldsIta-Sup.otf") format("opentype");
+}
+
+.fontOpti{
+  font-family: "Opti";
+}
+
 .fontHorizon {
   font-family: Horizon;
 }
@@ -38,6 +47,8 @@ canvas {
   width: 100vw;
   height: 100vh;
 }
+
+
 
 .mouse {
   width: 40px;
@@ -75,166 +86,6 @@ canvas {
   }
 }
 
-/* Landing Page */
-.ui-btn {
-  --btn-default-bg: rgb(41, 41, 41);
-  --btn-padding: 15px 20px;
-  --btn-hover-bg: rgb(51, 51, 51);
-  --btn-transition: 0.3s;
-  --btn-letter-spacing: 0.1rem;
-  --btn-animation-duration: 1.2s;
-  --btn-shadow-color: rgba(0, 0, 0, 0.137);
-  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
-  --hover-btn-color: #fac921;
-  --default-btn-color: #fff;
-  --font-size: 16px;
-  /* 👆 this field should not be empty */
-  --font-weight: 600;
-  --font-family: Menlo, Roboto Mono, monospace;
-  /* 👆 this field should not be empty */
-}
-
-/* button settings 👆 */
-
-.ui-btn {
-  box-sizing: border-box;
-  padding: var(--btn-padding);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--default-btn-color);
-  font: var(--font-weight) var(--font-size) var(--font-family);
-  background: var(--btn-default-bg);
-  border: none;
-  cursor: pointer;
-  transition: var(--btn-transition);
-  overflow: hidden;
-  /* box-shadow: var(--btn-shadow); */
-  box-shadow: -5px -5px 15px #444, 5px 5px 15px #222, inset 5px 5px 10px #444,
-  inset -5px -5px 10px #222;
-  border-radius: 1rem;
-}
-
-.ui-btn span {
-  letter-spacing: var(--btn-letter-spacing);
-  transition: var(--btn-transition);
-  box-sizing: border-box;
-  position: relative;
-  background: inherit;
-}
-
-.ui-btn span::before {
-  box-sizing: border-box;
-  position: absolute;
-  content: "";
-  background: inherit;
-}
-
-.ui-btn:hover,
-.ui-btn:focus {
-  background: var(--btn-hover-bg);
-}
-
-.ui-btn:hover span,
-.ui-btn:focus span {
-  color: var(--hover-btn-color);
-}
-
-.ui-btn:hover span::before,
-.ui-btn:focus span::before {
-  animation: chitchat linear both var(--btn-animation-duration);
-}
-
-@keyframes chitchat {
-  0% {
-    content: "#";
-  }
-
-  5% {
-    content: ".";
-  }
-
-  10% {
-    content: "^{";
-  }
-
-  15% {
-    content: "-!";
-  }
-
-  20% {
-    content: "#$_";
-  }
-
-  25% {
-    content: "№:0";
-  }
-
-  30% {
-    content: "#{+.";}35%{content: "@}-?";
-  }
-
-  40% {
-    content: "?{4@%";
-  }
-
-  45% {
-    content: "=.,^!";
-  }
-
-  50% {
-    content: "?2@%";
-  }
-
-  55% {
-    content: "\;1}]";
-  }
-
-  60% {
-    content: "?{%:%";
-    right: 0;
-  }
-
-  65% {
-    content: "|{f[4";
-    right: 0;
-  }
-
-  70% {
-    content: "{4%0%";
-    right: 0;
-  }
-
-  75% {
-    content: "'1_0<";
-    right: 0;
-  }
-
-  80% {
-    content: "{0%";
-    right: 0;
-  }
-
-  85% {
-    content: "]>'";
-    right: 0;
-  }
-
-  90% {
-    content: "4";
-    right: 0;
-  }
-
-  95% {
-    content: "2";
-    right: 0;
-  }
-
-  100% {
-    content: "";
-    right: 0;
-  }
-}
 
 .test {
   font-family: Horizon;
@@ -333,24 +184,29 @@ canvas {
   }
 }
 
-.CommonButton {
+.menuButton {
+  /* position: relative; */
+  width: 6rem;
+  height: 2rem;
   background-color: #fcfeea;
   border-color: #fcfeea;
   border-radius: 1rem;
   border: none;
-  padding: 6px 16px;
+  /* padding: 6px 16px; */
   text-transform: uppercase;
   line-height: 1.33;
-  display: inline-flex;
-  position: relative;
+  /* display: inline-flex; */
+  display: flex;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
   letter-spacing: 0.5px;
-  font-family: "Helvetic";
+  font-family: CircularXXWeb-Book;
+  font-weight: 900;
   transition: 0.3s linear;
 }
 
-.CommonButton:hover {
+.menuButton:hover {
   box-shadow: 0px 0px 13px 5px rgba(207, 200, 200, 0.678);
   font-size: 1.1rem;
 }
@@ -369,7 +225,8 @@ canvas {
   align-items: center;
   cursor: pointer;
   letter-spacing: 0.5px;
-  font-family: "Helvetic";
+  font-family: CircularXXWeb-Book;
+  font-weight: 800;
   transition: 0.3s linear;
 }
 
@@ -384,13 +241,14 @@ a {
 
 .socialButton {
   transition: 0.3s linear;
+  padding: 4px;
   border-radius: 1rem;
+  overflow: hidden;
 }
 .socialButton:hover {
   background-color: #00F0FF;
   color: #000000;
   box-shadow: 0px 0px 13px 5px rgba(66, 205, 239, 0.678);
-  /* padding: 1px; */
 }
 
 .enterButton {
@@ -404,10 +262,6 @@ a {
   /* padding: 1px; */
 }
 
-.menuOverlay {
-  background: #00000053;
-  backdrop-filter: blur(10px);
-}
 
 .glow-effect {
   filter: drop-shadow(0 0 10px white);

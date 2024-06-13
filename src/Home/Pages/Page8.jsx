@@ -48,7 +48,7 @@ function Page8() {
 
         <div className=" h-[350px] text-center">
           <p className="lg:text-8xl text-5xl headline-orange bigAmount">
-            {play ? <AnimatedCounter from={0} to={252000} /> : "0"}%
+            {play ? <AnimatedCounter from={0} to={252000} /> : "000000"}
           </p>
           <p className="pt-3 text-2xl bigText">
             New sites are created every day - make yours stand out{" "}
