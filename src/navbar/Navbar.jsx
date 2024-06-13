@@ -30,7 +30,7 @@ export default function Navbar() {
     },
     {
       title: "LEARN",
-      path: "/learn",
+      path: "/",
     },
     {
       title: "GET IN TOUCH",
@@ -113,16 +113,7 @@ export default function Navbar() {
                   return (
                     <div key={i}>
                       <NavLink to={link.path}>
-                        <div
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (link.title === "CONTACT") {
-                              handleContact();
-                            }
-                          }}
-                        >
-                        </div>
-                          <AnimatedLinks title={link.title} />
+                        <AnimatedLinks title={link.title} />
                       </NavLink>
                     </div>
                   );
