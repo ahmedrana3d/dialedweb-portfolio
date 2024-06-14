@@ -12,7 +12,7 @@ import state from "../state/state";
 import SkySphere from "./Components/SkySphere";
 import Stars from "./Components/Stars";
 import { editable as e, SheetProvider } from "@theatre/r3f";
-import studio from "@theatre/studio";
+// import studio from "@theatre/studio";
 import Globe from "./Components/Models/Globe";
 import Monitor from "./Components/Models/Monitor";
 import MonitorBox from "./Components/Models/MonitorBox";
@@ -25,7 +25,7 @@ import ChessBoard from "./Components/Models/ChessBoard";
 //   state.enterClicked = CLICKED_ENTER
 
 const Experience = () => {
-  studio.initialize()
+  // studio.initialize()
 
   const snapshot = useSnapshot(state);
   const enterExpClicked = snapshot.enterClicked;
@@ -43,7 +43,6 @@ const Experience = () => {
         { step: 3, reverse: true, direction: "reverse", range: [9, 10.5], message: "Third Animation" },
         { step: 5, reverse: false, range: [10.5, 12], message: "Third Animation" },
         { step: 4, reverse: true, direction: "reverse", range: [10.5, 12], message: "Third Animation" },
-        { step: 6, reverse: false, range: [12, 13.5], message: "Third Animation" },
         { step: 6, reverse: false, range: [12, 13.5], message: "Third Animation" },
         { step: 5, reverse: true, direction: "reverse", range: [12, 13.5], message: "Third Animation" },
         { step: 7, reverse: false, range: [13.5 , 14.5], message: "Third Animation" },
