@@ -1,116 +1,76 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSnapshot } from 'valtio';
-import throttle from 'lodash/throttle';
+import { throttle } from 'lodash';
 import state from '../../state/state'; // Import the shared state
 
 const MAX_STEPS = 7; // Set the maximum number of steps
 const TIMEOUT_STEPS = [4000, 2000, 1000, 1500, 1500, 1500, 1500]; // Timeout durations for each step
 
 const ScrollDetector = () => {
-  const [scrolling, setScrolling] = useState(false);
-  const snapshot = useSnapshot(state);
-  const xDownRef = useRef(null);
-  const yDownRef = useRef(null);
+  const snap = useSnapshot(state);
+  const [isThrottled, setIsThrottled] = useState(false);
+  const [touchStartY, setTouchStartY] = useState(0);
 
-  const getTimeoutDuration = (step) => {
-    if (step >= 1 && step <= MAX_STEPS) {
-      return TIMEOUT_STEPS[step - 1]; // Using zero-based index for array access
+  const handleScroll = useCallback(
+    throttle((direction) => {
+      if (!isThrottled) {
+        if (direction === 'down' && snap.step < MAX_STEPS) {
+          state.step = snap.step + 1;
+          state.reverse = false;
+        } else if (direction === 'up' && snap.step > 0) {
+          state.step = snap.step - 1;
+          state.reverse = true;
+        }
+        setIsThrottled(true);
+
+        // Set timeout to reset the throttle after the specified delay
+        setTimeout(() => {
+          setIsThrottled(false);
+        }, TIMEOUT_STEPS[snap.step - 1] || 0);
+      }
+    }, 300), // Throttle delay to prevent excessive firing
+    [isThrottled, snap.step]
+  );
+
+  const onWheel = (e) => {
+    if (e.deltaY > 0) {
+      handleScroll('down');
+    } else {
+      handleScroll('up');
     }
-    return TIMEOUT_STEPS[0]; // Default timeout for invalid steps, if any
   };
 
-  const handleScroll = throttle((event) => {
-    if (scrolling) return;
-
-    setScrolling(true);
-    let newStep = snapshot.step;
-    let reverseAnimation = snapshot.reverse;
-
-    if (event.deltaY > 0) {
-      // Scrolling down
-      newStep = Math.min(newStep + 1, MAX_STEPS);
-      reverseAnimation = false;
-    } else {
-      // Scrolling up
-      newStep = Math.max(newStep - 1, 0);
-      reverseAnimation = true;
-    }
-
-    state.step = newStep;
-    state.reverse = reverseAnimation;
-
-    // Prevent further scrolling until animation is complete
-    setTimeout(() => {
-      setScrolling(false);
-    }, getTimeoutDuration(newStep));
-  }, 1000); // Throttle interval in milliseconds
-
-  const handleTouchStart = (evt) => {
-    const firstTouch = getTouches(evt)[0];
-    xDownRef.current = firstTouch.clientX;
-    yDownRef.current = firstTouch.clientY;
+  const onTouchStart = (e) => {
+    const touch = e.touches[0];
+    setTouchStartY(touch.clientY);
   };
 
-  const handleTouchMove = throttle((evt) => {
-    if (!xDownRef.current || !yDownRef.current || scrolling) {
-      return;
+  const onTouchMove = (e) => {
+    if (touchStartY !== null) {
+      const touch = e.touches[0];
+      const touchEndY = touch.clientY;
+      const direction = touchStartY > touchEndY ? 'down' : 'up';
+      handleScroll(direction);
     }
+  };
 
-    const xUp = evt.touches[0].clientX;
-    const yUp = evt.touches[0].clientY;
-
-    const xDiff = xDownRef.current - xUp;
-    const yDiff = yDownRef.current - yUp;
-
-    if (Math.abs(xDiff) > Math.abs(yDiff)) {
-      // Horizontal swipe - ignored
-      xDownRef.current = null;
-      yDownRef.current = null;
-      return;
-    }
-
-    setScrolling(true);
-    let newStep = snapshot.step;
-
-    if (yDiff > 0) {
-      // Swiping up
-      newStep = Math.min(newStep + 1, MAX_STEPS);
-      state.reverse = false;
-    } else {
-      // Swiping down
-      newStep = Math.max(newStep - 1, 0);
-      state.reverse = true;
-    }
-
-    state.step = newStep;
-
-    // Reset values
-    xDownRef.current = null;
-    yDownRef.current = null;
-
-    // Prevent further scrolling until animation is complete
-    setTimeout(() => {
-      setScrolling(false);
-    }, getTimeoutDuration(newStep));
-  }, 1000); // Throttle interval in milliseconds
-
-  const getTouches = (evt) => {
-    return evt.touches || evt.originalEvent.touches;
+  const onTouchEnd = () => {
+    setTouchStartY(null);
   };
 
   useEffect(() => {
-    const handleWheel = (event) => handleScroll(event);
-
-    document.addEventListener('wheel', handleWheel);
-    document.addEventListener('touchstart', handleTouchStart, false);
-    document.addEventListener('touchmove', handleTouchMove, false);
+    window.addEventListener('wheel', onWheel);
+    window.addEventListener('touchstart', onTouchStart);
+    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener('touchend', onTouchEnd);
 
     return () => {
-      document.removeEventListener('wheel', handleWheel);
-      document.removeEventListener('touchstart', handleTouchStart, false);
-      document.removeEventListener('touchmove', handleTouchMove, false);
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
     };
-  }, [scrolling, snapshot.step]);
+  }, [onWheel, onTouchStart, onTouchMove, onTouchEnd]);
 
   return <div className="scroll-detector"></div>;
 };

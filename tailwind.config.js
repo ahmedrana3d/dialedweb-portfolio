@@ -11,17 +11,22 @@ export default {
         circular: ["CircularXXWeb-Book", "sans-serif"],
         Helvetic: ["Helvetic"],
         apline: ["apline"],
-        Opti: ["Opti"],
       },
       keyframes: {
         levitate: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        wave: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
       },
       animation: {
         levitate: "levitate 3s ease-in-out infinite",
+        wave: "wave 2s ease-in-out infinite",
       },
+      
     },
   },
   plugins: [],

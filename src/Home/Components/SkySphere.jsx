@@ -1,8 +1,8 @@
 
-import * as THREE from 'three';
+import {BackSide, ShaderMaterial} from 'three';
 const SkySphere = ({topColor, bottomColor}) => {
   // Custom shader material
-  const shaderMaterial = new THREE.ShaderMaterial({
+  const shaderMaterial = new ShaderMaterial({
     uniforms: {
       topColor: { value: topColor },
       bottomColor: { value: bottomColor },
@@ -28,7 +28,7 @@ const SkySphere = ({topColor, bottomColor}) => {
         gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h, 0.0), exponent), 0.0)), 1.0);
       }
     `,
-    side: THREE.DoubleSide
+    side: BackSide
   });
 
   return (

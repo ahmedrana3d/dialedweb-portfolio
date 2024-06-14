@@ -1,8 +1,8 @@
 // import { OrbitControls, Sky } from '@react-three/drei'
 import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useEffect, useRef, useState, useFrame } from "react";
-import { Float, OrbitControls, StatsGl, useDepthBuffer, useProgress } from "@react-three/drei";
-import * as THREE from "three";
+import React, { Suspense, useEffect, useRef, useState } from "react";
+import { Float, OrbitControls, StatsGl, useProgress } from "@react-three/drei";
+import {Color} from "three";
 import Ufo from "./Components/Models/Ufo";
 import { getProject, types } from "@theatre/core";
 import DialedWebAnimation from "../Components/animation/cloud-anime.json";
@@ -12,7 +12,7 @@ import state from "../state/state";
 import SkySphere from "./Components/SkySphere";
 import Stars from "./Components/Stars";
 import { editable as e, SheetProvider } from "@theatre/r3f";
-// import studio from "@theatre/studio";
+import studio from "@theatre/studio";
 import Globe from "./Components/Models/Globe";
 import Monitor from "./Components/Models/Monitor";
 import MonitorBox from "./Components/Models/MonitorBox";
@@ -25,7 +25,7 @@ import ChessBoard from "./Components/Models/ChessBoard";
 //   state.enterClicked = CLICKED_ENTER
 
 const Experience = () => {
-  // studio.initialize()
+  studio.initialize()
 
   const snapshot = useSnapshot(state);
   const enterExpClicked = snapshot.enterClicked;
@@ -98,6 +98,7 @@ const Experience = () => {
     posY: 0,
     opacity : 0.8,
     size : 5,
+    color : types.rgba({ r: 136, g: 136, b: 136, a: 1 }),
   });
 
   const bloomPara = sheet.object("Bloom", {
@@ -117,6 +118,8 @@ const Experience = () => {
   const [cloudPosZ, setCloudPosZ] = useState(-80);
   const [starsPosY, setStarsPosY] = useState(-700);
   const [starsSize, setStarsSize] = useState(5);
+  const [starsColor, setStarsColor] = useState({ r: 136, g: 136, b: 136, a: 1 });
+
   // Bloom Para
 
   const [bloomEnabled, setbloomEnabled] = useState(false);
@@ -137,6 +140,7 @@ const Experience = () => {
       setStarsPosY(values.posY);
       setstarsOpacity(values.opacity)
       setStarsSize(values.size)
+      setStarsColor(values.color)
     });
 
     skyColor.onValuesChange((colors) => {
@@ -248,14 +252,17 @@ const [monitorScale, setMonitorScale] = useState(1)
             enabled={bloomEnabled}
           />
           <SkySphere
-            topColor={new THREE.Color(topColor.r, topColor.g, topColor.b)}
+            topColor={new Color(topColor.r, topColor.g, topColor.b)}
             bottomColor={
-              new THREE.Color(bottomColor.r, bottomColor.g, bottomColor.b)
+              new Color(bottomColor.r, bottomColor.g, bottomColor.b)
             }
             
           />
 
-          <Stars posY={starsPosY} opacity={starsOpacity} StarSize={starsSize} />
+          <Stars posY={starsPosY} opacity={starsOpacity} StarSize={starsSize} starsColor={new Color(starsColor.r, starsColor.g, starsColor.b)}/>
+
+
+{/* <OrbitControls/> */}
 
           <StatsGl/>
         </Canvas>

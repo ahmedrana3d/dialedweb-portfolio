@@ -1,11 +1,15 @@
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
+import {MathUtils,BufferGeometry,Float32BufferAttribute,TextureLoader,PointsMaterial,AdditiveBlending,Points} from 'three';
 
-export default function Stars({ posY, opacity , StarSize }) {
+export default function Stars({ posY, opacity , StarSize , starsColor}) {
   const pointsRef = useRef();
   const starsRef = useRef();
   const { size } = useThree();
+
+
+
+
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -22,28 +26,28 @@ export default function Stars({ posY, opacity , StarSize }) {
 
   useEffect(() => {
     const vertices = [];
-    for (let i = 0; i < 5000; i++) {
-      const x = THREE.MathUtils.randFloatSpread(1000);
-      const y = THREE.MathUtils.randFloatSpread(1000);
-      const z = THREE.MathUtils.randFloatSpread(800);
+    for (let i = 0; i < 1000; i++) {
+      const x = MathUtils.randFloatSpread(800);
+      const y = MathUtils.randFloatSpread(1000);
+      const z = MathUtils.randFloatSpread(200);
       vertices.push(x, y, z);
     }
 
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    const geometry = new BufferGeometry();
+    geometry.setAttribute('position', new Float32BufferAttribute(vertices, 3));
 
-    const starTexture = new THREE.TextureLoader().load('/textures/star_07.png');
-    const material = new THREE.PointsMaterial({
-      color: 0x888888,
+    const starTexture = new TextureLoader().load('/textures/star_07.png');
+    const material = new PointsMaterial({
+      color: starsColor,
       size: size,
       map: starTexture,
       transparent: true,
-      blending: THREE.AdditiveBlending,
+      blending: AdditiveBlending,
       depthWrite: false,
       opacity: 0.8,
     });
 
-    const points = new THREE.Points(geometry, material);
+    const points = new Points(geometry, material);
     pointsRef.current = points;
   }, []);
 
@@ -52,11 +56,12 @@ export default function Stars({ posY, opacity , StarSize }) {
       // pointsRef.current.material.color.setHSL((state.clock.getElapsedTime() * 0.1) % 1, 0.5, 0.5);
       pointsRef.current.material.opacity = opacity;
       pointsRef.current.material.size = StarSize;
+      pointsRef.current.material.color = starsColor;
     }
   });
 
   return (
-    <group position={[0, posY, 0]}>
+    <group position={[0, posY, -150]}>
       <group ref={starsRef}>
         {pointsRef.current ? <primitive object={pointsRef.current} /> : null}
       </group>

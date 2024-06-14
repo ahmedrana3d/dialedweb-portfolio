@@ -3,12 +3,9 @@ import { Clouds, Cloud, Environment } from "@react-three/drei";
 import {
   Bloom,
   EffectComposer,
-  Noise,
-  DepthOfField,
 } from "@react-three/postprocessing";
-import * as THREE from "three";
+import {MeshBasicMaterial} from "three";
 import { useThree } from "@react-three/fiber";
-import { useControls } from "leva";
 
 const CloudsEnvironment = ({
   seed,
@@ -52,7 +49,7 @@ const CloudsEnvironment = ({
   return (
     <>
       <ambientLight intensity={Math.PI / 2} />
-      <Clouds ref={cloudsRef} material={THREE.MeshBasicMaterial}>
+      <Clouds ref={cloudsRef} material={MeshBasicMaterial}>
         <Cloud
           seed={seed}
           bounds={bounds}
