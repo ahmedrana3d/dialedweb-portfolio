@@ -112,10 +112,10 @@ export default function Navbar() {
                 {navLinks.map((link, i) => {
                   return (
                     <div key={i}>
-                      <NavLink to={link.path} target="_blank">
-                        <AnimatedLinks title={link.title} />
-                      </NavLink>
-                    </div>
+                    <NavLink to={link.path} target={link.title === "PROJECTS" ? "_blank" : "_self"}>
+                      <AnimatedLinks title={link.title} />
+                    </NavLink>
+                  </div>
                   );
                 })}
               </ul>

@@ -7,14 +7,14 @@ export default function AniNavLink({ title }) {
     <motion.div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative cursor-pointer overflow-hidden font-Helvetic"
+      className="relative cursor-pointer overflow-hidden font-Helvetic h-[70px] "
     >
       <AnimatedWord2
         title={title}
         animation={letterAnimation}
         isHovered={isHovered}
       />
-      <div className="absolute top-0 font-Opti font-semibold tracking-tighter ">
+      <div className="absolute top-0 font-Opti font-semibold tracking-tighter scale-90 ">
         <AnimatedWord
           title={title}
           animation={letterAnimationTwo}
@@ -70,7 +70,7 @@ const letterAnimationTwo = {
   },
   hover: {
     y: 0,
-    color: "#AAA3FF",
+    color: "#00f0ff",
     // fontFamily: "Opti",
     shadowBlur: 10,
     transition: {

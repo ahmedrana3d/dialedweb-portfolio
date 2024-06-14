@@ -264,7 +264,7 @@ const [monitorScale, setMonitorScale] = useState(1)
 
 {/* <OrbitControls/> */}
 
-          <StatsGl/>
+          {/* <StatsGl/> */}
         </Canvas>
       </Suspense>
     </div>

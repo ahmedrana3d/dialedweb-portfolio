@@ -2,7 +2,6 @@
 @tailwind base;
 @tailwind components;
 
-
 @font-face {
   font-family: "Horizon";
   src: url("./fonts/newhorizon.otf") format("opentype");
@@ -25,7 +24,7 @@
   src: url("/fonts/OPTIForquetOldsIta-Sup.otf") format("opentype");
 }
 
-.fontOpti{
+.fontOpti {
   font-family: "Opti";
 }
 
@@ -47,8 +46,6 @@ canvas {
   width: 100vw;
   height: 100vh;
 }
-
-
 
 .mouse {
   width: 25px;
@@ -85,7 +82,6 @@ canvas {
     top: 30px;
   }
 }
-
 
 .test {
   font-family: Horizon;
@@ -188,8 +184,8 @@ canvas {
   /* position: relative; */
   width: 6rem;
   height: 2rem;
-  background-color: #AAA3FF;
-  border-color: #AAA3FF;
+  background-color: #aaa3ff;
+  border-color: #aaa3ff;
   border-radius: 1rem;
   border: none;
   /* padding: 6px 16px; */
@@ -212,7 +208,7 @@ canvas {
 }
 
 .getInTouch {
-  background-color: #00F0FF;
+  background-color: #00f0ff;
   color: #000000;
   border: none;
   border-radius: 1rem;
@@ -246,7 +242,7 @@ a {
   overflow: hidden;
 }
 .socialButton:hover {
-  background-color: #00F0FF;
+  background-color: #00f0ff;
   color: #000000;
   box-shadow: 0px 0px 13px 5px rgba(66, 205, 239, 0.678);
 }
@@ -256,12 +252,11 @@ a {
   border-radius: 1rem;
 }
 .enterButton:hover {
-  background-color: #00F0FF;
+  background-color: #00f0ff;
   color: #000000;
   box-shadow: 0px 0px 13px 5px rgba(66, 205, 239, 0.678);
   /* padding: 1px; */
 }
-
 
 .glow-effect {
   filter: drop-shadow(0 0 10px white);
@@ -271,14 +266,10 @@ a {
   filter: drop-shadow(0 0 10px rgb(177, 95, 7));
 }
 
-
-
 .important h1 {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 
-               0 0 20px rgba(255, 255, 255, 0.4), 
-               0 0 30px rgba(255, 255, 255, 0.3), 
-               0 0 40px rgba(255, 255, 255, 0.2), 
-               0 0 50px rgba(255, 255, 255, 0.1);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.3),
+    0 0 40px rgba(255, 255, 255, 0.2), 0 0 50px rgba(255, 255, 255, 0.1);
   animation: shimmer 2s infinite;
 }
 
@@ -308,4 +299,68 @@ a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 5s linear infinite;
+}
+
+.chronicle-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  line-height: 1;
+  border-radius: 0.7rem;
+  padding: 0.815rem 1.232rem;
+  cursor: pointer;
+  border: none;
+  background: #00f0ff;
+  transition: background 0.4s linear;
+  will-change: background;
+}
+
+.chronicle-button:hover {
+  background: #00f0ff;
+  box-shadow: 0px 0px 13px 5px rgba(66, 205, 239, 0.678);
+
+}
+
+.chronicle-button:hover .chronicle-span:nth-of-type(1) em {
+  opacity: 0;
+  transform: rotateX(90deg) scaleX(0.9) translate3d(0, -10px, 0);
+}
+
+.chronicle-button:hover .chronicle-span:nth-of-type(2) em {
+  opacity: 1;
+  transform: rotateX(0deg) scaleX(1) translateZ(0);
+  transition: transform 0.75s cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 0.35s linear 0.3s;
+}
+
+.chronicle-span {
+  position: relative;
+  display: block;
+  perspective: 108px;
+}
+
+.chronicle-span:nth-of-type(2) {
+  position: absolute;
+}
+
+em {
+  font-style: normal;
+  display: inline-block;
+  font-size: 1.125rem;
+  color: black;
+  font-weight: 600;
+  will-change: transform, opacity, transition;
+  transition: transform 0.55s cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 0.35s linear 0.2s;
+}
+
+.chronicle-span:nth-of-type(1) em {
+  transform-origin: top;
+}
+
+.chronicle-span:nth-of-type(2) em {
+  opacity: 0;
+  transform: rotateX(-90deg) scaleX(0.9) translate3d(0, 10px, 0);
+  transform-origin: bottom;
 }
