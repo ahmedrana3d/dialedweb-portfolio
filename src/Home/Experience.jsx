@@ -257,7 +257,7 @@ const [monitorScale, setMonitorScale] = useState(1)
 
           <Stars posY={starsPosY} opacity={starsOpacity} StarSize={starsSize} />
 
-          <StatsGl/>
+          {/* <StatsGl/> */}
         </Canvas>
       </Suspense>
     </div>

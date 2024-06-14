@@ -104,16 +104,21 @@ const LoadingScreen = () => {
 
       <button
         id=""
-        className="text-1xl uppercase font-Helvetic getInTouch"
+        className="chronicle-button font-Helvetic"
         onClick={snapshot.loadingProgress === 100 ? handleClick : null}
       >
-        
-        <span>
-          {snapshot.loadingProgress === 100
-            ? <AnimText  title="Enter Experience"/>
-            : Math.floor(snapshot.loadingProgress) + "%"}
-        </span>
-            
+        {snapshot.loadingProgress === 100 ? (
+          <>
+            <span className="chronicle-span">
+              <em>ENTER EXPERIENCE</em>
+            </span>
+            <span className="chronicle-span">
+              <em>ENTER EXPERIENCE</em>
+            </span>
+          </>
+        ) : (
+          Math.floor(snapshot.loadingProgress) + "%"
+        )}
       </button>
     </div>
   );

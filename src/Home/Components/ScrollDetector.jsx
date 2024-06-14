@@ -11,6 +11,7 @@ const ScrollDetector = () => {
   const snapshot = useSnapshot(state);
   const xDownRef = useRef(null);
   const yDownRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   const getTimeoutDuration = (step) => {
     if (step >= 1 && step <= MAX_STEPS) {
@@ -39,11 +40,15 @@ const ScrollDetector = () => {
     state.step = newStep;
     state.reverse = reverseAnimation;
 
-    // Prevent further scrolling until animation is complete
-    setTimeout(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
       setScrolling(false);
+      timeoutRef.current = null;
     }, getTimeoutDuration(newStep));
-  }, 1000); // Throttle interval in milliseconds
+  }, 2000); // Throttle interval in milliseconds
 
   const handleTouchStart = (evt) => {
     const firstTouch = getTouches(evt)[0];
@@ -84,15 +89,19 @@ const ScrollDetector = () => {
 
     state.step = newStep;
 
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      setScrolling(false);
+      timeoutRef.current = null;
+    }, getTimeoutDuration(newStep));
+
     // Reset values
     xDownRef.current = null;
     yDownRef.current = null;
-
-    // Prevent further scrolling until animation is complete
-    setTimeout(() => {
-      setScrolling(false);
-    }, getTimeoutDuration(newStep));
-  }, 1000); // Throttle interval in milliseconds
+  }, 300); // Throttle interval in milliseconds
 
   const getTouches = (evt) => {
     return evt.touches || evt.originalEvent.touches;
