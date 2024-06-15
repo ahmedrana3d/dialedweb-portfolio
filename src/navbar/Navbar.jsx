@@ -18,11 +18,6 @@ export default function Navbar() {
 
   const [contact, setContact] = useState(false);
 
-  const handleContact = () => {
-    setContact((prev) => !prev);
-    setMenuOpened(false);
-  };
-
   const navLinks = [
     {
       title: "PROJECTS",
@@ -69,7 +64,7 @@ export default function Navbar() {
       timeline
         .from(".navLinks", {
           opacity: 0,
-          y: 50,
+          y: 100,
           ease: "power4.out",
           duration: 2,
           stagger: { amount: 0.8, from: "start" },
@@ -108,14 +103,17 @@ export default function Navbar() {
               DIALED<span className="text-[#AAA3FF]">WEB</span>
             </p>
             <div>
-              <ul className="flex text-2xl text-white gap-6 items-center justify-center font-serif font-semibold ">
+              <ul className="flex text-2xl text-white gap-6 items-center justify-center font-Helvetic font-semibold ">
                 {navLinks.map((link, i) => {
                   return (
                     <div key={i}>
-                    <NavLink to={link.path} target={link.title === "PROJECTS" ? "_blank" : "_self"}>
-                      <AnimatedLinks title={link.title} />
-                    </NavLink>
-                  </div>
+                      <NavLink
+                        to={link.path}
+                        target={link.title === "PROJECTS" ? "_blank" : "_self"}
+                      >
+                        <AnimatedLinks title={link.title} />
+                      </NavLink>
+                    </div>
                   );
                 })}
               </ul>
@@ -147,36 +145,49 @@ export default function Navbar() {
                     </p>
                   </div>
                   <div className="hidden pr-4 lg:flex">
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleContact();
-                      }}
-                      className="  getInTouch  "
-                    >
-                      <AnimText title="GET IN TOUCH" />
+                    <button className="touch-button">
+                      <span className="touch-span">
+                        <em>GET IN TOUCH</em>
+                      </span>
+                      <span className="touch-span">
+                        <em>GET IN TOUCH</em>
+                      </span>
                     </button>
                   </div>
                 </div>
 
                 <div className=" w-full  text-center flex flex-col sm:flex sm:flex-col lg:items-center lg:justify-between gap-10 ">
-                  <p className="navLinks text-4xl lg:text-6xl cursor-pointer tracking-tight ">
-                    <AniNavLink title="PROJECTS" />
-                  </p>
-                  <p className=" navLinks text-4xl lg:text-6xl   lg:text-start cursor-pointer ">
-                    <AniNavLink title="LEARN" />
-                  </p>
-                  <p
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleContact();
-                    }}
-                    className="navLinks text-4xl lg:text-6xl  cursor-pointer "
-                  >
-                    <AniNavLink title="GET IN TOUCH" />
-                  </p>
+                  <div className="overflow-hidden">
+                    <p
+                      onClick={() => setMenuOpened(false)}
+                      className="navLinks text-4xl lg:text-6xl cursor-pointer tracking-tight "
+                    >
+                      <NavLink to="/projects">
+                        <AniNavLink title="PROJECTS" />
+                      </NavLink>
+                    </p>
+                  </div>
+                  <div className="overflow-hidden">
+                    <p
+                      onClick={() => setMenuOpened(false)}
+                      className=" navLinks text-4xl lg:text-6xl   lg:text-start cursor-pointer "
+                    >
+                      <NavLink to="/">
+                        <AniNavLink title="LEARN" />
+                      </NavLink>
+                    </p>
+                  </div>
+                  <div className="overflow-hidden">
+                    <p
+                      onClick={() => setMenuOpened(false)}
+                      className="navLinks text-4xl lg:text-6xl  cursor-pointer "
+                    >
+                      <NavLink to="/contact">
+                        <AniNavLink title="GET IN TOUCH" />
+                      </NavLink>
+                    </p>
+                  </div>
                 </div>
-
                 <div className="w-full flex items-end justify-end text-center  ">
                   <div className="flex items-center justify-center pb-6 pr-6 gap-6 ">
                     <h1 className="text-sm text-cyan-50 text-opacity-40">
@@ -216,7 +227,6 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          {/* <Contact contact={contact} setContact={setContact} /> */}
         </>
       )}
 

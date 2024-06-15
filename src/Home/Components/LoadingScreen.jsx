@@ -113,7 +113,7 @@ const LoadingScreen = () => {
 
       <button
         id=""
-        className="chronicle-button font-Helvetic"
+        className="chronicle-button font-Helvetic "
         onClick={snapshot.loadingProgress === 100 ? handleClick : null}
       >
         {snapshot.loadingProgress === 100 ? (

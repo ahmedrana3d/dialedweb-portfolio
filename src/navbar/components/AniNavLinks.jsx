@@ -14,7 +14,7 @@ export default function AniNavLink({ title }) {
         animation={letterAnimation}
         isHovered={isHovered}
       />
-      <div className="absolute top-0 font-Opti font-semibold tracking-tighter scale-90 ">
+      <div className="absolute top-0 font-Opti font-semibold tracking-tighter  ">
         <AnimatedWord
           title={title}
           animation={letterAnimationTwo}
@@ -70,8 +70,7 @@ const letterAnimationTwo = {
   },
   hover: {
     y: 0,
-    color: "#00f0ff",
-    // fontFamily: "Opti",
+    color: "#AAA3FF",
     shadowBlur: 10,
     transition: {
       duration: 0.9,
