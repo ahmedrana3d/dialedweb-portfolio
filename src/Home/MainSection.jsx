@@ -20,7 +20,7 @@ const MainSection = () => {
   const sec2 = useRef();
 
   const snapshot = useSnapshot(state);
-  console.log(snapshot.step);
+  // console.log(snapshot.step);
 
   const enterExpClicked = snapshot.enterClicked;
 
@@ -309,49 +309,49 @@ const MainSection = () => {
   useEffect(() => {
     if (enterExpClicked && snapshot.step === 0 && !snapshot.reverse) {
       Section1In();
-      console.log("scetion1in");
+      // console.log("scetion1in");
     } else if (snapshot.step === 0 && snapshot.reverse) {
       Section2Out();
-      console.log("scetion2Out");
+      // console.log("scetion2Out");
     } else if (snapshot.step === 1 && !snapshot.reverse) {
       Section2In();
-      console.log("scetion2In");
+      // console.log("scetion2In");
     } else if (snapshot.step === 1 && snapshot.reverse) {
       Section3Out();
-      console.log("scetion3Out");
+      // console.log("scetion3Out");
     } else if (snapshot.step === 2 && !snapshot.reverse) {
       Section3In();
-      console.log("scetion3In");
+      // console.log("scetion3In");
     } else if (snapshot.step === 2 && snapshot.reverse) {
       Section4Out();
-      console.log("scetion4Out");
+      // console.log("scetion4Out");
     } else if (snapshot.step === 3 && !snapshot.reverse) {
       Section4In();
-      console.log("scetion4In");
+      // console.log("scetion4In");
     } else if (snapshot.step === 3 && snapshot.reverse) {
       Section5Out();
-      console.log("scetion5Out");
+      // console.log("scetion5Out");
     } else if (snapshot.step === 4 && !snapshot.reverse) {
       Section5In();
-      console.log("scetion5In");
+      // console.log("scetion5In");
     } else if (snapshot.step === 4 && snapshot.reverse) {
       Section6Out();
-      console.log("scetion6Out");
+      // console.log("scetion6Out");
     } else if (snapshot.step === 5 && !snapshot.reverse) {
       Section6In();
-      console.log("scetion6In");
+      // console.log("scetion6In");
     } else if (snapshot.step === 5 && snapshot.reverse) {
       Section7Out();
-      console.log("scetion7out");
+      // console.log("scetion7out");
     } else if (snapshot.step === 6 && !snapshot.reverse) {
       Section7In();
-      console.log("scetion7In");
+      // console.log("scetion7In");
     } else if (snapshot.step === 6 && snapshot.reverse) {
       Section8Out();
-      console.log("scetion8Out");
+      // console.log("scetion8Out");
     } else if (snapshot.step === 7 && !snapshot.reverse) {
       Section8In();
-      console.log("scetion8In");
+      // console.log("scetion8In");
     }
   }, [enterExpClicked, snapshot.step, snapshot.reverse]);
 

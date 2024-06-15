@@ -53,7 +53,7 @@ const Experience = () => {
   
       if (animation) {
         sheet.sequence.play({ direction: animation.direction, range: animation.range });
-        console.log(snapshot.step , snapshot.reverse);
+        // console.log(snapshot.step , snapshot.reverse);
       }
     }
   }, [snapshot.step]);
