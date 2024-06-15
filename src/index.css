@@ -4,24 +4,24 @@
 
 @font-face {
   font-family: "Horizon";
-  src: url("./fonts/newhorizon.otf") format("opentype");
+  src: url("https://cdn.glitch.global/b75b22a8-446a-45ca-bd37-9e63f6cd7c5d/newhorizon.otf?v=1718489174696") format("opentype");
 }
 @font-face {
   font-family: "CircularXXWeb-Book";
-  src: url("./fonts/CircularXXWeb-Book.woff2") format("woff2");
+  src: url("https://cdn.glitch.global/b75b22a8-446a-45ca-bd37-9e63f6cd7c5d/CircularXXWeb-Book.woff2?v=1718489171289") format("woff2");
 }
 @font-face {
   font-family: "Helvetic";
-  src: url("./fonts/HelveticaNeueBold.otf") format("opentype");
+  src: url("https://cdn.glitch.global/b75b22a8-446a-45ca-bd37-9e63f6cd7c5d/HelveticaNeueBold.otf?v=1718489173897") format("opentype");
 }
 @font-face {
   font-family: "apline";
-  src: url("./fonts/gt-apline.otf") format("opentype");
+  src: url("https://cdn.glitch.global/b75b22a8-446a-45ca-bd37-9e63f6cd7c5d/gt-apline.otf?v=1718489172128") format("opentype");
 }
 
 @font-face {
   font-family: "Opti";
-  src: url("./fonts/OPTIForquetOldsIta-Sup.otf") format("opentype");
+  src: url("https://cdn.glitch.global/b75b22a8-446a-45ca-bd37-9e63f6cd7c5d/OPTIForquetOldsIta-Sup.otf?v=1718489175476") format("opentype");
 }
 
 .fontOpti {
