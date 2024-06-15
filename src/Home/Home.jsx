@@ -68,6 +68,7 @@ console.log("SCROLL")
       <LoadingScreen />
       <Experience />
         <MainSection />
+
     </div>
   );
 };

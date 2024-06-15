@@ -53,7 +53,7 @@ const letterAnimation = {
 };
 const letterAnimationTwo = {
   rest: {
-    y: 25,
+    y: 35,
   },
   hover: {
     y: -0,

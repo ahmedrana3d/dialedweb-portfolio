@@ -5,12 +5,10 @@ import { FaInstagram } from "react-icons/fa";
 import AniNavLink from "./components/AniNavLinks";
 import AnimText from "./components/AnimText";
 import gsap from "gsap";
+import { NavLink } from "react-router-dom";
 
 function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
-  const handleContact = () => {
-    setContact((prev) => !prev);
-    setMenuOpened(false);
-  };
+
   useEffect(() => {
     if (menuOpened === true) {
       const timeline = gsap.timeline({ delay: 0.5 });
@@ -51,20 +49,29 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
             </div>
 
             <div className="  flex flex-col sm:flex sm:flex-col lg:items-center lg:justify-between gap-5 font-Helvetic">
-              <p className=" ml-8 mobileLinks text-4xl  lg:text-6xl  cursor-pointer  ">
+              <p 
+              onClick={()=> setMenuOpened(false)}
+              className=" ml-8 mobileLinks text-4xl  lg:text-6xl  cursor-pointer  ">
+                <NavLink to="/project">
                 <AniNavLink title="PROJECTS" />
+                </NavLink>
               </p>
-              <p className=" ml-14 mobileLinks text-4xl lg:text-6xl   lg:text-start cursor-pointer ">
+              <p 
+              onClick={()=> setMenuOpened(false)}
+              
+              className=" ml-14 mobileLinks text-4xl lg:text-6xl   lg:text-start cursor-pointer ">
+                <NavLink to="/">
                 <AniNavLink title="LEARN" />
+                </NavLink>
               </p>
               <p
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleContact();
-                }}
+              onClick={()=> setMenuOpened(false)}
+                
                 className="mobileLinks text-4xl lg:text-6xl  cursor-pointer "
               >
+                <NavLink to="/contact">
                 <AniNavLink title="GET IN TOUCH" />
+                </NavLink>
               </p>
             </div>
 
@@ -95,7 +102,6 @@ function MobileNav({ menuOpened, setMenuOpened, contact, setContact }) {
           </div>
         </div>
       </div>
-      {/* <Contact contact={contact} setContact={setContact} /> */}
     </>
   );
 }
