@@ -8,20 +8,20 @@
 }
 @font-face {
   font-family: "CircularXXWeb-Book";
-  src: url("/fonts/CircularXXWeb-Book.woff2") format("woff2");
+  src: url("./fonts/CircularXXWeb-Book.woff2") format("woff2");
 }
 @font-face {
   font-family: "Helvetic";
-  src: url("/fonts/HelveticaNeueBold.otf") format("opentype");
+  src: url("./fonts/HelveticaNeueBold.otf") format("opentype");
 }
 @font-face {
   font-family: "apline";
-  src: url("/fonts/gt-apline.otf") format("opentype");
+  src: url("./fonts/gt-apline.otf") format("opentype");
 }
 
 @font-face {
   font-family: "Opti";
-  src: url("/fonts/OPTIForquetOldsIta-Sup.otf") format("opentype");
+  src: url("./fonts/OPTIForquetOldsIta-Sup.otf") format("opentype");
 }
 
 .fontOpti {
@@ -124,13 +124,13 @@ canvas {
   color: transparent;
   background-image: linear-gradient(
     90deg,
-    #ff7e5f,
-    /* coral */ #feb47b,
-    /* peach */ #ff7e5f,
-    /* coral */ #feb47b,
-    /* peach */ #ff7e5f,
-    /* coral */ #feb47b,
-    /* peach */ #ff7e5f /* coral */
+    #0d0b38,
+    /* coral */ #aaa3ff,
+    /* peach */ #0d0b38,
+    /* coral */ #aaa3ff,
+    /* peach */ #0d0b38,
+    /* coral */ #aaa3ff,
+    /* peach */ #0d0b38 /* coral */
   );
   background-size: 400% 400%;
   animation: backgroundChange 4s linear infinite alternate;

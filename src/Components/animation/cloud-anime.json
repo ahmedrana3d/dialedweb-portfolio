@@ -446,9 +446,9 @@
                     ],
                     "type": "bezier",
                     "value": {
-                      "r": 0,
-                      "g": 0,
-                      "b": 0,
+                      "r": 0.050980392156862744,
+                      "g": 0.043137254901960784,
+                      "b": 0.2196078431372549,
                       "a": 1
                     }
                   }
@@ -488,9 +488,9 @@
                     ],
                     "type": "bezier",
                     "value": {
-                      "r": 0,
-                      "g": 0,
-                      "b": 0,
+                      "r": 0.6666666666666666,
+                      "g": 0.6392156862745098,
+                      "b": 1,
                       "a": 1
                     }
                   }
@@ -545,7 +545,33 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": true
+                    "value": false
+                  },
+                  {
+                    "id": "g4HWS_WfD4",
+                    "position": 8,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": false
+                  },
+                  {
+                    "id": "ebIYpmf5NV",
+                    "position": 9,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": false
                   },
                   {
                     "id": "haWW1l5Mfo",
@@ -558,7 +584,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": true
+                    "value": false
                   }
                 ]
               },
@@ -1366,6 +1392,7 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "Gil-ndJBUY8AB3uP",
     "oglCL0DSkzWNtHD-",
     "qij4xSd7GyPGPU3G",
     "5SUz8N7eCXK4YFZZ",

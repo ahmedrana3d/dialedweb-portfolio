@@ -145,14 +145,9 @@ export default function Navbar() {
                     </p>
                   </div>
                   <div className="hidden pr-4 lg:flex">
-                    <button className="touch-button">
-                      <span className="touch-span">
-                        <em>GET IN TOUCH</em>
-                      </span>
-                      <span className="touch-span">
-                        <em>GET IN TOUCH</em>
-                      </span>
-                    </button>
+                  <div className="hidden pr-4 getInTouch lg:flex">
+                    <AnimText title="GET IN TOUCH" />
+                  </div>
                   </div>
                 </div>
 

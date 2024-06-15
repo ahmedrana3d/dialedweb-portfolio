@@ -1,9 +1,9 @@
 import LoadingScreen from "./Components/LoadingScreen";
 import Experience from "./Experience";
 import MainSection from "./MainSection";
-import React from "react";
-import { useWheel } from '@use-gesture/react'
-import { Lethargy } from 'lethargy'
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import { useWheel, useDrag } from '@use-gesture/react';
+import { Lethargy } from 'lethargy';
 import { useSnapshot } from 'valtio';
 import state from '../state/state';
 
@@ -26,49 +26,68 @@ const lethargy = new Lethargy();
 
 const Home = () => {
   const snapshot = useSnapshot(state);
-  const [scrollFired, setScrollFired] = React.useState(false);
-  const [currentItem, setCurrentItem] = React.useState(0);
-  const [currentReverse, setCurrentReverse] = React.useState(false);
-  const [scrollDisabled, setScrollDisabled] = React.useState(false);
+  const scrollFiredRef = useRef(false);
+  const currentItemRef = useRef(0);
+  const currentReverseRef = useRef(false);
+  const scrollDisabledRef = useRef(false);
+  const [currentItem, setCurrentItem] = useState(0);
+  const [currentReverse, setCurrentReverse] = useState(false);
+
+  const handleScroll = useCallback((deltaY) => {
+    if (!scrollDisabledRef.current) {
+      if (deltaY > 0) {
+        currentItemRef.current += 1;
+        currentReverseRef.current = false;
+      } else if (deltaY < 0 && currentItemRef.current > 0) {
+        currentItemRef.current -= 1;
+        currentReverseRef.current = true;
+      }
+
+      setCurrentItem(currentItemRef.current);
+      setCurrentReverse(currentReverseRef.current);
+      scrollFiredRef.current = true;
+
+      const timeout = TIMEOUTS[currentItemRef.current + 1] || 0;
+      scrollDisabledRef.current = true;
+      setTimeout(() => {
+        scrollDisabledRef.current = false;
+      }, timeout);
+    }
+  }, []);
 
   const wheel = useWheel(({ event, first, last, delta: [, deltaY] }) => {
-
-    if (!first && !last && !scrollDisabled) {
+    if (!first && !last && !scrollDisabledRef.current) {
       const scrolling = lethargy.check(event) !== false;
-      if (scrolling && !scrollFired) {
-        if (deltaY > 0) {
-          setCurrentItem(prevItem => prevItem + 1);
-          setCurrentReverse(false);
-        }
-        if (deltaY < 0 && currentItem > 0) {
-          setCurrentItem(prevItem => prevItem - 1);
-          setCurrentReverse(true);
-        }
-        setScrollFired(true);
-        const timeout = TIMEOUTS[currentItem + 1] || 0; // Get timeout for next step
-        setScrollDisabled(true);
-        setTimeout(() => {
-console.log("SCROLL")
-          setScrollDisabled(false)
-        }, timeout);
+      if (scrolling && !scrollFiredRef.current) {
+        handleScroll(deltaY);
       }
     } else {
-      setScrollFired(false);
+      scrollFiredRef.current = false;
     }
   });
 
-  React.useEffect(() => {
+  const drag = useDrag(({ first, last, movement: [, my], memo = currentItemRef.current }) => {
+    if (!first && !last && !scrollDisabledRef.current) {
+      if (my > 50) { // Swipe down
+        handleScroll(-1);
+      } else if (my < -50) { // Swipe up
+        handleScroll(1);
+      }
+    }
+    return memo;
+  });
+
+  useEffect(() => {
     state.step = currentItem;
     state.reverse = currentReverse;
     console.log(state.step, state.reverse);
   }, [currentItem, currentReverse]);
 
   return (
-    <div {...wheel()}>
+    <div {...wheel()} {...drag()} style={{ touchAction: 'none' }}>
       <LoadingScreen />
       <Experience />
-        <MainSection />
-
+      <MainSection />
     </div>
   );
 };
