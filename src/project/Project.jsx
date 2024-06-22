@@ -45,21 +45,14 @@ function Project() {
       </div>
 
       <ProjectBody open={open} setOpen={setOpen} />
-      <ProjectBody open={open} setOpen={setOpen} />
 
       <button
         onClick={handleOpen}
-        className="absolute button right-0 bottom-0 text-2xl text-red-500 z-50 cursor-pointer "
-      >
-        {/* <NavLink to="/baba">
-        View Projects
-        </NavLink> */}
-        {/* onClick={handleOpen}
         className={`project-button ${open ? "rotate-arrow" : ""}`}
-      > */}
+      >
         <span className="project-span">
           <p className="flex justify-center items-center gap-2">
-            <em>{open ? "Close Projects" : "View Projects"}</em>
+            <em>{open ? "Close Projects" : "View Projects"}</em> 
             <span className="arrowIcon">
               <FaLongArrowAltRight />
             </span>
@@ -78,4 +71,4 @@ function Project() {
   );
 }
 
-export default Project;
+export default Project;

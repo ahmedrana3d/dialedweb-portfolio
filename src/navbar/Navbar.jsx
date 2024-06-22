@@ -68,16 +68,29 @@ export default function Navbar() {
       });
     }
 
-    gsap.set(menuRef.current, { right: "-120%" });
-    gsap.set(".navLinks", { opacity: 0, y: 100 });
+    // gsap.set(menuRef.current, { right: "-120%" });
+    // gsap.set(".navLinks", { opacity: 0, y: 100 });
 
     if (!menuOpened) {
       const tl = gsap.timeline();
       tl.to(menuRef.current, {
-        right: "-120%",
-        duration: 1,
-        ease: "power3.out",
-      });
+        right: "-100%",
+        duration: 0.7,
+      ease: "sine.inOut",      });
+
+      tl.to(menuRef.current, {
+        opacity: 0,
+        duration: 0.2,
+      ease: "sine.inOut",      });
+
+
+// Reset background and text color
+tl.to(menuRef.current, {
+  backgroundColor: "transparent", // Change background to transparent
+  color: "#000000", // Change text color to black
+  duration: 0.4,
+ease: "sine.inOut",
+});
 
       tl.to(
         ".navLinks",
@@ -94,26 +107,44 @@ export default function Navbar() {
 
     if (menuOpened) {
       const tl = gsap.timeline();
-      tl.to(menuRef.current, {
-        right: 0,
-        duration: 0.5,
-        ease: "power3.out",
+    
+      // Slide in from left to right
+      tl.fromTo(
+        menuRef.current, 
+        { right: '-100%' }, // Start position off-screen to the left
+        { right: 0, duration: 1.2, ease: "power4.out" } // Smooth easing
+      );
+    
+      // Fade in with a slight scale-up effect
+      tl.fromTo(
+        menuRef.current, 
+        { opacity: 0, scale: 0.9 }, 
+        { opacity: 1, scale: 1, duration: 0.6, ease: "power4.out" }
+      );
+    
+      // Change background and text color with a subtle pulse effect
+      tl.to(menuRef.current, { 
+        color: "#ffffff",
+        backgroundColor: "#000000",
+        duration: 0.4,
+        ease: "power4.out",
+        onStart: () => gsap.to(menuRef.current, { scale: 1.05, yoyo: true, repeat: 1, duration: 0.2 }) // Subtle pulse effect
       });
-
+    
+      // Animate nav links with stagger
       tl.to(
         ".navLinks",
         {
           opacity: 1,
           y: 0,
           ease: "power4.out",
-          duration: 2,
-          stagger: 0.5
+          duration: 0.8,
+          stagger: 0.2
         },
-        "-=0.5"
+        "-=1.2" // Overlap with the initial slide-in animation
       );
-
-      
     }
+    
   }, [snapshot.step, menuOpened]);
 
   const [xPosition, setXPosition] = useState(window.innerWidth < 768);
@@ -170,7 +201,7 @@ export default function Navbar() {
             </div>
             <div
               ref={menuRef}
-              className={` w-full h-full fixed top-0   transition-all overflow-hidden duration-1000 bg-black text-white z-10 `}
+              className={` w-full h-full fixed top-0   transition-all overflow-hidden duration-1000  text-white z-10 opacity-0`}
             >
               <div className=" w-full h-screen  flex flex-col justify-between items-center ">
                 <div className="w-full lg:h-20 h-16   flex justify-between items-center ">
