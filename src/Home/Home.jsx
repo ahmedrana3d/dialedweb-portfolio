@@ -87,7 +87,9 @@ const Home = () => {
     <div {...wheel()} {...drag()} style={{ touchAction: 'none' }}>
       <LoadingScreen />
       <Experience />
+      <div className=" hidden">
       <MainSection />
+      </div>
     </div>
   );
 };
