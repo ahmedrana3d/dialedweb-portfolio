@@ -157,6 +157,14 @@ export default function Navbar() {
                       DIALED<span className="text-[#AAA3FF]">WEB</span>
                     </p>
                   </div>
+<<<<<<<<< Temporary merge branch 1
+                  <div className="hidden pr-4 lg:flex">
+                  <div className="hidden pr-4 getInTouch lg:flex">
+                    <AnimText title="GET IN TOUCH" />
+                  </div>
+                  </div>
+=========
+>>>>>>>>> Temporary merge branch 2
                 </div>
 
                 <div className=" w-full  text-center flex flex-col sm:flex sm:flex-col lg:items-center lg:justify-between gap-10 ">

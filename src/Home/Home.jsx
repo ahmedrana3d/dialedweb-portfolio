@@ -1,11 +1,19 @@
 import LoadingScreen from "./Components/LoadingScreen";
 import Experience from "./Experience";
 import MainSection from "./MainSection";
+<<<<<<< HEAD
 import React from "react";
 import { useWheel } from "@use-gesture/react";
 import { Lethargy } from "lethargy";
 import { useSnapshot } from "valtio";
 import state from "../state/state";
+=======
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import { useWheel, useDrag } from '@use-gesture/react';
+import { Lethargy } from 'lethargy';
+import { useSnapshot } from 'valtio';
+import state from '../state/state';
+>>>>>>> 18e1932075eb305e6b14ca0184b3f56be5cac830
 
 const TIMEOUTS = {
   1: 4000,
@@ -32,6 +40,7 @@ const Home = () => {
   const [scrollDisabled, setScrollDisabled] = React.useState(false);
 
   const wheel = useWheel(({ event, first, last, delta: [, deltaY] }) => {
+<<<<<<< HEAD
     if (!first && !last && !scrollDisabled) {
       const scrolling = lethargy.check(event) !== false;
       if (scrolling && !scrollFired) {
@@ -50,6 +59,12 @@ const Home = () => {
           console.log("SCROLL");
           setScrollDisabled(false);
         }, timeout);
+=======
+    if (!first && !last && !scrollDisabledRef.current) {
+      const scrolling = lethargy.check(event) !== false;
+      if (scrolling && !scrollFiredRef.current) {
+        handleScroll(deltaY);
+>>>>>>> 18e1932075eb305e6b14ca0184b3f56be5cac830
       }
     } else {
       setScrollFired(false);
@@ -66,7 +81,13 @@ const Home = () => {
     <div {...wheel()}>
       <LoadingScreen />
       <Experience />
+<<<<<<< HEAD
       {/* <MainSection /> */}
+=======
+      <div className=" hidden">
+      {/* <MainSection /> */}
+      </div>
+>>>>>>> 18e1932075eb305e6b14ca0184b3f56be5cac830
     </div>
   );
 };
