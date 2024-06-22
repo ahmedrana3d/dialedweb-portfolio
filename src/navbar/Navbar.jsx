@@ -23,6 +23,7 @@ export default function Navbar() {
   const handleMenu = () => {
     setMenuOpened(!menuOpened);
   };
+
   const navLinks = [
     {
       title: "HOME",
@@ -41,6 +42,7 @@ export default function Navbar() {
       path: "/contact",
     },
   ];
+
   useEffect(() => {
     if (snapshot.step === 0) {
       const tl = gsap.timeline();
@@ -66,32 +68,53 @@ export default function Navbar() {
       });
     }
 
-    gsap.set(menuRef.current, { bottom: "-120%", });
+    gsap.set(menuRef.current, { right: "-120%" });
     gsap.set(".navLinks", { opacity: 0, y: 100 });
-    tl.current = gsap.timeline({ paused: true });
 
-    tl.current
-      .to(menuRef.current, {
-        bottom: 0,
+    if (!menuOpened) {
+      const tl = gsap.timeline();
+      tl.to(menuRef.current, {
+        right: "-120%",
         duration: 1,
         ease: "power3.out",
-      })
-      // .to(
-      //   ".navLinks",
-      //   {
-      //     opacity: 1,
-      //     y: 0,
-      //     ease: "power4.out",
-      //     duration: 2,
-      //     stagger: { amount: 0.8, from: "start" },
-      //   },
-        
-      // );
-  }, [snapshot.step]);
+      });
 
-  useEffect(() => {
-    menuOpened ? tl.current.play() : tl.current.reverse();
-  }, [menuOpened]);
+      tl.to(
+        ".navLinks",
+        {
+          opacity: 0,
+          y: 100,
+          ease: "power4.out",
+          duration: 2,
+          stagger: 0.5
+        },
+        "-=0.5"
+      );
+    }
+
+    if (menuOpened) {
+      const tl = gsap.timeline();
+      tl.to(menuRef.current, {
+        right: 0,
+        duration: 0.5,
+        ease: "power3.out",
+      });
+
+      tl.to(
+        ".navLinks",
+        {
+          opacity: 1,
+          y: 0,
+          ease: "power4.out",
+          duration: 2,
+          stagger: 0.5
+        },
+        "-=0.5"
+      );
+
+      
+    }
+  }, [snapshot.step, menuOpened]);
 
   const [xPosition, setXPosition] = useState(window.innerWidth < 768);
 
@@ -147,7 +170,7 @@ export default function Navbar() {
             </div>
             <div
               ref={menuRef}
-              className={` w-full h-full fixed  left-0  transition-all overflow-hidden duration-1000 bg-black text-white z-10 `}
+              className={` w-full h-full fixed top-0   transition-all overflow-hidden duration-1000 bg-black text-white z-10 `}
             >
               <div className=" w-full h-screen  flex flex-col justify-between items-center ">
                 <div className="w-full lg:h-20 h-16   flex justify-between items-center ">
@@ -156,14 +179,6 @@ export default function Navbar() {
                       DIALED<span className="text-[#AAA3FF]">WEB</span>
                     </p>
                   </div>
-<<<<<<<<< Temporary merge branch 1
-                  <div className="hidden pr-4 lg:flex">
-                  <div className="hidden pr-4 getInTouch lg:flex">
-                    <AnimText title="GET IN TOUCH" />
-                  </div>
-                  </div>
-=========
->>>>>>>>> Temporary merge branch 2
                 </div>
 
                 <div className=" w-full  text-center flex flex-col sm:flex sm:flex-col lg:items-center lg:justify-between gap-10 ">

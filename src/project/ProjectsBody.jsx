@@ -4,9 +4,8 @@ import img2 from "/meteor.png";
 import img3 from "/pirate.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { NavLink, useNavigate } from "react-router-dom";
 
-export default function ProjectBody({open}) {
+export default function ProjectBody({ open }) {
   const projects = [
     {
       text1: "DIALEDWEB AGENCIES INTO A ",
@@ -40,8 +39,8 @@ export default function ProjectBody({open}) {
   const projectRefs = useRef([]);
   projectRefs.current = [];
 
-  const menuRef = useRef()
-  const tl = useRef()
+  const menuRef = useRef();
+  const tl = useRef();
 
   const addToRefs = (el) => {
     if (el && !projectRefs.current.includes(el)) {
@@ -52,22 +51,21 @@ export default function ProjectBody({open}) {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    tl.current = gsap.timeline({paused: true})
+    tl.current = gsap.timeline({ paused: true });
 
-    tl.current.to(menuRef.current,{
+    tl.current.to(menuRef.current, {
       opacity: 1,
+      left: 0,
       zIndex: 50,
-      duration: 3,
-      ease: "power3.inOut"
-    })
+      duration: 2,
+      ease: "power3.inOut",
+    });
 
-    
-      // gsap.to(projectRefs.current[0], { opacity: 0 });
-      tl.current.to(
-        projectRefs.current[0],
-        { opacity: 1, duration: 1, ease: "power3.inOut" ,delay: 1,}
-      );
-    
+    // gsap.to(projectRefs.current[0], { opacity: 0 });
+    // tl.current.to(
+    //   projectRefs.current[0],
+    //   { opacity: 1, duration: 1, ease: "power3.inOut" ,}
+    // );
 
     projectRefs.current.forEach((project, index) => {
       gsap
@@ -90,33 +88,23 @@ export default function ProjectBody({open}) {
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      tl.current.kill();
     };
   }, []);
 
-  useEffect(()=>{
- 
-    // open ? tl.current.play() : tl.current.reverse()
-
-  },[open])
+  useEffect(() => {
+    open ? tl.current.play() : tl.current.reverse();
+  }, [open]);
 
   const [hovered1, setHovered1] = useState(null);
   const [hovered, setHovered] = useState(null);
 
-  const navigate = useNavigate();
-
-  const goToProjects = () => {
-    navigate('/projects');
-    window.location.reload();
-  };
-
   return (
-    <div ref={menuRef} className="absolute w-full left-0 top-0 bg-[#02210a] text-[#43ea67] z-[999]   ">
-      <button>
-        <a onClick={goToProjects}>
-        PROJECTS
-        </a>
-        </button>
-      <div className="relative max-w-[90%] h-full mx-auto    ">
+    <div
+      ref={menuRef}
+      className="absolute w-full h-[300vh] -left-[100vh] top-0 bg-[#02210a] text-[#43ea67] -z-[90] opacity-0   "
+    >
+      <div className="relative max-w-[90%] h-full mx-auto ">
         {projects.map((project, index) => (
           <div ref={addToRefs} key={index} className="relative pt-40">
             <div
@@ -141,31 +129,32 @@ export default function ProjectBody({open}) {
               </h1>
             </div>
 
-            <div className="relative pt-20 z-0 flex flex-col-reverse lg:flex-row  lg:justify-between lg:items-end  ">
+            <div className="relative lg:pt-20 pt-32 z-0 flex flex-col-reverse lg:flex-row  lg:justify-between lg:items-end  ">
               <div className="mx-2">
                 <h1 className="lg:text-3xl font-bebas-neue ">{project.info}</h1>
                 <h1 className="lg:text-3xl font-bebas-neue ">
                   {project.info1}
                 </h1>
                 <h1 className="lg:text-3xl font-bebas-neue ">{project.date}</h1>
-                <button className="border-2 border-[#43ea67] rounded-xl px-2 py-1  lg:px-4 lg:py-2 lg:rounded-3xl lg:mt-3">
+                <button className="border-2 border-[#43ea67]  px-2 py-1  lg:px-4 lg:py-2 rounded-3xl mt-3 hover:bg-yellow-300 hover:text-black transition-all duration-200 ease-linear">
                   {project.button}
                 </button>
               </div>
-              <div
-                onMouseEnter={() => setHovered(index)}
-                onMouseLeave={() => setHovered(null)}
-                style={
-                  hovered === index
-                    ? {
-                        transform: "scale(1.1) ",
-                        transition: "transform 0.5s ease-in-out",
-                      }
-                    : { transition: "transform 1s ease-in-out" }
-                }
-                className="overflow-hidden relative z-10"
-              >
-                <img src={project.img} alt="" className="lg:h-[560px]" />
+              <div className="overflow-hidden">
+                <div
+                  onMouseEnter={() => setHovered(index)}
+                  onMouseLeave={() => setHovered(null)}
+                  style={
+                    hovered === index
+                      ? {
+                          transform: "scale(1.1) ",
+                          transition: "transform 0.5s ease-in-out",
+                        }
+                      : { transition: "transform 1s ease-in-out" }
+                  }
+                >
+                  <img src={project.img} alt="" className="lg:h-[560px]" />
+                </div>
               </div>
             </div>
           </div>

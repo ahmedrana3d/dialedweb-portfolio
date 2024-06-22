@@ -1,85 +1,83 @@
-:root {
-    --shimmer-hue-1: 213deg;
-    --shimmer-sat-1: 95%;
-    --shimmer-lit-1: 91%;
-    --shimmer-hue-2: 248deg;
-    --shimmer-sat-2: 100%;
-    --shimmer-lit-2: 86%;
-    --shimmer-hue-3: 293deg;
-    --shimmer-sat-3: 78%;
-    --shimmer-lit-3: 89%;
-    
-    --glow-hue: 222deg;
-    --shadow-hue: 180deg;
-    --spring-easing: linear(
-    0, 0.002, 0.01 0.9%, 0.038 1.8%, 0.156, 0.312 5.8%, 0.789 11.1%, 1.015 14.2%,
-    1.096, 1.157, 1.199, 1.224 20.3%, 1.231, 1.231, 1.226, 1.214 24.6%,
-    1.176 26.9%, 1.057 32.6%, 1.007 35.5%, 0.984, 0.968, 0.956, 0.949 42%,
-    0.946 44.1%, 0.95 46.5%, 0.998 57.2%, 1.007, 1.011 63.3%, 1.012 68.3%,
-    0.998 84%, 1
-  );
-    --spring-duration: 1.33s;
+.project-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  overflow: hidden;
+  line-height: 1;
+  border-radius: 0.7rem;
+  padding: 0.815rem 1.632rem;
+  cursor: pointer;
+  border: none;
+  background: white;
+  transition: background 0.4s linear;
+  will-change: background;
+  position: fixed;
+  right: 0%;
+  bottom: 0%;
+  margin: 10px;
+  z-index: 5000;
 }
 
-.button {
-    color: var(--bg);
-    font-weight: 600;
-    font-size: 1.2em;
-    background-image: linear-gradient(
-        315deg, 
-        hsl(var(--shimmer-hue-1),var(--shimmer-sat-1),var(--shimmer-lit-1)) 0.00%, 
-        hsl(var(--shimmer-hue-2),var(--shimmer-sat-2),var(--shimmer-lit-2)) 47%,
-        hsl(var(--shimmer-hue-3),var(--shimmer-sat-3),var(--shimmer-lit-3)) 100.00% 
-    );
-    padding: .8em 1.4em;
-    position: relative;
-    isolation: isolate;
-    box-shadow: 0 2px 3px 1px hsl(var(--glow-hue) 50% 20% / 50%);
-    border: none;
-    outline: none;
-    border-radius: 0.66em;
-    scale: 1;
-    transition: all var(--spring-duration) var(--spring-easing);
-    text-transform: unset;
+.project-button:hover {
+  background-color: #00eaff;
+  box-shadow: 0px 0px 13px 5px rgba(207, 200, 200, 0.678);
 }
 
-.shimmer {
-    
-    border-radius: inherit;
-    mix-blend-mode: color-dodge;
-    mix-blend-mode: plus-lighter;
-    pointer-events: none;
-    transition: spin;
+.project-button:hover .project-span:nth-of-type(1) em {
+  opacity: 0;
+  transform: translateY(-100%);
 }
 
-.shimmer::before,
-.shimmer::after {
-    transition: all 0.5s ease;
-    opacity: 0;
-    content: "";
-    border-radius: inherit;
-    position: absolute;
-    inset: 40px;
-}
-.shimmer::before {
-    box-shadow: 0 0 3px 2px hsl(var(--shimmer-hue-1) 20% 95%),
-        0 0 7px 4px hsl(var(--shimmer-hue-1) 20% 80%),
-        0 0 13px 8px hsl(var(--shimmer-hue-2) 40% 60%),
-        0 0 22px 6px hsl(var(--shimmer-hue-2) 20% 40%);
-    z-index: -1;
-}
-.shimmer::after {
-    box-shadow: inset 0 0 0 1px hsl(var(--shimmer-hue-2) 70% 95%),
-        inset 0 0 3px 1px hsl(var(--shimmer-hue-2) 100% 80%),
-        inset 0 0 9px 1px hsl(var(--shimmer-hue-2) 100% 70%);
-    z-index: 2;
+.project-button:hover .project-span:nth-of-type(2) em {
+  opacity: 1;
+  transform: translateY(0%);
+  transition: transform 0.75s cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 0.35s linear 0.3s;
 }
 
-@keyframes spin {
-    0% {
-        --mask: 0deg;
-    }
-    100% {
-        --mask: 360deg;
-    }
+.project-span {
+  position: relative;
+  display: block;
+  perspective: 108px;
+}
+
+.project-span:nth-of-type(2) {
+  position: absolute;
+  text-align: center;
+}
+
+em {
+  display: flex;
+  font-style: normal;
+  display: inline-block;
+  font-size: 1.125rem;
+  color: black;
+  font-weight: 600;
+  will-change: transform, opacity, transition;
+  transition: transform 0.55s cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 0.35s linear 0.2s;
+}
+
+.project-span:nth-of-type(1) em {
+  transform-origin: top;
+}
+
+.project-span:nth-of-type(2) em {
+  transform: translateY(200%);
+  transform-origin: bottom;
+}
+
+.arrowIcon {
+  transition: transform 0.3s linear;
+}
+
+.project-button:hover .arrowIcon {
+  transform: rotate(-20deg);
+}
+
+.rotate-arrow .arrowIcon {
+  transform: rotate(360deg);
+  transition: transform 0.6s ease;
 }

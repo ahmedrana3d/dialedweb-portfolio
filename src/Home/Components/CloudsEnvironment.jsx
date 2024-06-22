@@ -8,9 +8,6 @@ import {MeshBasicMaterial} from "three";
 import { useThree } from "@react-three/fiber";
 
 const CloudsEnvironment = ({
-  seed,
-  bounds,
-  volume,
   position,
   luminanceThreshold,
   intensity,
@@ -46,21 +43,38 @@ const CloudsEnvironment = ({
     };
   }, []);
 
+
+
+  const { ...cloudCon} =  {
+    seed :  12,
+    bounds :  140,
+    volume : 179,
+    growth : -5,
+    segments: 20, 
+    fade:  215, 
+    color: "#2c5890",
+    concentrate : 'inside'
+    
+    
+    
+  }
+
+
+
+
+
+
   return (
     <>
       <ambientLight intensity={Math.PI / 2} />
       <Clouds ref={cloudsRef} material={MeshBasicMaterial}>
         <Cloud
-          seed={seed}
-          bounds={bounds}
-          volume={volume}
-          position={[40, 10, position]}
+   {...cloudCon}
+          position={[80, -20, position]}
         />
         <Cloud
-          seed={seed}
-          bounds={bounds}
-          volume={volume}
-          position={[-40, 10, position]}
+     {...cloudCon}
+          position={[-80, -20, position]}
         />
       </Clouds>
       <Environment preset="city" />
@@ -70,7 +84,10 @@ const CloudsEnvironment = ({
           luminanceThreshold={luminanceThreshold}
           height={300}
           intensity={intensity}
+          levels={6}
+          radius={0.8}
         />
+
       </EffectComposer>
     </>
   );

@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import Stairs from "../transitions/Stair";
 import Experience from "./Experience/Experience";
-
 import "./project.css";
 import ProjectBody from "./ProjectsBody";
-import { NavLink } from "react-router-dom";
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 const HtmlComponent = () => {
   useEffect(() => {
@@ -45,15 +44,28 @@ function Project() {
         <HtmlComponent />
       </div>
 
-      {/* <ProjectBody open={open} setOpen={setOpen} /> */}
+      <ProjectBody open={open} setOpen={setOpen} />
 
       <button
-        // onClick={handleOpen}
-        className="absolute button right-0 bottom-0 text-2xl text-red-500 z-50 cursor-pointer "
+        onClick={handleOpen}
+        className={`project-button ${open ? "rotate-arrow" : ""}`}
       >
-        <NavLink to="/baba">
-        View Projects
-        </NavLink>
+        <span className="project-span">
+          <p className="flex justify-center items-center gap-2">
+            <em>{open ? "Close Projects" : "View Projects"}</em>
+            <span className="arrowIcon">
+              <FaLongArrowAltRight />
+            </span>
+          </p>
+        </span>
+        <span className="project-span">
+          <p className="flex justify-center items-center gap-2">
+            <em>{open ? "Close Projects" : "View Projects"}</em>
+            <span className="arrowIcon">
+              <FaLongArrowAltRight />
+            </span>
+          </p>
+        </span>
       </button>
     </Stairs>
   );

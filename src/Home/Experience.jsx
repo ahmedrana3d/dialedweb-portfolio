@@ -15,7 +15,7 @@ import { editable as e, SheetProvider } from "@theatre/r3f";
 // import studio from "@theatre/studio";
 import Globe from "./Components/Models/Globe";
 import Monitor from "./Components/Models/Monitor";
-import MonitorBox from "./Components/Models/MonitorBox";
+
 import ChessBoard from "./Components/Models/ChessBoard";
 
 // const snapshot  = useSnapshot(state);
@@ -88,8 +88,9 @@ const Experience = () => {
   });
 
   const skyColor = sheet.object("Sky Color", {
-    topColor: types.rgba({ r: 92, g: 83, b: 204, a: 1 }), // #5C53CC
-    bottomColor: types.rgba({ r: 153, g: 147, b: 223, a: 1 }), // #9993DF
+    topRightColor: types.rgba({ r: 136, g: 136, b: 136, a: 1 }), // #5C53CC
+    bottomLeftColor: types.rgba({ r: 136, g: 136, b: 136, a: 1 }), // #9993DF
+    mainColor: types.rgba({ r: 136, g: 136, b: 136, a: 1 }), // #9993DF
   });
   
 
@@ -106,13 +107,15 @@ const Experience = () => {
     intensity: 0,
   });
 
-  const [topColor, setTopColor] = useState({ r: 135, g: 206, b: 235, a: 1 }); // Sky blue in hex
-  const [bottomColor, setBottomColor] = useState({
-    r: 255,
-    g: 255,
-    b: 255,
-    a: 1,
-  }); // White in hex
+
+  // bottomLeftColor={new Color("#D4E8FC")} 
+  // mainColor={new Color("#D4E8FC")} 
+  // topRightColor={new Color("skyblue")}
+
+
+  const [topRightColor, setTopRightColor] =useState({ r: 136, g: 136, b: 136, a: 1 });
+  const [mainColor, setMainColor] = useState({ r: 136, g: 136, b: 136, a: 1 });
+  const [bottomLeftColor, setBottomLeftColor] = useState({ r: 136, g: 136, b: 136, a: 1 });
   // Stars Pos
   const [cloudPosZ, setCloudPosZ] = useState(-80);
   const [starsPosY, setStarsPosY] = useState(-700);
@@ -143,8 +146,9 @@ const Experience = () => {
     });
 
     skyColor.onValuesChange((colors) => {
-      setTopColor(colors.topColor); // Using functional form of setTopColor
-      setBottomColor(colors.bottomColor);
+      setTopRightColor(colors.topRightColor); // Using functional form of setTopColor
+      setBottomLeftColor(colors.bottomLeftColor);
+      setMainColor(colors.mainColor);
     });
 
     bloomPara.onValuesChange((val) => {
@@ -219,10 +223,6 @@ const [monitorScale, setMonitorScale] = useState(1)
 <e.group theatreKey="Monitors"  scale={[0,0,0]}>
   {/* <e.group theatreKey="Monitor"> */}
 <Monitor />
-  {/* </e.group> */}
-  {/* <e.group theatreKey="Monitor Box"> */}
-<MonitorBox />
-  {/* </e.group> */}
 </e.group>
 </group>
 
@@ -242,21 +242,20 @@ const [monitorScale, setMonitorScale] = useState(1)
      
 
           <CloudsEnvironment
-            seed={10}
-            bounds={50}
-            volume={50}
+            // seed={10}
+            // bounds={50}
+            // volume={50}
             position={cloudPosZ}
             luminanceThreshold={bloomThreshold}
             intensity={bloomIntensity}
             enabled={bloomEnabled}
           />
-          <SkySphere
-            topColor={new Color(topColor.r, topColor.g, topColor.b)}
-            bottomColor={
-              new Color(bottomColor.r, bottomColor.g, bottomColor.b)
-            }
-            
-          />
+        <SkySphere 
+  bottomLeftColor={new Color(bottomLeftColor.r, bottomLeftColor.g, bottomLeftColor.b)} 
+  mainColor={new Color(mainColor.r, mainColor.g, mainColor.b)} 
+  topRightColor={new Color(topRightColor.r, topRightColor.g, topRightColor.b)}
+/>
+
 
           <Stars posY={starsPosY} opacity={starsOpacity} StarSize={starsSize} starsColor={new Color(starsColor.r, starsColor.g, starsColor.b)}/>
 
