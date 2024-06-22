@@ -42,7 +42,6 @@ export default function Navbar() {
       path: "/contact",
     },
   ];
-
   useEffect(() => {
     if (snapshot.step === 0) {
       const tl = gsap.timeline();
