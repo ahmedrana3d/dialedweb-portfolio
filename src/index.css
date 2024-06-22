@@ -39,7 +39,7 @@ body #root {
   width: 100%;
   height: 100%;
   user-select: none;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 canvas {
@@ -416,4 +416,26 @@ em {
 
 .touch-button:hover .touch-span:nth-of-type(2) em {
   transform: translateY(0%);
+}
+
+
+
+/* For WebKit-based browsers */
+::-webkit-scrollbar {
+  width: 1px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #1c1c1c /* Background color */
+} 
+
+/* Handle (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+  background: #313131; /* Color of the handle */
+  border-radius: 6px; /* Rounded corners */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #050505; /* Color on hover */
 }

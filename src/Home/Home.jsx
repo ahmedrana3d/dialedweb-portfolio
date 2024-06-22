@@ -10,7 +10,7 @@ import state from '../state/state';
 const TIMEOUTS = {
   1: 4000,
   2: 2500,
-  3: 1500,
+  3: 2500,
   4: 2000,
   5: 2000,
   6: 2000,
@@ -88,7 +88,7 @@ const Home = () => {
       <LoadingScreen />
       <Experience />
       <div className=" hidden">
-      <MainSection />
+      {/* <MainSection /> */}
       </div>
     </div>
   );

@@ -13,19 +13,29 @@ import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const [menuOpened, setMenuOpened] = useState(false);
+  const menuRef = useRef();
+  const tl = useRef();
 
   const snapshot = useSnapshot(state);
 
   const [contact, setContact] = useState(false);
 
+  const handleMenu = () => {
+    setMenuOpened(!menuOpened);
+  };
+
   const navLinks = [
+    {
+      title: "HOME",
+      path: "/home",
+    },
     {
       title: "PROJECTS",
       path: "/project",
     },
     {
       title: "LEARN",
-      path: "/",
+      path: "/learn",
     },
     {
       title: "GET IN TOUCH",
@@ -58,25 +68,32 @@ export default function Navbar() {
       });
     }
 
-    if (menuOpened === true) {
-      const timeline = gsap.timeline({ delay: 0.5 });
+    gsap.set(menuRef.current, { bottom: "-120%", });
+    gsap.set(".navLinks", { opacity: 0, y: 100 });
+    tl.current = gsap.timeline({ paused: true });
 
-      timeline
-        .from(".navLinks", {
-          opacity: 0,
-          y: 100,
-          ease: "power4.out",
-          duration: 2,
-          stagger: { amount: 0.8, from: "start" },
-        })
-        .to(".navLinks", {
-          opacity: 1,
-          y: 0,
-          duration: 2,
-          ease: "power4.out",
-        });
-    }
-  }, [snapshot.step, menuOpened]);
+    tl.current
+      .to(menuRef.current, {
+        bottom: 0,
+        duration: 1,
+        ease: "power3.out",
+      })
+      // .to(
+      //   ".navLinks",
+      //   {
+      //     opacity: 1,
+      //     y: 0,
+      //     ease: "power4.out",
+      //     duration: 2,
+      //     stagger: { amount: 0.8, from: "start" },
+      //   },
+        
+      // );
+  }, [snapshot.step]);
+
+  useEffect(() => {
+    menuOpened ? tl.current.play() : tl.current.reverse();
+  }, [menuOpened]);
 
   const [xPosition, setXPosition] = useState(window.innerWidth < 768);
 
@@ -122,10 +139,7 @@ export default function Navbar() {
           {/* MENU */}
           <div className=" hidden secPage absolute top-3 left-1  h-14 px-4  z-10 lg:flex items-center ">
             <div className="z-50 ">
-              <button
-                onClick={() => setMenuOpened(!menuOpened)}
-                className="menuButton "
-              >
+              <button onClick={handleMenu} className="menuButton ">
                 {menuOpened ? (
                   <AnimText title="CLOSE" />
                 ) : (
@@ -134,12 +148,12 @@ export default function Navbar() {
               </button>
             </div>
             <div
-              className={` w-full fixed bottom-0 left-0  transition-all overflow-hidden duration-1000 bg-black text-white 
-          ${menuOpened ? "h-full" : "h-0"} `}
+              ref={menuRef}
+              className={` w-full h-full fixed  left-0  transition-all overflow-hidden duration-1000 bg-black text-white z-10 `}
             >
               <div className=" w-full h-screen  flex flex-col justify-between items-center ">
-                <div className="w-full lg:h-20 h-16 pl-5  flex justify-between items-center ">
-                  <div className="flex-1 flex justify-center items-center text-center  pl-[9rem]  ">
+                <div className="w-full lg:h-20 h-16   flex justify-between items-center ">
+                  <div className="flex-1 flex justify-center items-center text-center    ">
                     <p className="text-5xl font-horizon text-white hover:-translate-y-1 transition-all duration-300">
                       DIALED<span className="text-[#AAA3FF]">WEB</span>
                     </p>
@@ -155,6 +169,16 @@ export default function Navbar() {
                   <div className="overflow-hidden">
                     <p
                       onClick={() => setMenuOpened(false)}
+                      className="navLinks text-4xl lg:text-6xl cursor-pointer tracking-wider "
+                    >
+                      <NavLink to="/">
+                        <AniNavLink title="HOME" />
+                      </NavLink>
+                    </p>
+                  </div>
+                  <div className="overflow-hidden">
+                    <p
+                      onClick={() => setMenuOpened(false)}
                       className="navLinks text-4xl lg:text-6xl cursor-pointer tracking-tight "
                     >
                       <NavLink to="/projects">
@@ -167,7 +191,7 @@ export default function Navbar() {
                       onClick={() => setMenuOpened(false)}
                       className=" navLinks text-4xl lg:text-6xl   lg:text-start cursor-pointer "
                     >
-                      <NavLink to="/">
+                      <NavLink to="/learn">
                         <AniNavLink title="LEARN" />
                       </NavLink>
                     </p>
@@ -235,39 +259,3 @@ export default function Navbar() {
     </>
   );
 }
-
-const Diallogo = () => {
-  return (
-    <>
-      <div className="keycaps w-60  flex items-center select-none">
-        <div className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
-          <img className="glow-effect" src="./dialedweb_keys/1.png" alt="" />
-        </div>
-        <div className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
-          <img className="glow-effect" src="./dialedweb_keys/2.png" alt="" />
-        </div>
-        <div className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
-          <img className="glow-effect" src="./dialedweb_keys/3.png" alt="" />
-        </div>
-        <div className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
-          <img className="glow-effect" src="./dialedweb_keys/4.png" alt="" />
-        </div>
-        <div className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
-          <img className="glow-effect" src="./dialedweb_keys/5.png" alt="" />
-        </div>
-        <div className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
-          <img className="glow-effect" src="./dialedweb_keys/6.png" alt="" />
-        </div>
-        <div className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
-          <img className="glow-effect" src="./dialedweb_keys/7.png" alt="" />
-        </div>
-        <div className="key w-24 transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
-          <img className="glow-effect" src="./dialedweb_keys/8.png" alt="" />
-        </div>
-        <div className="key w-24  transform transition-transform duration-100 hover:scale-95 hover:translate-y-1">
-          <img className="glow-effect" src="./dialedweb_keys/9.png" alt="" />
-        </div>
-      </div>
-    </>
-  );
-};
