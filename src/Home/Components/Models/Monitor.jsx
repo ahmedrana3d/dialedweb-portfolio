@@ -1,8 +1,14 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react'
-import { shaderMaterial, useGLTF, useTexture, useVideoTexture } from '@react-three/drei'
-import {  MathUtils } from 'three';
-import { extend, useFrame, useThree } from '@react-three/fiber'
-import * as THREE from 'three';
+import React, { Suspense, useEffect, useRef, useState } from "react";
+import {
+  shaderMaterial,
+  useGLTF,
+  useTexture,
+  useVideoTexture,
+} from "@react-three/drei";
+import { MathUtils } from "three";
+import { extend, useFrame, useThree } from "@react-three/fiber";
+import * as THREE from "three";
+import { useControls } from "leva";
 
 // Define shader material outside the component to avoid recreation on each render
 const ImageFadeMaterial = shaderMaterial(
@@ -11,14 +17,13 @@ const ImageFadeMaterial = shaderMaterial(
     dispFactor: 0,
     tex: undefined,
     tex2: undefined,
-    disp: undefined
+    disp: undefined,
   },
   ` varying vec2 vUv;
     void main() {
       vUv = uv;
       gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
     }`,
-
   ` 
     varying vec2 vUv;
     uniform sampler2D tex;
@@ -45,33 +50,26 @@ const ImageFadeMaterial = shaderMaterial(
 
 extend({ ImageFadeMaterial });
 
-
-
-
-
-
 export default function Monitor(props) {
   const [hovered, hover] = useState(false);
-  const texture1 = useVideoTexture('./videos/good_screen.mp4');
-  const texture2 = useVideoTexture('./videos/bad_screen.mp4');
-  const dispTexture = useTexture('./videos/cells_disp.png');
+  const texture1 = useVideoTexture("./videos/good_screen.mp4");
+  const texture2 = useVideoTexture("./videos/bad_screen.mp4");
+  const dispTexture = useTexture("./videos/cells_disp.png");
   const ref = useRef();
   const ref2 = useRef(null);
   const { size } = useThree();
   texture1.flipY = false;
   texture2.flipY = false;
 
-  
-
   useFrame(() => {
     if (ref.current) {
-      ref.current.dispFactor = MathUtils.lerp(ref.current.dispFactor, hovered ? 1 : 0, 0.055);
+      ref.current.dispFactor = MathUtils.lerp(
+        ref.current.dispFactor,
+        hovered ? 1 : 0,
+        0.055
+      );
     }
   });
-
-
-
-
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -82,13 +80,9 @@ export default function Monitor(props) {
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [size.width, size.height]);
-
-
-
-
 
   function setBG(value) {
     hover(value);
@@ -98,20 +92,36 @@ export default function Monitor(props) {
     if (ref2.current) console.log(ref2.current);
   }, []);
 
-  const { nodes, materials } = useGLTF('./models/simple_monitor.glb');
+  const { nodes, materials } = useGLTF("./models/monitor_simple.glb");
+
+  const { ...matConfig } = useControls("Monitor Material", {
+    color: "#000000",
+    metalness: { min: 0, max: 1, value: 0.1 },
+    roughness: { min: 0, max: 1, value: 0.1 },
+  });
 
   return (
-    <group {...props} dispose={null} scale={[35, 35, 35]} position={[0, -45, 0]} ref={ref2}>
-      <group position={[0, 1.775, 0]}>
-        <mesh castShadow receiveShadow geometry={nodes.Object_4.geometry} material={materials.GLASS} />
-        <mesh castShadow receiveShadow geometry={nodes.Object_5.geometry} material={materials.BOTTOM_LINE} />
+    <group
+      {...props}
+      dispose={null}
+      scale={[30, 30, 30]}
+      position={[0, -30, 0]}
+    >
+      <group position={[0, -0.055, 0.027]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_5.geometry}
+        >
+     <meshStandardMaterial {...matConfig} />
+        </mesh>
         <mesh
           onPointerEnter={() => setBG(true)}
           onPointerLeave={() => setBG(false)}
           castShadow
           receiveShadow
           geometry={nodes.screen.geometry}
-          material={materials.GLASS}
+          material={materials.Display}
         >
           <Suspense fallback={null}>
             <imageFadeMaterial
@@ -125,11 +135,26 @@ export default function Monitor(props) {
             />
           </Suspense>
         </mesh>
-        <mesh castShadow receiveShadow geometry={nodes.Object_2.geometry} material={materials.FRAME} />
-        <mesh castShadow receiveShadow geometry={nodes.Object_2_1.geometry} material={materials.BOTTOM_LINE} />
       </group>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_9.geometry}
+      >
+        <meshStandardMaterial {...matConfig} />
+      </mesh>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Object_7.geometry}
+        position={[0, -0.055, 0.027]}
+        rotation={[-1.571, 0, 0]}
+        scale={0.272}
+      >
+        <meshStandardMaterial {...matConfig} />
+      </mesh>
     </group>
   );
 }
 
-useGLTF.preload('./models/simple_monitor.glb');
+useGLTF.preload("./models/monitor_simple.glb");

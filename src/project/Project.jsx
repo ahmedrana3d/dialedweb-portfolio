@@ -45,15 +45,15 @@ function Project() {
         <HtmlComponent />
       </div>
 
-      {/* <ProjectBody open={open} setOpen={setOpen} /> */}
+      <ProjectBody open={open} setOpen={setOpen} />
 
       <button
-        // onClick={handleOpen}
+        onClick={handleOpen}
         className="absolute button right-0 bottom-0 text-2xl text-red-500 z-50 cursor-pointer "
       >
-        <NavLink to="/baba">
+        {/* <NavLink to="/baba">
         View Projects
-        </NavLink>
+        </NavLink> */}
       </button>
     </Stairs>
   );

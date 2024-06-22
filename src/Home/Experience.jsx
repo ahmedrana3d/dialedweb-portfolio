@@ -17,6 +17,7 @@ import Globe from "./Components/Models/Globe";
 import Monitor from "./Components/Models/Monitor";
 
 import ChessBoard from "./Components/Models/ChessBoard";
+import Ufo_Animated from "./Components/Models/Ufo_Animated";
 
 // const snapshot  = useSnapshot(state);
 // let CLICKED_ENTER = snapshot.step
@@ -212,6 +213,9 @@ const [monitorScale, setMonitorScale] = useState(1)
                 <e.group theatreKey="Ufo">
                   <Ufo ref={ufoRef} position={[0,0 , 0]} >
                   </Ufo>
+
+{/* <Ufo_Animated ref={ufoRef} position={[0,0 , 0]}> </Ufo_Animated> */}
+
                 </e.group>
 
 

@@ -62,7 +62,7 @@ export default function ProjectBody({open}) {
     })
 
     
-      // gsap.to(projectRefs.current[0], { opacity: 0 });
+      gsap.to(projectRefs.current[0], { opacity: 0 });
       tl.current.to(
         projectRefs.current[0],
         { opacity: 1, duration: 1, ease: "power3.inOut" ,delay: 1,}
@@ -95,7 +95,7 @@ export default function ProjectBody({open}) {
 
   useEffect(()=>{
  
-    // open ? tl.current.play() : tl.current.reverse()
+    open ? tl.current.play() : tl.current.reverse()
 
   },[open])
 
@@ -110,7 +110,7 @@ export default function ProjectBody({open}) {
   };
 
   return (
-    <div ref={menuRef} className="absolute w-full left-0 top-0 bg-[#02210a] text-[#43ea67] z-[999]   ">
+    <div ref={menuRef} className="absolute w-full left-0 top-0 bg-[#02210a] text-[#43ea67] z-[-1]   ">
       <button>
         <a onClick={goToProjects}>
         PROJECTS
