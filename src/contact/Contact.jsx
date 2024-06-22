@@ -10,6 +10,7 @@ import { AiFillMessage } from "react-icons/ai";
 
 import "./contact.css";
 import Stairs from "../transitions/Stair";
+import ProjectBody from "../project/ProjectsBody";
 
 function Contact({ contact, setContact }) {
   return (
@@ -37,22 +38,7 @@ function Contact({ contact, setContact }) {
                 </span>
               </p>
             </div>
-            <div className="p-3 mb-3 xl:mb-4 text-[#9d9d9d] border rounded-xl flex hover:bg-white/20 transition-all">
-              <img
-                src="/mathewpic2.jpg"
-                alt=""
-                className="lg:w-20 w-12 mr-3 rounded-full"
-              />
-              <p className="font-circular  ">
-                Hi, I’m Matvey and I’ll be happy to talk to you about your
-                potential project ideas. Email me at
-                <span className="text-white pl-1">
-                  <a href="http://" target="_blank" rel="noopener noreferrer">
-                    support@dialedworldwide.com
-                  </a>
-                </span>
-              </p>
-            </div>
+
             <div className=" w-full flex justify-between items-center font-circular xl:mb-4">
               <div className="lg:w-32 lg:h-20 w-28 h-20 hover:bg-white/20 transition-all  rounded-md text-white bg-[#1f1f1f] flex justify-center items-center flex-col ">
                 <IoIosCall size="30" />

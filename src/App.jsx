@@ -4,6 +4,7 @@ import Navbar from "./navbar/Navbar";
 import { AnimatePresence } from "framer-motion";
 import Project from "./project/Project";
 import Contact from "./contact/Contact";
+import ProjectBody from "./project/ProjectsBody";
 
 function App() {
   const location = useLocation();
@@ -15,6 +16,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/project" element={<Project />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/baba" element={<ProjectBody />} />
         </Routes>
       </AnimatePresence>
     </>

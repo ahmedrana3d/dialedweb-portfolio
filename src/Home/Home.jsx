@@ -2,15 +2,15 @@ import LoadingScreen from "./Components/LoadingScreen";
 import Experience from "./Experience";
 import MainSection from "./MainSection";
 import React from "react";
-import { useWheel } from '@use-gesture/react'
-import { Lethargy } from 'lethargy'
-import { useSnapshot } from 'valtio';
-import state from '../state/state';
+import { useWheel } from "@use-gesture/react";
+import { Lethargy } from "lethargy";
+import { useSnapshot } from "valtio";
+import state from "../state/state";
 
 const TIMEOUTS = {
   1: 4000,
   2: 2500,
-  3: 1500,
+  3: 2500,
   4: 2000,
   5: 2000,
   6: 2000,
@@ -32,24 +32,23 @@ const Home = () => {
   const [scrollDisabled, setScrollDisabled] = React.useState(false);
 
   const wheel = useWheel(({ event, first, last, delta: [, deltaY] }) => {
-
     if (!first && !last && !scrollDisabled) {
       const scrolling = lethargy.check(event) !== false;
       if (scrolling && !scrollFired) {
         if (deltaY > 0) {
-          setCurrentItem(prevItem => prevItem + 1);
+          setCurrentItem((prevItem) => prevItem + 1);
           setCurrentReverse(false);
         }
         if (deltaY < 0 && currentItem > 0) {
-          setCurrentItem(prevItem => prevItem - 1);
+          setCurrentItem((prevItem) => prevItem - 1);
           setCurrentReverse(true);
         }
         setScrollFired(true);
         const timeout = TIMEOUTS[currentItem + 1] || 0; // Get timeout for next step
         setScrollDisabled(true);
         setTimeout(() => {
-console.log("SCROLL")
-          setScrollDisabled(false)
+          console.log("SCROLL");
+          setScrollDisabled(false);
         }, timeout);
       }
     } else {
@@ -67,8 +66,7 @@ console.log("SCROLL")
     <div {...wheel()}>
       <LoadingScreen />
       <Experience />
-        <MainSection />
-
+      {/* <MainSection /> */}
     </div>
   );
 };

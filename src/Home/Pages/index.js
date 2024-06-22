@@ -6,5 +6,6 @@ import Page5 from "./Page5";
 import Page6 from "./Page6";
 import Page7 from "./Page7";
 import Page8 from "./Page8";
+import Page9 from "./page9/Page9";
 
-export { Page1, Page2, Page3, Page4, Page5, Page6, Page7, Page8 };
+export { Page1, Page2, Page3, Page4, Page5, Page6, Page7, Page8 ,Page9 };
