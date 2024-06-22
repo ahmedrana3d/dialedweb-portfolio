@@ -23,7 +23,6 @@ export default function Navbar() {
   const handleMenu = () => {
     setMenuOpened(!menuOpened);
   };
-
   const navLinks = [
     {
       title: "HOME",
