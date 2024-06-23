@@ -2,10 +2,10 @@ import LoadingScreen from "./Components/LoadingScreen";
 import Experience from "./Experience";
 import MainSection from "./MainSection";
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { useWheel, useDrag } from '@use-gesture/react';
-import { Lethargy } from 'lethargy';
-import { useSnapshot } from 'valtio';
-import state from '../state/state';
+import { useWheel, useDrag } from "@use-gesture/react";
+import { Lethargy } from "lethargy";
+import { useSnapshot } from "valtio";
+import state from "../state/state";
 
 const TIMEOUTS = {
   1: 4000,
@@ -66,16 +66,20 @@ const Home = () => {
     }
   });
 
-  const drag = useDrag(({ first, last, movement: [, my], memo = currentItemRef.current }) => {
-    if (!first && !last && !scrollDisabledRef.current) {
-      if (my > 50) { // Swipe down
-        handleScroll(-1);
-      } else if (my < -50) { // Swipe up
-        handleScroll(1);
+  const drag = useDrag(
+    ({ first, last, movement: [, my], memo = currentItemRef.current }) => {
+      if (!first && !last && !scrollDisabledRef.current) {
+        if (my > 50) {
+          // Swipe down
+          handleScroll(-1);
+        } else if (my < -50) {
+          // Swipe up
+          handleScroll(1);
+        }
       }
+      return memo;
     }
-    return memo;
-  });
+  );
 
   useEffect(() => {
     state.step = currentItem;
@@ -84,12 +88,10 @@ const Home = () => {
   }, [currentItem, currentReverse]);
 
   return (
-    <div {...wheel()} {...drag()} style={{ touchAction: 'none' }}>
+    <div {...wheel()} {...drag()} style={{ touchAction: "none" }}>
       <LoadingScreen />
       <Experience />
-      <div className=" hidden">
-      {/* <MainSection /> */}
-      </div>
+      <MainSection />
     </div>
   );
 };

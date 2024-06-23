@@ -40,7 +40,6 @@ export default function ProjectBody({ open }) {
   projectRefs.current = [];
 
   const menuRef = useRef();
-  const tl = useRef();
 
   const addToRefs = (el) => {
     if (el && !projectRefs.current.includes(el)) {
@@ -51,15 +50,24 @@ export default function ProjectBody({ open }) {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    tl.current = gsap.timeline({ paused: true });
+    if (!open) {
+      const tl = gsap.timeline();
+      tl.to(menuRef.current, {
+        left: "-100%",
+        duration: 1,
+        ease: "power3.inOut",
+      });
+    }
 
-    tl.current.to(menuRef.current, {
-      opacity: 1,
-      left: 0,
-      zIndex: 50,
-      duration: 2,
-      ease: "power3.inOut",
-    });
+    if (open) {
+      const tl = gsap.timeline();
+      tl.to(menuRef.current, {
+        left: "0",
+        duration: 1,
+        ease: "power3.inOut",
+        
+      });
+    }
 
     // gsap.to(projectRefs.current[0], { opacity: 0 });
     // tl.current.to(
@@ -88,12 +96,7 @@ export default function ProjectBody({ open }) {
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      tl.current.kill();
     };
-  }, []);
-
-  useEffect(() => {
-    open ? tl.current.play() : tl.current.reverse();
   }, [open]);
 
   const [hovered1, setHovered1] = useState(null);
@@ -102,7 +105,7 @@ export default function ProjectBody({ open }) {
   return (
     <div
       ref={menuRef}
-      className="absolute w-full h-[300vh] -left-[100vh] top-0 bg-[#02210a] text-[#43ea67] -z-[90] opacity-0   "
+      className="absolute w-full h-[400vh]  top-0 bg-[#02210a] text-[#43ea67] z-[90]   "
     >
       <div className="relative max-w-[90%] h-full mx-auto ">
         {projects.map((project, index) => (
@@ -121,10 +124,10 @@ export default function ProjectBody({ open }) {
               }
               className={`absolute z-10 tracking-wider `}
             >
-              <h1 className="lg:text-8xl text-3xl font-bebas-neue ">
+              <h1 className="lg:text-8xl text-3xl font-SFPRO ">
                 {project.text1}
               </h1>
-              <h1 className="lg:text-6xl text-3xl font-playwrite ">
+              <h1 className="lg:text-6xl text-3xl font-Opti ">
                 {project.text2}
               </h1>
             </div>

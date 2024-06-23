@@ -1,21 +1,54 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Section from "./Section";
 import gsap from "gsap";
 import { useSnapshot } from "valtio";
 import state from "../../state/state";
+import SplitType from "split-type";
 
 export default function Page1() {
   const snapshot = useSnapshot(state);
 
-  const Section1In = () => {
-    const tl = gsap.timeline({ delay: 2 });
+  const page1Text = useRef();
 
-    tl.to(".section1", { autoAlpha: 1 }).from(".anim", {
-      y: -500,
-      ease: "power4.out",
-      duration: 3,
-      stagger: { amount: 0.8, from: "start" },
+  const mySplitText = new SplitType(page1Text.current, { types: "chars" });
+  const chars = mySplitText.chars;
+
+  const Section1In = () => {
+    gsap.set(page1Text.current, {
+      transformPerspective: 500,
+      transformOrigin: "center bottom",
+      rotationX: 70,
     });
+    const tl = gsap.timeline();
+
+    tl.to(".section1", { autoAlpha: 1, duration: 1 });
+
+    tl.fromTo(
+      page1Text.current,
+      {
+        rotationX: 70,
+        opacity: 0,
+      },
+      {
+        rotationX: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: "back.out",
+      }
+    );
+
+    tl.from(
+      chars,
+      {
+        yPercent: 100,
+        stagger: 0.04,
+        opacity: 0,
+        ease: "power1.out",
+        duration: 1.5,
+      },
+      "<"
+    );
+
     return tl;
   };
 
@@ -23,6 +56,9 @@ export default function Page1() {
     let tl;
 
     if (snapshot.step === 0 && snapshot.enterClicked && !snapshot.reverse) {
+      tl = Section1In();
+    }
+    if (snapshot.step === 0 && snapshot.reverse) {
       tl = Section1In();
     }
     return () => {
@@ -35,19 +71,14 @@ export default function Page1() {
   return (
     <Section>
       <div className="section1 z-[1] absolute bottom-0 left-0  w-full opacity-0  flex flex-col gap-10 items-center justify-center pb-32 overflow-hidden">
-        <h1 className="lg:text-6xl text-1xl flex lg:gap-3 gap-2 font-mono font-semibold text-white cursor-pointer ">
-          <div className="anim">
-            <span className="anim test ">BEGIN</span>
-          </div>
-          <div className="anim">
-            <span className="anim test">YOUR</span>
-          </div>
-          <div className="anim">
-            <span className="anim test headline-dark fontHorizon">
-              EXPERIENCE
-            </span>
-          </div>
-        </h1>
+        <div className="overflow-hidden p-10">
+          <h1
+            ref={page1Text}
+            className="lg:text-7xl text-3xl  text-white font-horizon m-0 "
+          >
+            BEGIN YOUR <span className="text-[#AAA3FF]">EXPERIENCE</span>
+          </h1>
+        </div>
       </div>
     </Section>
   );
