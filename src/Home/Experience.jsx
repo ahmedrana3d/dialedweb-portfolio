@@ -30,24 +30,29 @@ const Experience = () => {
 
   const snapshot = useSnapshot(state);
   const enterExpClicked = snapshot.enterClicked;
+  const ufoRef = useRef(null);
+  const sheet = getProject("Demo Project", { state: DialedWebAnimation }).sheet(
+    "Demo Sheet"
+  );
+
 
   useEffect(() => {
     if (enterExpClicked) {
       const animations = [
         { step: 0, reverse: true, direction: "reverse", range: [2, 6], message: "First Animation Reverse" },
-        { step: 1, reverse: false, range: [2, 6], message: "First Animation" },
-        { step: 2, reverse: false, range: [6, 8], message: "Second Animation" },
-        { step: 1, reverse: true, direction: "reverse", range: [6, 8], message: "Second Animation Reversed" },
-        { step: 2, reverse: true, direction: "reverse", range: [8, 9], message: "Third Animation Reversed" },
-        { step: 3, reverse: false, range: [8, 9], message: "Third Animation" },
-        { step: 4, reverse: false, range: [9, 10.5], message: "Third Animation" },
-        { step: 3, reverse: true, direction: "reverse", range: [9, 10.5], message: "Third Animation" },
-        { step: 5, reverse: false, range: [10.5, 12], message: "Third Animation" },
-        { step: 4, reverse: true, direction: "reverse", range: [10.5, 12], message: "Third Animation" },
-        { step: 6, reverse: false, range: [12, 13.5], message: "Third Animation" },
-        { step: 5, reverse: true, direction: "reverse", range: [12, 13.5], message: "Third Animation" },
-        { step: 7, reverse: false, range: [13.5 , 14.5], message: "Third Animation" },
-        { step: 6, reverse: true, direction: "reverse", range: [13.5 , 14.5], message: "Third Animation" },
+        { step: 1, reverse: false, range: [2, 6], index: 1 },
+        { step: 1, reverse: true, direction: "reverse", range: [6, 8], index: 1 },
+        { step: 2, reverse: false, range: [6, 8], index: 2 },
+        { step: 2, reverse: true, direction: "reverse", range: [8, 9], index: 2 },
+        { step: 3, reverse: false, range: [8, 9], index: 3 },
+        { step: 3, reverse: true, direction: "reverse", range: [9, 10.5], index: 3 },
+        { step: 4, reverse: false, range: [9, 10.5], index: 4 },
+        { step: 4, reverse: true, direction: "reverse", range: [10.5, 12], index: 4 },
+        { step: 5, reverse: false, range: [10.5, 12], index: 5 },
+        { step: 5, reverse: true, direction: "reverse", range: [12, 13.5], index: 5 },
+        { step: 6, reverse: false, range: [12, 13.5], index: 6 },
+        { step: 6, reverse: true, direction: "reverse", range: [13.5, 14.5], index: 6 },
+        { step: 7, reverse: false, range: [13.5, 14.5], index: 7 },
       ];
   
       const animation = animations.find(anim => anim.step === snapshot.step && anim.reverse === snapshot.reverse);
@@ -55,18 +60,15 @@ const Experience = () => {
       if (animation) {
         sheet.sequence.play({ direction: animation.direction, range: animation.range });
         // console.log(snapshot.step , snapshot.reverse);
+        ufoRef.current.playAnimation();
+        console.log(animation.index, animation.reverse);
       }
     }
-  }, [snapshot.step]);
-  
+  }, [snapshot.step, enterExpClicked, sheet.sequence, snapshot.reverse]);
 
-  const ufoRef = useRef(null);
 
   let LOAD_PROGRESS = snapshot.loadingProgress;
 
-  const sheet = getProject("Demo Project", { state: DialedWebAnimation }).sheet(
-    "Demo Sheet"
-  );
 
   useEffect(() => {
     if (enterExpClicked) {
@@ -75,7 +77,7 @@ const Experience = () => {
       sheet.sequence.play({ range: [0, 2] });
 
       setTimeout(() => {
-        ufoRef.current.playAnimation();
+        ufoRef.current.playAnimation(0, false);
       }, 1500);
     }
   }, [enterExpClicked]);
