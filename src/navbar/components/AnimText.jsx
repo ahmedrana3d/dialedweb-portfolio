@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
-import { FaLongArrowAltRight } from "react-icons/fa";
+// import { FaLongArrowAltRight } from "react-icons/fa";
+import { PiArrowRight } from "react-icons/pi";
 
 export default function AnimText({ title }) {
   const [isHovered, setHovered] = useState(false);
@@ -92,7 +93,7 @@ const AnimatedWord3 = ({ title, animation, isHovered }) => {
         className="relative whitespace-nowrap flex justify-between items-center min-w-[240px] "
       >
         {title}
-      <FaLongArrowAltRight />
+      <PiArrowRight />
       </motion.span>
     </motion.span>
   );

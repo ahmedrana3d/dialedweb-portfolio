@@ -20,6 +20,7 @@ export default class World {
 
     //? html
     this.navImage = this.experience.html.navImage;
+    this.animationBg = this.experience.html.animationBg;
 
     //? led-LIGHT AND FLOOR REFLECTION
     this.ledScreen = null;
@@ -465,18 +466,24 @@ export default class World {
 
       //! MIXER AFTER CUBE FALLING ANIMATION AND "WEBSITE URL"
       this.mixer.addEventListener("finished", (e) => {
+        this.animationBg.style.display = "flex";
         gsap.to(this.door.rotation, {
           duration: 1.25,
           x: -Math.PI * 0.5,
           onComplete: () => {
+            gsap.to(this.animationBg, {
+              duration: 2,
+              opacity: 1,
+            });
+            
             if (this.cubeAnimations.firstCubeAnimation) {
               this.cubeAnimations.firstCubeAnimation = false;
               this.controls = null;
+
               gsap.to(this.camera.position, {
                 duration: 0.9,
                 z: this.firstCube.position.z + 0.3,
                 onComplete: () => {
-                  //! CHANGE THE URL FOR THE PORTFOLIO-1
                   window.open("https://www.google.com/", "_top").focus();
                 },
               });

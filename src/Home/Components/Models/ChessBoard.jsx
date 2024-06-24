@@ -19,7 +19,7 @@ const snapshot = useSnapshot(state);
 
 
 useEffect(() => {
-    if (snapshot.step === 6 && snapshot.reverse === false) {
+    if (snapshot.step === 5 && snapshot.reverse === false) {
       console.log("Play Animation");
       const action = actions['Take 001']; // Reference the animation by its name
       if (action) {

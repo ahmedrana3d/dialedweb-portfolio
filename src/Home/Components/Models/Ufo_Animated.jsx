@@ -4,34 +4,68 @@ import React, { useEffect, useImperativeHandle, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-export default React.forwardRef(function Ufo(props, ref) {
+export default React.forwardRef(function Ufo_Animated(props, ref) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF("models/Animated.glb");
-  const { actions, names } = useAnimations(animations, group);
+  const { nodes, materials, animations } = useGLTF("models/c1.glb");
+  const { actions, names, mixer } = useAnimations(animations, group);
 
   const ufo_body = useRef();
   const ufo_disk = useRef()
-//   useEffect(()=>{
-//   const subDiv_ufo = ufo_disk.current.material
-// subDiv_ufo.roughness = 0
-// subDiv_ufo.metalness = 1
-// subDiv_ufo.color = new THREE.Color("#212121")
-
-// console.log(subDiv_ufo.metalness)
-
-// // subDiv_ufo.Matalic = Matalic
-// },[])
 
 
 
-  const playAnimation = () => {
-    if (actions && names.length > 0) {
-      const firstAnimation = actions[names[0]];
-      firstAnimation.clampWhenFinished = true;
-      firstAnimation.loop = THREE.LoopOnce;
-      firstAnimation.play();
+  const playAnimation = (index, reverse = false, fadeDuration = 0.5) => {
+    if (actions && names.length > 0 && index >= 0 && index < names.length) {
+      const animation = actions[names[index]];
+      animation.clampWhenFinished = true;
+      animation.loop = THREE.LoopOnce;
+
+
+      // mixer.removeEventListener("finished" , handleFinishedAnimation)
+
+  // Remove previous event listeners to avoid multiple triggers
+  // mixer.removeEventListener('finished', handleFinished);
+
+  // Add an event listener to play "Animation5" when any animation ends
+  // mixer.addEventListener('finished', () => {
+  //   const specificAnimationIndex = names.indexOf('Animation5');
+  //   if (specificAnimationIndex >= 0) {
+  //     playAnimation(specificAnimationIndex, false, fadeDuration, true); // Play Animation5 in loop
+  //   } else {
+  //     console.error('Animation5 not found in names array.');
+  //   }
+  // });
+
+  
+      // // Remove previous event listeners to avoid multiple triggers
+      // animation.off('finished');
+  
+      // // Add an event listener to play "Animation5" when any animation ends
+  
+      if (reverse) {
+        animation.timeScale = -1; // Play the animation in reverse
+        animation.time = animation.getClip().duration; // Start from the end
+      } else {
+        animation.timeScale = 1; // Play the animation normally
+        animation.time = 0; // Start from the beginning
+      }
+  
+      // Fade out all other animations
+      for (let i = 0; i < names.length; i++) {
+        if (i !== index) {
+          actions[names[i]].fadeOut(fadeDuration);
+        }
+      }
+  
+      // Fade in the current animation
+      animation.reset().fadeIn(fadeDuration).play();
+    } else {
+      console.error("Invalid animation index or actions/names array is empty.");
     }
   };
+  
+
+  
 
   // Forwarding the ref
   useImperativeHandle(ref, () => ({
@@ -45,7 +79,12 @@ export default React.forwardRef(function Ufo(props, ref) {
   return (
     <group ref={group} position={[0, 0.5, 0]} {...props} dispose={null}>
     <group name="Scene">
-        <group name="Empty" position={[13.851, 0.013, 0.001]}>
+        <group
+        ref={ufo_body}
+          name="Empty"
+          position={[0.2, 1.138, 32.812]}
+          rotation={[0, -Math.PI / 2, 0]}
+          scale={1.6}>
           <group
             name="Disc_1"
             position={[-27.414, 7.236, -13.029]}
@@ -72,4 +111,4 @@ export default React.forwardRef(function Ufo(props, ref) {
   );
 });
 
-useGLTF.preload("models/Animated.glb");
+useGLTF.preload("models/c1.glb");

@@ -7,8 +7,6 @@ import {
 } from "@react-three/drei";
 import { MathUtils } from "three";
 import { extend, useFrame, useThree } from "@react-three/fiber";
-import * as THREE from "three";
-import { useControls } from "leva";
 
 // Define shader material outside the component to avoid recreation on each render
 const ImageFadeMaterial = shaderMaterial(
@@ -71,18 +69,18 @@ export default function Monitor(props) {
     }
   });
 
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      if (size.width !== 0 && size.height !== 0) {
-        const x = (event.clientX / size.width) * 2 - 1;
-        const y = -(event.clientY / size.height) * 2 + 1;
-        // ref2.current.rotation.set(-y * 0.1, x * 0.1, 0);
-      }
-    };
+  // useEffect(() => {
+  //   const handleMouseMove = (event) => {
+  //     if (size.width !== 0 && size.height !== 0) {
+  //       const x = (event.clientX / size.width) * 2 - 1;
+  //       const y = -(event.clientY / size.height) * 2 + 1;
+  //       ref2.current.rotation.set(-y * 0.1, x * 0.1, 0);
+  //     }
+  //   };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [size.width, size.height]);
+  //   window.addEventListener("mousemove", handleMouseMove);
+  //   return () => window.removeEventListener("mousemove", handleMouseMove);
+  // }, [size.width, size.height]);
 
   function setBG(value) {
     hover(value);
@@ -94,11 +92,11 @@ export default function Monitor(props) {
 
   const { nodes, materials } = useGLTF("./models/monitor_simple.glb");
 
-  const { ...matConfig } = useControls("Monitor Material", {
+  const { ...matConfig } = {
     color: "#000000",
-    metalness: { min: 0, max: 1, value: 0.1 },
-    roughness: { min: 0, max: 1, value: 0.1 },
-  });
+    metalness:  0.1 ,
+    roughness: 0.1 ,
+  }
 
   return (
     <group

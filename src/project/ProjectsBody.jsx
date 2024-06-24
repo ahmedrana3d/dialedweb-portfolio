@@ -68,11 +68,6 @@ export default function ProjectBody({ open }) {
       });
     }
 
-    // gsap.to(projectRefs.current[0], { opacity: 0 });
-    // tl.current.to(
-    //   projectRefs.current[0],
-    //   { opacity: 1, duration: 1, ease: "power3.inOut" ,}
-    // );
 
     projectRefs.current.forEach((project, index) => {
       gsap

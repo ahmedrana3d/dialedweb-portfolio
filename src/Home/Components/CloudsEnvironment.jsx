@@ -1,10 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Clouds, Cloud, Environment } from "@react-three/drei";
-import {
-  Bloom,
-  EffectComposer,
-} from "@react-three/postprocessing";
-import {MeshBasicMaterial} from "three";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import { MeshBasicMaterial } from "three";
 import { useThree } from "@react-three/fiber";
 
 const CloudsEnvironment = ({
@@ -14,17 +11,18 @@ const CloudsEnvironment = ({
   enabled,
 }) => {
   const cloudsRef = useRef();
-  const { size } = useThree();
+  const cloudsRefParent = useRef();
+  const { size, scene, gl, camera } = useThree();
+  const timeRef = useRef(0); // Reference to keep track of time
 
   useEffect(() => {
     const handleMouseMove = (event) => {
-      // Ensure that viewport width and height are non-zero
       if (size.width !== 0 && size.height !== 0) {
         const x = (event.clientX / size.width) * 2 - 1;
         const y = -(event.clientY / size.height) * 2 + 1;
 
-        if (cloudsRef.current) {
-          cloudsRef.current.position.set(-y * 1.5, x * 1.5, 0); // Adjust the scaling factor if needed
+        if (cloudsRefParent.current) {
+          cloudsRefParent.current.position.set(-y * 1.5, x * 1.5, 0);
         }
       }
     };
@@ -36,58 +34,52 @@ const CloudsEnvironment = ({
     };
   }, [size.width, size.height]);
 
-  // Dispose EffectComposer if it has cleanup logic
   useEffect(() => {
-    return () => {
-      // Additional cleanup if needed for EffectComposer
+    const animateClouds = () => {
+      if (cloudsRef.current) {
+        timeRef.current += 0.001; // Adjust speed of movement as needed
+        cloudsRef.current.position.x = Math.sin(timeRef.current) * 10; // Adjust amplitude and direction for horizontal movement
+        cloudsRef.current.position.y = Math.sin(timeRef.current * 2) * 2.5 ; // Adjust amplitude and direction for vertical movement
+      }
+      requestAnimationFrame(animateClouds); // Ensure continuous animation
     };
+
+    animateClouds(); // Initial call to start the animation
+
+    return () => cancelAnimationFrame(timeRef.current);
   }, []);
 
-
-
-  const { ...cloudCon} =  {
-    seed :  12,
-    bounds :  140,
-    volume : 179,
-    growth : -5,
-    segments: 20, 
-    fade:  215, 
+  const { ...cloudCon } = {
+    seed: 12,
+    bounds: 140,
+    volume: 179,
+    growth: -5,
+    segments: 20,
+    fade: 215,
     color: "#2c5890",
-    concentrate : 'inside'
-    
-    
-    
-  }
-
-
-
-
-
+    concentrate: "inside",
+  };
 
   return (
     <>
       <ambientLight intensity={Math.PI / 2} />
-      <Clouds ref={cloudsRef} material={MeshBasicMaterial}>
-        <Cloud
-   {...cloudCon}
-          position={[80, -20, position]}
-        />
-        <Cloud
-     {...cloudCon}
-          position={[-80, -20, position]}
-        />
-      </Clouds>
+      <group ref={cloudsRefParent}>
+        <Clouds ref={cloudsRef} material={MeshBasicMaterial}>
+          <Cloud {...cloudCon} position={[80, -20, position]} />
+          <Cloud {...cloudCon} position={[-80, -20, position]} />
+        </Clouds>
+      </group>
       <Environment preset="city" />
 
-      <EffectComposer enabled={enabled}>
-        <Bloom
+      <EffectComposer>
+        {/* <Bloom
+          enabled={false}
           luminanceThreshold={luminanceThreshold}
-          height={300}
           intensity={intensity}
           levels={6}
+          mipmapBlur={false}
           radius={0.8}
-        />
-
+        /> */}
       </EffectComposer>
     </>
   );
