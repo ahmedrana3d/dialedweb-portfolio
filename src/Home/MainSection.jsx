@@ -413,7 +413,7 @@ const MainSection = () => {
         <Page1 />
         <Page2 sec2={sec2} />
         <Page3 />
-        {/* <Page4 /> */}
+        <Page4 />
         {/* <Page5 /> */}
         {/* <Page6 /> */}
         {/* <Page7 /> */}

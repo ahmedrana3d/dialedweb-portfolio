@@ -4,10 +4,12 @@ import gsap from "gsap";
 import { useSnapshot } from "valtio";
 import state from "../../state/state";
 import SplitType from "split-type";
+import "../page.css";
 
 export default function Page1() {
   const snapshot = useSnapshot(state);
 
+  const epRef = useRef();
   const page1Text = useRef();
 
   const mySplitText = new SplitType(page1Text.current, { types: "chars" });
@@ -45,15 +47,21 @@ export default function Page1() {
         opacity: 0,
         ease: "power1.out",
         duration: 1.5,
+        onComplete: () => {
+          epRef.current.classList.add("baba");
+        }
       },
       "<"
     );
+
+  
 
     return tl;
   };
 
   useEffect(() => {
     let tl;
+
 
     if (snapshot.step === 0 && snapshot.enterClicked && !snapshot.reverse) {
       tl = Section1In();
@@ -70,13 +78,14 @@ export default function Page1() {
 
   return (
     <Section>
-      <div className="section1 z-[1] absolute bottom-0 left-0  w-full opacity-0  flex flex-col gap-10 items-center justify-center pb-32 overflow-hidden">
+      <div className="section1 z-[1] absolute bottom-0 left-0  w-full flex flex-col gap-10 items-center justify-center pb-32 overflow-hidden">
         <div className="overflow-hidden p-10">
           <h1
             ref={page1Text}
-            className="lg:text-7xl text-3xl  text-white font-horizon m-0 "
+            className="lg:text-7xl text-3xl  text-white font-horizon m-0  "
           >
-            BEGIN YOUR <span className="text-[#AAA3FF]">EXPERIENCE</span>
+            BEGIN YOUR{" "}
+            <span ref={epRef} className="text-[#AAA3FF]">EXPERIENCE</span>
           </h1>
         </div>
       </div>

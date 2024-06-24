@@ -65,7 +65,6 @@ export default function ProjectBody({ open }) {
         left: "0",
         duration: 1,
         ease: "power3.inOut",
-        
       });
     }
 
@@ -100,7 +99,7 @@ export default function ProjectBody({ open }) {
   return (
     <div
       ref={menuRef}
-      className="absolute w-full h-[400vh]  top-0 bg-[#02210a] text-[#43ea67] z-[90]   "
+      className="absolute w-full h-[400vh] top-0 -left-[100%] bg-[#02210a] text-[#43ea67] z-40  "
     >
       <div className="relative max-w-[90%] h-full mx-auto ">
         {projects.map((project, index) => (

@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+.navButton {
+  position: relative;
+
+  width: 100px;
+  height: 40px;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: #00f0ff;
+  overflow: hidden;
+}
+
+.navSlider {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.navText {
+  height: 100%;
+  width: 100%;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.navText:nth-of-type(2) {
+  position: absolute;
+  background-color: rgb(254, 254, 254);
+  top: 100%;
+}
+
+.navText:hover .perspectiveText {
+  transform: rotateX(90deg);
+}
+
+.navText:hover .navP:nth-of-type(1) {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+.navText:hover .navP:nth-of-type(2) {
+  opacity: 1;
+}
+
+.perspectiveText {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+  transform-style: preserve-3d;
+}
+
+.navP {
+  transition: all 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.navP:nth-of-type(2) {
+  position: absolute;
+  transform: rotateX(-90deg) translateY(15px);
+  transform-origin: bottom center;
+  opacity: 0;
+}
+
+.menu {
+  position: absolute;
+  margin-top: 10px;
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 25px;
+  color: black;
+}
+
+.menuNav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 0.625em;
+  padding: 1em 0.5125em;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: white;
+}
+
+.navlinks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding-left: 15px;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.65s cubic-bezier(0.76, 0, 0.24, 1);
+  
+}
+
+.showIcon {
+  opacity: 0;
+  transition: all 0.65s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.navlinks:hover .showIcon {
+  opacity: 1;
+}
+
+.navlinks:hover {
+  border-radius: 25px;
+  background: #e5e7fd;
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.625em;
+  padding: 1em 0.3125em;
+  cursor: pointer;
+  background-color: white;
+}
+
+.emailText {
+  font-size: 1.4rem;
+  font-family: "Rubik", sans-serif;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+  max-width: 250px;
+}
+
+.emailinput {
+  padding: 6px;
+  /* width: calc(100% - 40px);  */
+  /* max-width: calc(100% - 40px);  */
+  height: 3rem;
+  border-radius: 8px;
+  color: #313131;
+  border: none;
+  box-sizing: border-box;
+}
+
+input {
+  width: 100%;
+  height: 3rem;
+  border-radius: 8px;
+  resize: none;
+  color: #fff;
+  border: 1px solid #313131;
+  background-color: #f0f1fa;
+  border: none;
+}
+
+
+
+.arrowIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #313131;
+  font-size: 1.5rem;
+}
+
+.menuSocial {
+  color: #f0f1fa;
+  border-radius: 0.625em;
+  padding: 1em 0.3125em;
+  cursor: pointer;
+  background-color: rgb(0, 0, 0);
+}
