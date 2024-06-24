@@ -35,6 +35,7 @@ export default function Page3() {
       transformOrigin: "center bottom",
       rotationX: 70,
     });
+
     gsap.set(page3Text3.current, {
       transformPerspective: 500,
       transformOrigin: "center bottom",
@@ -99,6 +100,102 @@ export default function Page3() {
       },
       "<"
     );
+
+    return tl;
+  };
+
+  const Section3Out = () => {
+    const tl = gsap.timeline();
+    tl.to(".section3", { autoAlpha: 0, duration: 1 }).to(".section2", {
+      autoAlpha: 1,
+      duration: 1,
+    });
+
+    return tl;
+  };
+
+  const Section4In = () => {
+   
+
+    const tl = gsap.timeline();
+
+    // tl.to(section3Ref.current, {
+    //   scale: 8,
+    //   duration: 2,
+    //   ease: "power3.out",
+    // });
+
+    tl.to(".section3", {
+      opacity: 0,
+      duration: 1,
+    });
+
+    // tl.to(section3Ref.current, {
+    //   clearProps: "scale",
+    //   duration: 0,
+    // });
+
+    tl.to(".section3", {
+      autoAlpha: 1,
+      duration: 1,
+    });
+
+
+    //! Section 4 in from start
+
+
+    tl.fromTo(
+      page3Text1.current,
+      {
+        rotationX: 70,
+        opacity: 0,
+      },
+      {
+        rotationX: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: "back.out",
+      }
+    );
+
+    tl.from(
+      chars,
+      {
+        yPercent: 100,
+        stagger: 0.04,
+        opacity: 0,
+        ease: "power1.out",
+        duration: 1.5,
+      },
+      "<"
+    );
+    tl.fromTo(
+      page3Text2.current,
+      {
+        rotationX: 70,
+        opacity: 0,
+      },
+      {
+        rotationX: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: "back.out",
+      },
+      "-=2"
+    );
+
+    tl.from(
+      chars2,
+      {
+        yPercent: 100,
+        stagger: 0.04,
+        opacity: 0,
+        ease: "power1.out",
+        duration: 1.5,
+      },
+      "<"
+    );
+
     tl.fromTo(
       byRef.current,
       { opacity: 0 },
@@ -135,54 +232,12 @@ export default function Page3() {
     return tl;
   };
 
-  const Section3Out = () => {
-    const tl = gsap.timeline();
-    tl.to(".section3", { autoAlpha: 0, duration: 1 }).to(".section2", {
-      autoAlpha: 1,
-      duration: 1,
-    });
-
-    return tl;
-  };
-
-  const Section4In = () => {
-    const tl = gsap.timeline();
-
-    tl.to(section3Ref.current, {
-      scale: 8,
-      duration: 2,
-      ease: "power3.out",
-    });
-
-    tl.to(".section3", {
-      autoAlpha: 0,
-      duration: 1,
-    });
-
-    tl.to(".section4", {
-      autoAlpha: 1,
-      duration: 1,
-      onComplete: () => {
-        gsap.to(section3Ref.current, {
-          clearProps: "scale",
-          duration: 0,
-        });
-      },
-    });
-
-    return tl;
-  };
-
   const Section4Out = () => {
     const tl = gsap.timeline();
-    tl.to(".section3", { autoAlpha: 1, duration: 1 }).to(
-      ".section4",
-      {
-        autoAlpha: 0,
-        duration: 1,
-      },
-      "-=.5"
-    );
+    tl.to(byRef.current, { opacity: 0, duration: 1 }, "baby");
+    tl.to(page3Text3.current, {  opacity: 0, duration: .3 }, "baby");
+    tl.to(".section3", { autoAlpha: 1, duration: 1 }, "baby");
+
     return tl;
   };
 
@@ -208,6 +263,10 @@ export default function Page3() {
       tl = Section4Out();
       tl = Section3In();
       console.log("Section4Out");
+    }
+
+    if (snapshot.step === 3 && snapshot.reverse) {
+      tl = Section4In();
     }
 
     return () => {
@@ -245,7 +304,7 @@ export default function Page3() {
         </h1>
         <div
           ref={page3Text3}
-          className="flex flex-col justify-center items-center p-20"
+          className="flex flex-col justify-center items-center p-20 opacity-0"
         >
           <h1 className="lg:text-8xl text-4xl text-[#AAA3FF]">94%</h1>
           <h1 className="text-3xl  ">

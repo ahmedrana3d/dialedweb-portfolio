@@ -1,62 +1,99 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Section from "./Section";
-import { useEffect } from "react";
-import { useSnapshot } from "valtio";
 import state from "../../state/state";
-import AnimatedCounter from "./AnimatedNum";
+import { useSnapshot } from "valtio";
+import gsap from "gsap";
 
-function Page8() {
+export default function Page8() {
   const snapshot = useSnapshot(state);
 
-  const [play, setPlay] = useState(false);
+  const btn1 = useRef();
+  const btn2 = useRef();
+
+  const Section8In = () => {
+    const tl = gsap.timeline();
+    tl.to(".section7", {
+      opacity: 0,
+      duration: 1,
+    }).to(".section8", {
+      opacity: 1,
+      duration: 1,
+    })
+    .fromTo(
+      btn1.current,
+      {
+        opacity: 0,
+        scale: 10,
+        z: -200,
+        rotation: -45,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        z: 0,
+        rotation: 0,
+        duration: 1,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    )
+    .fromTo(
+      btn2.current,
+      {
+        opacity: 0,
+        scale: 10,
+        z: 200,
+        rotation: 45,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        z: 0,
+        rotation: 0,
+        duration: 1,
+        ease: "power2.out",
+      },
+      "-=0.5"
+    );
+  };
+  const Section8Out = () => {
+    const tl = gsap.timeline();
+    tl.to(".section8", {
+      opacity: 0,
+      duration: 1,
+    }).to(".section7", {
+      opacity: 1,
+      duration: 1,
+    });
+  };
 
   useEffect(() => {
-    let timeout;
-    if (snapshot.step === 7) {
-      timeout = setTimeout(() => {
-        setPlay(true);
-      }, 4000);
-    } else {
-      setPlay(false);
+    if (snapshot.step === 8 && !snapshot.reverse) {
+      Section8In();
+      console.log("Section8In");
     }
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [snapshot.step]);
+    if (snapshot.step === 7 && snapshot.reverse) {
+      Section8Out();
+      console.log("Section8Out");
+    }
+  }, [snapshot.step, snapshot.reverse]);
+
   return (
     <Section>
-      <div className="section8 h-screen w-full  fontHorizon flex flex-col justify-between items-center text-white opacity-0">
-        <div className="lg:flex lg:flex-row  flex flex-col pt-20 lg:pt-0 gap-6 lg:gap-0 h-[300px]  items-end">
-          <div className="text-center leftCon">
-            <p className="lg:text-2xl   leftText">
-              A well-designed user interface (UI) could boost website
-              conversions by:
-            </p>
-            <p className="leftText lg:text-7xl text-5xl headline-orange">
-              200%
-            </p>
-          </div>
-          <div className="text-center rightCon">
-            <p className="rightText lg:text-2xl ">
-              Better user experience (UX) design could lead to an increase of:
-            </p>
-            <p className="rightText lg:text-7xl text-5xl headline-orange">
-              400%
-            </p>
-          </div>
-        </div>
-
-        <div className=" h-[350px] text-center">
-          <p className="lg:text-8xl text-5xl headline-orange bigAmount">
-            {play ? <AnimatedCounter from={0} to={252000} /> : "000000"}
-          </p>
-          <p className="pt-3 text-2xl bigText">
-            New sites are created every day - make yours stand out{" "}
-          </p>
-        </div>
+      <div className="section8 w-full h-screen flex justify-center items-center gap-56 opacity-0">
+        <button
+          ref={btn1}
+          className="cursor-pointer text-white font-bold relative text-[30px] w-[9em] h-[3em] text-center bg-gradient-to-r from-violet-500 from-10% via-sky-500 via-30% to-pink-500 to-90% bg-[length:400%] rounded-[30px] z-10 hover:animate-gradient-xy hover:bg-[length:100%] before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:-left-[5px] before:-right-[5px] before:bg-gradient-to-r before:from-violet-500 before:from-10% before:via-sky-500 before:via-30% before:to-pink-500 before:bg-[length:400%] before:-z-10 before:rounded-[35px] before:hover:blur-xl before:transition-all before:ease-in-out before:duration-[1s] before:hover:bg-[length:10%] active:bg-violet-700 focus:ring-violet-700"
+        >
+          PROJECTS
+        </button>
+        <button
+          ref={btn2}
+          className="cursor-pointer text-white font-bold relative text-[30px] w-[9em] h-[3em] text-center bg-gradient-to-r from-violet-500 from-10% via-sky-500 via-30% to-pink-500 to-90% bg-[length:400%] rounded-[30px] z-10 hover:animate-gradient-xy hover:bg-[length:100%] before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:-left-[5px] before:-right-[5px] before:bg-gradient-to-r before:from-violet-500 before:from-10% before:via-sky-500 before:via-30% before:to-pink-500 before:bg-[length:400%] before:-z-10 before:rounded-[35px] before:hover:blur-xl before:transition-all before:ease-in-out before:duration-[1s] before:hover:bg-[length:10%] active:bg-violet-700 focus:ring-violet-700"
+        >
+          GET IN TOUCH
+        </button>
       </div>
     </Section>
   );
 }
-
-export default Page8;

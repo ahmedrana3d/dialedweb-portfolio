@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Section from "./Section";
 import { useSnapshot } from "valtio";
 import state from "../../state/state";
@@ -8,67 +8,76 @@ import SplitType from "split-type";
 export default function Page5() {
   const snapshot = useSnapshot(state);
 
-  const text = new SplitType(".target", { types: "chars" });
-  const chars = text.chars;
-
-  chars.forEach((char) => {
-    char.style.display = "inline-block";
-  });
+  const page5Text1 = useRef();
+  const page5Text2 = useRef();
 
   const Section5In = () => {
     const tl = gsap.timeline();
-    tl.staggerTo(
-      ".text4",
-      0.5,
-      { scale: 8, alpha: 0, ease: "SlowMo.ease.config(0.1, 0.1, false)" },
-    )
-      .to(".section4", { opacity: 0, duration: 1 })
-      .to(".section5", { opacity: 1, duration: 1 })
-      .from(chars, {
-        y: 200,
-        rotation: 10,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power3.inOut",
-      });
 
-    return tl;
-  };
+    tl.to(".section4", {
+      opacity: 0,
+      duration: 1,
+    });
 
-  const Section5Out = () => {
-    const tl = gsap.timeline();
-    tl
-    .to(".section5", { opacity: 0, duration: 1 })
-    .to(".section4", {
+    tl.to(".section5", {
       opacity: 1,
       duration: 1,
     });
 
-    return tl;
+    tl.from(".text5", {
+      y: 200,
+      duration: 1.5,
+      ease: "power3.out",
+      stagger: 0.3,
+    });
+  };
+  const Section5Out = () => {
+    const tl = gsap.timeline();
+
+    tl.to(".section5", {
+      opacity: 0,
+      duration: 1,
+    });
+    tl.to(".section4", {
+      opacity: 1,
+      duration: 1,
+    });
   };
 
   useEffect(() => {
-    if (snapshot.step === 4 && !snapshot.reverse) {
+    if (snapshot.step === 5 && !snapshot.reverse) {
       Section5In();
       console.log("Section5In");
     }
-    if (snapshot.step === 3 && snapshot.reverse) {
+    if (snapshot.step === 4 && snapshot.reverse) {
       Section5Out();
       console.log("Section5Out");
+    }
+
+    if (snapshot.step === 5 && snapshot.reverse) {
+      Section5In();
+      console.log("Section6Out");
     }
   }, [snapshot.step, snapshot.reverse]);
 
   return (
     <Section>
-      <div className="section5 flex flex-col justify-end items-start  text-start h-[450px] ml-9 lg:ml-0 text-white opacity-0  animate-levitate ">
+      <div className="section5 flex flex-col justify-end lg:justify-center lg:ml-12 lg:pb-52 items-center lg:items-start text-center lg:text-start h-[400px] lg:h-full lg:w-[90vh] text-white fontHorizon opacity-0  ">
         <div className="overflow-hidden">
-        <h1 className="target  font-horizon  lg:pl-96 text-6xl lg:text-9xl glow3d    ">
-          94%
-        </h1>
-        <h3 className="target text-1xl lg:text-4xl font-Helvetic  lg:pl-96 ">
-          Increase in Conversions after implementing{" "}
-          <span className="target  glow3d">3D</span>{" "}
-        </h3>
+          <h1
+            ref={page5Text1}
+            className="text-[#AAA3FF] text-start text5 text-6xl lg:text-9xl glow3d   "
+          >
+            89%
+          </h1>
+        </div>
+        <div className="overflow-hidden">
+          <h3
+            ref={page5Text2}
+            className="text5 text-1xl lg:text-2xl text-center lg:text-start pt-6 lg:p-0 "
+          >
+            of consumers turn to a competitor after a poor user experience
+          </h3>
         </div>
       </div>
     </Section>

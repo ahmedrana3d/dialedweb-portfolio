@@ -21,6 +21,12 @@ function Page4() {
     });
     const tl = gsap.timeline();
 
+    tl.to(".section3", { autoAlpha: 0, duration: 1 })
+    .to(".section4", {
+      autoAlpha: 1,
+      duration: 1,
+    });
+
     tl.fromTo(
       page4text.current,
       {
@@ -50,11 +56,29 @@ function Page4() {
     return tl;
   };
 
+  const Section4Out = () => {
+    const tl = gsap.timeline();
+    tl.to(".section4", { opacity: 0, duration: 1 }).to(".section3", {
+      opacity: 1,
+      duration: 1,
+    });
+
+    return tl;
+  };
+
   useEffect(() => {
     let tl;
 
-    if (snapshot.step === 3 && !snapshot.reverse) {
+    if (snapshot.step === 4 && !snapshot.reverse) {
       tl = Section4In();
+    }
+    if (snapshot.step === 3 && snapshot.reverse) {
+      tl = Section4Out();
+    }
+
+    if (snapshot.step === 4 && snapshot.reverse) {
+      tl = Section4In();
+      console.log("Section5Out");
     }
 
     return () => {

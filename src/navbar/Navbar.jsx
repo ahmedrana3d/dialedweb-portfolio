@@ -7,6 +7,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import "./navbar.css";
 import { AnimatePresence, motion } from "framer-motion";
 import AnimText from "./components/AnimText";
+import { PiArrowRight } from "react-icons/pi";
 
 // Register CustomEase plugin with GSAP
 gsap.registerPlugin(CustomEase);
@@ -16,7 +17,7 @@ const customEase = CustomEase.create("customEase", ".4,0,.1,1");
 
 export default function Navbar() {
   const [menu, setMenu] = useState(false);
-  
+
   const menuContentRef = useRef(null);
   const menuNavRef = useRef(null);
   const menuContainerRef = useRef(null);
@@ -27,7 +28,7 @@ export default function Navbar() {
 
     tl.fromTo(
       menuContentRef.current,
-      { opacity: 0, gap: "50px" },
+      { opacity: 0, gap: "70px" },
       { opacity: 1, duration: 0.5, gap: "10px", ease: customEase },
       0
     );
@@ -35,21 +36,33 @@ export default function Navbar() {
     tl.fromTo(
       menuNavRef.current,
       { transform: "translate3d(0, 5.5em, 0) rotate(3.5deg)" },
-      { transform: "translate3d(0, 0, 0) rotate(0deg)", duration: 0.5, ease: customEase },
+      {
+        transform: "translate3d(0, 0, 0) rotate(0deg)",
+        duration: 0.5,
+        ease: customEase,
+      },
       0
     );
 
     tl.fromTo(
       menuContainerRef.current,
       { transform: "translate3d(0, 5.5em, 0) rotate(-3.5deg)" },
-      { transform: "translate3d(0, 0, 0) rotate(0deg)", duration: 0.5, ease: customEase },
+      {
+        transform: "translate3d(0, 0, 0) rotate(0deg)",
+        duration: 0.5,
+        ease: customEase,
+      },
       0
     );
 
     tl.fromTo(
       menuSocialRef.current,
       { transform: "translate3d(0, 5.5em, 0) rotate(-3.5deg)" },
-      { transform: "translate3d(0, 0, 0) rotate(0deg)", duration: 0.5, ease: customEase },
+      {
+        transform: "translate3d(0, 0, 0) rotate(0deg)",
+        duration: 0.5,
+        ease: customEase,
+      },
       0
     );
 
@@ -100,7 +113,7 @@ export default function Navbar() {
             </div>
           </motion.div>
         </div>
-        <div className="menu" animate={menu ? "open" : "closed"} initial="closed">
+        <div className="menu">
           <AnimatePresence>
             <div
               key="menuContent"
@@ -114,14 +127,14 @@ export default function Navbar() {
               </div>
               <div ref={menuContainerRef}>
                 <div className="menuContainer mt-2">
-                  <h1 className="emailText">LETS TALK TOGETHER</h1>
+                  <h1 className="emailText">Book Your Consultation</h1>
                   <div className="inputContainer">
                     <input
                       type="email"
                       placeholder="Your email"
                       className="emailinput"
                     />
-                    <FaLongArrowAltRight className="arrowIcon" />
+                    <PiArrowRight className="arrowIcon" />
                   </div>
                 </div>
                 <div className="menuSocial mt-2" ref={menuSocialRef}>

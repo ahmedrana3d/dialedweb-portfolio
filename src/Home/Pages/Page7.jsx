@@ -1,24 +1,88 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Section from "./Section";
-import { useEffect } from "react";
-import { useSnapshot } from "valtio";
 import state from "../../state/state";
+import { useSnapshot } from "valtio";
+import gsap from "gsap";
 import AnimatedCounter from "./AnimatedNum";
 
-function Page7() {
- 
+export default function Page7() {
+  const snapshot = useSnapshot(state);
+
+
+  const [play, setPlay] = useState(false);
+
+  useEffect(() => {
+    let timeout;
+    if (snapshot.step === 7) {
+      timeout = setTimeout(() => {
+        setPlay(true);
+      }, 3000);
+    } else {
+      setPlay(false);
+    }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [snapshot.step]);
+
+  const Section7In = () => {
+    const tl = gsap.timeline();
+    tl.to(".section6", {
+      opacity: 0,
+      duration: 1,
+    }).to(".section7", {
+      opacity: 1,
+      duration: 1,
+    });
+  };
+  const Section7Out = () => {
+    const tl = gsap.timeline();
+    tl.to(".section7", {
+      opacity: 0,
+      duration: 1,
+    }).to(".section6", {
+      opacity: 1,
+      duration: 1,
+    });
+  };
+
+  useEffect(() => {
+    if (snapshot.step === 7 && !snapshot.reverse) {
+      Section7In();
+      console.log("Section7In");
+    }
+    if (snapshot.step === 6 && snapshot.reverse) {
+      Section7Out();
+      console.log("Section7Out");
+    }
+  }, [snapshot.step, snapshot.reverse]);
+
   return (
     <Section>
-      <div className="section7 flex flex-col justify-end lg:justify-center lg:ml-12 lg:pb-52 items-center lg:items-start text-center lg:text-start h-[400px] lg:h-full lg:w-[90vh] text-white fontHorizon opacity-0  ">
-        <h1 className="animate-levitate headline-orange text-start bg-red-500  text-6xl lg:text-9xl glow3d   ">
-          89%
-        </h1>
-        <h3 className="animate-levitate text-1xl lg:text-2xl text-center lg:text-start pt-6 lg:p-0 ">
-          of consumers turn to a competitor after a poor user experience
-        </h3>
+      <div className="section7 w-full h-screen flex lg:flex-row flex-col justify-between items-center font-horizon  text-white opacity-0">
+        <div className=" h-full lg:w-1/2 flex flex-col justify-center items-center px-3">
+          <h1 className=" lg:text-3xl text-center">
+            Impact of UI and UX Design on Website Conversions
+          </h1>
+          <img className="" src="/meteor.png" alt="" />
+        </div>
+
+        <div className=" h-full lg:w-1/2 flex flex-col justify-center items-center px-3 lg:gap-20 gap-10">
+          <div className="flex flex-col justify-center items-center text-center">
+            <h1 className="lg:text-2xl">
+              A well-designed user interface (UI) could boost website
+              conversions by:
+            </h1>
+            <h2 className="lg:text-5xl text-[#AAA3FF]"> {play ? <AnimatedCounter from={0} to={200} /> : "0"}%</h2>
+          </div>
+          <div className="flex flex-col justify-center items-center text-center">
+            <h1 className="lg:text-2xl">
+              Better user experience (UX) design could lead to an increase of:
+            </h1>
+            <h2 className="lg:text-5xl text-[#AAA3FF]">{play ? <AnimatedCounter from={0} to={400} /> : "0"}%</h2>
+          </div>
+        </div>
       </div>
     </Section>
   );
 }
-
-export default Page7;
