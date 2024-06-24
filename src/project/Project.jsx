@@ -52,7 +52,7 @@ function Project() {
       >
         <span className="project-span">
           <p className="flex justify-center items-center gap-2">
-            <em>{open ? "Close Projects" : "View Projects"}</em> 
+            <em>{open ? "Close Projects" : "View Projects"}</em>
             <span className="arrowIcon">
               <FaLongArrowAltRight />
             </span>
@@ -71,4 +71,4 @@ function Project() {
   );
 }
 
-export default Project;
+export default Project;

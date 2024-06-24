@@ -11,7 +11,8 @@ const CloudsEnvironment = ({
   enabled,
 }) => {
   const cloudsRef = useRef();
-  const { size } = useThree();
+  const cloudsRefParent = useRef();
+  const { size, scene, gl, camera } = useThree();
   const timeRef = useRef(0); // Reference to keep track of time
 
   useEffect(() => {
@@ -20,8 +21,8 @@ const CloudsEnvironment = ({
         const x = (event.clientX / size.width) * 2 - 1;
         const y = -(event.clientY / size.height) * 2 + 1;
 
-        if (cloudsRef.current) {
-          cloudsRef.current.position.set(-y * 1.5, x * 1.5, 0);
+        if (cloudsRefParent.current) {
+          cloudsRefParent.current.position.set(-y * 1.5, x * 1.5, 0);
         }
       }
     };
@@ -35,16 +36,17 @@ const CloudsEnvironment = ({
 
   useEffect(() => {
     const animateClouds = () => {
-      // Move clouds continuously in one direction
       if (cloudsRef.current) {
-        timeRef.current += 0.005; // Adjust speed of movement as needed
-        cloudsRef.current.position.x = Math.sin(timeRef.current) * 100; // Adjust amplitude and direction
+        timeRef.current += 0.001; // Adjust speed of movement as needed
+        cloudsRef.current.position.x = Math.sin(timeRef.current) * 10; // Adjust amplitude and direction for horizontal movement
+        cloudsRef.current.position.y = Math.sin(timeRef.current * 2) * 2.5 ; // Adjust amplitude and direction for vertical movement
       }
+      requestAnimationFrame(animateClouds); // Ensure continuous animation
     };
 
-    const animationFrame = requestAnimationFrame(animateClouds);
+    animateClouds(); // Initial call to start the animation
 
-    return () => cancelAnimationFrame(animationFrame);
+    return () => cancelAnimationFrame(timeRef.current);
   }, []);
 
   const { ...cloudCon } = {
@@ -61,20 +63,23 @@ const CloudsEnvironment = ({
   return (
     <>
       <ambientLight intensity={Math.PI / 2} />
-      <Clouds ref={cloudsRef} material={MeshBasicMaterial}>
-        <Cloud {...cloudCon} position={[80, -20, position]} />
-        <Cloud {...cloudCon} position={[-80, -20, position]} />
-      </Clouds>
+      <group ref={cloudsRefParent}>
+        <Clouds ref={cloudsRef} material={MeshBasicMaterial}>
+          <Cloud {...cloudCon} position={[80, -20, position]} />
+          <Cloud {...cloudCon} position={[-80, -20, position]} />
+        </Clouds>
+      </group>
       <Environment preset="city" />
 
-      <EffectComposer enabled={enabled}>
-        <Bloom
+      <EffectComposer>
+        {/* <Bloom
+          enabled={false}
           luminanceThreshold={luminanceThreshold}
-          height={300}
           intensity={intensity}
           levels={6}
+          mipmapBlur={false}
           radius={0.8}
-        />
+        /> */}
       </EffectComposer>
     </>
   );

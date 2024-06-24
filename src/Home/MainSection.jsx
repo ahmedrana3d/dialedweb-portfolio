@@ -16,6 +16,8 @@ import {
   Page9,
 } from "./Pages";
 
+import "./page.css"
+
 const MainSection = () => {
   const sec2 = useRef();
 
@@ -411,12 +413,12 @@ const MainSection = () => {
         <Page1 />
         <Page2 sec2={sec2} />
         <Page3 />
-        <Page4 />
-        <Page5 />
-        <Page6 />
-        <Page7 />
-        <Page8 />
-        <Page9 />
+        {/* <Page4 /> */}
+        {/* <Page5 /> */}
+        {/* <Page6 /> */}
+        {/* <Page7 /> */}
+        {/* <Page8 /> */}
+        {/* <Page9 /> */}
       </main>
     </>
   );

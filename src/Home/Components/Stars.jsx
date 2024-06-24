@@ -45,6 +45,7 @@ export default function Stars({ posY, opacity , StarSize , starsColor}) {
       blending: AdditiveBlending,
       depthWrite: false,
       opacity: 0.8,
+      toneMapped : false,
     });
 
     const points = new Points(geometry, material);

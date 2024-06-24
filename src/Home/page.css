@@ -1,0 +1,42 @@
+.shimmer {
+    color: #AAA3FF;
+    font-size: 16px;
+    font-family: 'Open-Sans', sans-serif;
+    font-weight: 600;
+    perspective: 80px;
+    transform-style: preserve-3d;
+    display: inline-block;
+    position: relative;
+    transition: all .3s ease;
+    animation: wave 2.4s ease infinite;
+    letter-spacing: 0.01em;
+    transform-origin: 100% 50%;
+  }
+  
+  @keyframes wave {
+    0% {
+      transform: translate3D(0, 0, 0) scale(1) rotateY(0);
+      color: #AAA3FF;
+      text-shadow: 0 0 0 rgba(170, 163, 255, 0);
+    }
+    12% {
+      transform: translate3D(2px, -2px, 2px) scale(1.16) rotateY(6deg);
+      color: #D7CFFF; /* Adjusted lighten color */
+    }
+    15% {
+      text-shadow: 0 0 2px #D7CFFF; /* Adjusted lighten color */
+    }
+    24% {
+      transform: translate3D(0, 0, 0) scale(1) rotateY(0);
+      color: #EAE7FF; /* Adjusted lighten color */
+      opacity: 1;
+    }
+    36% {
+      transform: translate3D(0, 0, 0) scale(1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: .8;
+    }
+  }
+  

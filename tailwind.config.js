@@ -12,6 +12,7 @@ export default {
         Helvetic: ["Helvetic"],
         apline: ["apline"],
         Opti: ["Opti"],
+        SFPRO: ["SFPRO"],
       },
       keyframes: {
         levitate: {

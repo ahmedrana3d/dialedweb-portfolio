@@ -76,21 +76,22 @@ export default function Navbar() {
       tl.to(menuRef.current, {
         right: "-100%",
         duration: 0.7,
-      ease: "sine.inOut",      });
+        ease: "sine.inOut",
+      });
 
       tl.to(menuRef.current, {
         opacity: 0,
         duration: 0.2,
-      ease: "sine.inOut",      });
+        ease: "sine.inOut",
+      });
 
-
-// Reset background and text color
-tl.to(menuRef.current, {
-  backgroundColor: "transparent", // Change background to transparent
-  color: "#000000", // Change text color to black
-  duration: 0.4,
-ease: "sine.inOut",
-});
+      // Reset background and text color
+      tl.to(menuRef.current, {
+        backgroundColor: "transparent", // Change background to transparent
+        color: "#000000", // Change text color to black
+        duration: 0.4,
+        ease: "sine.inOut",
+      });
 
       tl.to(
         ".navLinks",
@@ -99,7 +100,7 @@ ease: "sine.inOut",
           y: 100,
           ease: "power4.out",
           duration: 2,
-          stagger: 0.5
+          stagger: 0.5,
         },
         "-=0.5"
       );
@@ -107,30 +108,36 @@ ease: "sine.inOut",
 
     if (menuOpened) {
       const tl = gsap.timeline();
-    
+
       // Slide in from left to right
       tl.fromTo(
-        menuRef.current, 
-        { right: '-100%' }, // Start position off-screen to the left
+        menuRef.current,
+        { right: "-100%" }, // Start position off-screen to the left
         { right: 0, duration: 1.2, ease: "power4.out" } // Smooth easing
       );
-    
+
       // Fade in with a slight scale-up effect
       tl.fromTo(
-        menuRef.current, 
-        { opacity: 0, scale: 0.9 }, 
+        menuRef.current,
+        { opacity: 0, scale: 0.9 },
         { opacity: 1, scale: 1, duration: 0.6, ease: "power4.out" }
       );
-    
+
       // Change background and text color with a subtle pulse effect
-      tl.to(menuRef.current, { 
+      tl.to(menuRef.current, {
         color: "#ffffff",
         backgroundColor: "#000000",
         duration: 0.4,
         ease: "power4.out",
-        onStart: () => gsap.to(menuRef.current, { scale: 1.05, yoyo: true, repeat: 1, duration: 0.2 }) // Subtle pulse effect
+        onStart: () =>
+          gsap.to(menuRef.current, {
+            scale: 1.05,
+            yoyo: true,
+            repeat: 1,
+            duration: 0.2,
+          }), // Subtle pulse effect
       });
-    
+
       // Animate nav links with stagger
       tl.to(
         ".navLinks",
@@ -139,12 +146,11 @@ ease: "sine.inOut",
           y: 0,
           ease: "power4.out",
           duration: 0.8,
-          stagger: 0.2
+          stagger: 0.2,
         },
         "-=1.2" // Overlap with the initial slide-in animation
       );
     }
-    
   }, [snapshot.step, menuOpened]);
 
   const [xPosition, setXPosition] = useState(window.innerWidth < 768);

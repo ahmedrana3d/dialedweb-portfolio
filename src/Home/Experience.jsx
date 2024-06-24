@@ -13,7 +13,6 @@ import SkySphere from "./Components/SkySphere";
 import Stars from "./Components/Stars";
 import { editable as e, SheetProvider } from "@theatre/r3f";
 // import studio from "@theatre/studio";
-import Globe from "./Components/Models/Globe";
 import Monitor from "./Components/Models/Monitor";
 
 import ChessBoard from "./Components/Models/ChessBoard";
@@ -45,14 +44,14 @@ const Experience = () => {
         { step: 2, reverse: false, range: [6, 8], index: 2 },
         { step: 2, reverse: true, direction: "reverse", range: [8, 9], index: 2 },
         { step: 3, reverse: false, range: [8, 9], index: 3 },
-        { step: 3, reverse: true, direction: "reverse", range: [9, 10.5], index: 3 },
-        { step: 4, reverse: false, range: [9, 10.5], index: 4 },
-        { step: 4, reverse: true, direction: "reverse", range: [10.5, 12], index: 4 },
-        { step: 5, reverse: false, range: [10.5, 12], index: 5 },
-        { step: 5, reverse: true, direction: "reverse", range: [12, 13.5], index: 5 },
-        { step: 6, reverse: false, range: [12, 13.5], index: 6 },
-        { step: 6, reverse: true, direction: "reverse", range: [13.5, 14.5], index: 6 },
-        { step: 7, reverse: false, range: [13.5, 14.5], index: 7 },
+        // { step: 3, reverse: true, direction: "reverse", range: [9, 10.5], index: 3 },
+        // { step: 4, reverse: false, range: [9, 10.5], index: 4 },
+        { step: 3, reverse: true, direction: "reverse", range: [10.5, 12], index: 4 },
+        { step: 4, reverse: false, range: [10.5, 12], index: 5 },
+        { step: 4, reverse: true, direction: "reverse", range: [12, 13.5], index: 5 },
+        { step: 5, reverse: false, range: [12, 13.5], index: 6 },
+        { step: 5, reverse: true, direction: "reverse", range: [13.5, 14.5], index: 6 },
+        { step: 6, reverse: false, range: [13.5, 14.5], index: 7 },
       ];
   
       const animation = animations.find(anim => anim.step === snapshot.step && anim.reverse === snapshot.reverse);
@@ -221,9 +220,9 @@ const [monitorScale, setMonitorScale] = useState(1)
                 </e.group>
 
 
-<e.group theatreKey="Globe" position={[-8.1299, -22 , 0]} scale={[0.45,0.45,0.45]}>
+{/* <e.group theatreKey="Globe" position={[-8.1299, -22 , 0]} scale={[0.45,0.45,0.45]}>
 <Globe/>
-</e.group>
+</e.group> */}
 
 <group scale={[monitorScale,monitorScale,monitorScale]}>
 <e.group theatreKey="Monitors"  scale={[0,0,0]}>

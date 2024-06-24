@@ -24,6 +24,16 @@
   src: url("https://cdn.glitch.global/b75b22a8-446a-45ca-bd37-9e63f6cd7c5d/OPTIForquetOldsIta-Sup.otf?v=1718489175476") format("opentype");
 }
 
+@font-face {
+  font-family: "Opti";
+  src: url("https://cdn.glitch.global/b75b22a8-446a-45ca-bd37-9e63f6cd7c5d/OPTIForquetOldsIta-Sup.otf?v=1718489175476") format("opentype");
+}
+
+@font-face {
+  font-family: "SFPRO";
+  src: url("/fonts/SFPRODISPLAYHEAVYITALIC.OTF") format("opentype");
+}
+
 .fontOpti {
   font-family: "Opti";
 }
@@ -207,28 +217,6 @@ canvas {
   font-size: 1.1rem;
 }
 
-.getInTouch {
-  background-color: #00f0ff;
-  color: #000000;
-  border: none;
-  border-radius: 1rem;
-  border: none;
-  padding: 6px 14px;
-  text-transform: uppercase;
-  line-height: 1.33;
-  display: inline-flex;
-  position: relative;
-  align-items: center;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  font-family: CircularXXWeb-Book;
-  font-weight: 800;
-  transition: 0.3s linear;
-}
-
-.getInTouch:hover {
-  box-shadow: 0px 0px 13px 5px rgba(66, 205, 239, 0.678);
-}
 
 a {
   text-decoration: none;
@@ -258,48 +246,9 @@ a {
   /* padding: 1px; */
 }
 
-.glow-effect {
-  filter: drop-shadow(0 0 10px white);
-}
 
-.glow3d {
-  filter: drop-shadow(0 0 10px rgb(177, 95, 7));
-}
 
-.important h1 {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
-    0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.3),
-    0 0 40px rgba(255, 255, 255, 0.2), 0 0 50px rgba(255, 255, 255, 0.1);
-  animation: shimmer 2s infinite;
-}
 
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-.shimmer {
-  background: linear-gradient(
-    to right,
-    #ff0066 10%,
-    #ff99cc 20%,
-    #ff0066 30%,
-    #ff99cc 40%,
-    #ff0066 50%,
-    #ff99cc 60%,
-    #ff0066 70%,
-    #ff99cc 80%,
-    #ff0066 90%
-  );
-  background-size: 2000px 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 5s linear infinite;
-}
 
 .chronicle-button {
   display: flex;
