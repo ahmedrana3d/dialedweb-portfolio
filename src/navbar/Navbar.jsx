@@ -1,96 +1,96 @@
-import React, { useEffect, useState, useRef } from "react";
-import AnimatedLinks from "./components/AnimatedLinks.jsx";
-import { useSnapshot } from "valtio";
-import state from "../state/state.js";
+import React, { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
-import Contact from "../contact/Contact.jsx";
-import AniNavLink from "./components/AniNavLinks.jsx";
-import AnimText from "./components/AnimText.jsx";
+import { CustomEase } from "gsap/CustomEase"; // Import CustomEase for custom bezier ease
 import { FaInstagram } from "react-icons/fa";
 import { BsLinkedin, BsTwitterX } from "react-icons/bs";
-import MobileNav from "./MobileNav.jsx";
-import { NavLink } from "react-router-dom";
 import { FaLongArrowAltRight } from "react-icons/fa";
-
 import "./navbar.css";
 import { AnimatePresence, motion } from "framer-motion";
+import AnimText from "./components/AnimText";
+
+// Register CustomEase plugin with GSAP
+gsap.registerPlugin(CustomEase);
+
+// Define custom cubic bezier ease
+const customEase = CustomEase.create("customEase", ".4,0,.1,1");
 
 export default function Navbar() {
   const [menu, setMenu] = useState(false);
+  
+  const menuContentRef = useRef(null);
+  const menuNavRef = useRef(null);
+  const menuContainerRef = useRef(null);
+  const menuSocialRef = useRef(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline({ paused: true });
+
+    tl.fromTo(
+      menuContentRef.current,
+      { opacity: 0, gap: "50px" },
+      { opacity: 1, duration: 0.5, gap: "10px", ease: customEase },
+      0
+    );
+
+    tl.fromTo(
+      menuNavRef.current,
+      { transform: "translate3d(0, 5.5em, 0) rotate(3.5deg)" },
+      { transform: "translate3d(0, 0, 0) rotate(0deg)", duration: 0.5, ease: customEase },
+      0
+    );
+
+    tl.fromTo(
+      menuContainerRef.current,
+      { transform: "translate3d(0, 5.5em, 0) rotate(-3.5deg)" },
+      { transform: "translate3d(0, 0, 0) rotate(0deg)", duration: 0.5, ease: customEase },
+      0
+    );
+
+    tl.fromTo(
+      menuSocialRef.current,
+      { transform: "translate3d(0, 5.5em, 0) rotate(-3.5deg)" },
+      { transform: "translate3d(0, 0, 0) rotate(0deg)", duration: 0.5, ease: customEase },
+      0
+    );
+
+    // Function to handle opening and closing
+    const handleOpen = (isClosed) => {
+      if (isClosed) {
+        tl.play();
+      } else {
+        tl.progress(1).reverse();
+      }
+    };
+
+    handleOpen(menu);
+
+    return () => {
+      tl.kill(); // Clean up the timeline when the component unmounts
+    };
+  }, [menu]);
 
   const navLinks = [
-    {
-      title: "HOME",
-      path: "/home",
-    },
-    {
-      title: "PROJECTS",
-      path: "/project",
-    },
-    {
-      title: "LEARN",
-      path: "/learn",
-    },
-    {
-      title: "GET IN TOUCH",
-      path: "/contact",
-    },
+    { title: "HOME", path: "/home" },
+    { title: "PROJECTS", path: "/project" },
+    { title: "LEARN", path: "/learn" },
+    { title: "GET IN TOUCH", path: "/contact" },
   ];
-
-  const varitants = {
-    open: {
-      width: "18rem",
-      height: "30rem",
-      transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
-    },
-    closed: {
-      width: 0,
-      height: 0,
-      transition: {delay: .75, duration: 0.75, ease: [0.76, 0, 0.24, 1] },
-    },
-  };
-
-  const linkVariants = {
-    initial: {
-      marginTop: 60,
-      opacity: 0,
-      transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
-    },
-    enter: {
-      marginTop: 10,
-      opacity: 1,
-      transition: { delay: 0.5 },
-    },
-    exit: {
-      marginTop: 60,
-      opacity: 0,
-      transition: {
-        duration: 0.45,
-        ease: [0.76, 0, 0.24, 1],
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const childVariants = {
-    initial: { opacity: 0,  },
-    enter: { opacity: 1, transition: { duration: 0.5 } },
-    exit: (custom) => ({
-      opacity: 0,
-      rotate: custom === "left" ? 10 : -10,
-      transition: { duration: 0.5 },
-    }),
-  };
 
   return (
     <>
-      <div className="fixed top-[50px] left-[50px] z-10 ">
-        {/* --!? */}
-        <div onClick={() => setMenu(!menu)} className="navButton">
+      <div className="fixed top-[50px] left-[50px] z-10">
+        <div
+          onClick={() => {
+            // const newClosedState = !closed;
+            // setClosed(newClosedState);
+            setMenu(!menu);
+          }}
+          className="navButton"
+        >
           <motion.div
             className="navSlider"
             animate={{ top: menu ? "-100%" : "0" }}
-            transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+            transition={{ duration: 0.5, ease: customEase }}
           >
             <div className="navText">
               <PerspectiveText text="MENU" />
@@ -100,54 +100,37 @@ export default function Navbar() {
             </div>
           </motion.div>
         </div>
-        {/* --!? */}
-        <motion.div
-          className="menu"
-          variants={varitants}
-          animate={menu ? "open" : "closed"}
-          initial="closed"
-        >
+        <div className="menu" animate={menu ? "open" : "closed"} initial="closed">
           <AnimatePresence>
-            {menu && (
-              <motion.div
-                key="menuContent"
-                variants={linkVariants}
-                animate="enter"
-                initial="initial"
-                exit="exit"
-              >
-                <motion.div
-                  className="menuNav"
-                  variants={childVariants}
-                  custom="left"
-                >
-                  {/* <FaLongArrowAltRight className="showIcon" /> */}
-                  {navLinks.map((link, i) => (
-                      <AnimText key={i} title={link.title} />
-                    // <div key={i} className="navlinks">
-                    // </div>
-                  ))}
-                </motion.div>
-                <motion.div variants={childVariants} custom="right">
-                  <div className="menuContainer mt-2">
-                    <h1 className="emailText">LETS TALK TOGETHER </h1>
-                    <div className="inputContainer">
-                      <input
-                        type="email"
-                        placeholder="Your email"
-                        className="emailinput"
-                      />
-                      <FaLongArrowAltRight className="arrowIcon" />
-                    </div>
+            <div
+              key="menuContent"
+              className="menuContent flex flex-col"
+              ref={menuContentRef}
+            >
+              <div className="menuNav" ref={menuNavRef}>
+                {navLinks.map((link, i) => (
+                  <AnimText key={i} title={link.title} />
+                ))}
+              </div>
+              <div ref={menuContainerRef}>
+                <div className="menuContainer mt-2">
+                  <h1 className="emailText">LETS TALK TOGETHER</h1>
+                  <div className="inputContainer">
+                    <input
+                      type="email"
+                      placeholder="Your email"
+                      className="emailinput"
+                    />
+                    <FaLongArrowAltRight className="arrowIcon" />
                   </div>
-                  <div className="menuSocial mt-2">
-                    <Icons />
-                  </div>
-                </motion.div>
-              </motion.div>
-            )}
+                </div>
+                <div className="menuSocial mt-2" ref={menuSocialRef}>
+                  <Icons />
+                </div>
+              </div>
+            </div>
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
     </>
   );
@@ -164,18 +147,18 @@ function PerspectiveText({ text }) {
 
 function Icons() {
   return (
-    <ul className="flex justify-center text-center gap-6  ">
-      <div className="socialButton ">
+    <ul className="flex justify-center text-center gap-6">
+      <div className="socialButton">
         <a href="http://" target="_blank" rel="noopener noreferrer">
           <FaInstagram size="35" />
         </a>
       </div>
-      <div className="socialButton  ">
+      <div className="socialButton">
         <a href="http://" target="_blank" rel="noopener noreferrer">
           <BsTwitterX size="35" />
         </a>
       </div>
-      <div className="socialButton ">
+      <div className="socialButton">
         <a href="http://" target="_blank" rel="noopener noreferrer">
           <BsLinkedin size="35" />
         </a>
