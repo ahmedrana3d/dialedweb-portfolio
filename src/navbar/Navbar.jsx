@@ -40,24 +40,29 @@ export default function Navbar() {
   const varitants = {
     open: {
       width: "18rem",
+      height: "30rem",
       transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
     },
     closed: {
       width: 0,
-      transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+      height: 0,
+      transition: {delay: .75, duration: 0.75, ease: [0.76, 0, 0.24, 1] },
     },
   };
 
   const linkVariants = {
     initial: {
+      marginTop: 60,
       opacity: 0,
       transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
     },
     enter: {
+      marginTop: 10,
       opacity: 1,
       transition: { delay: 0.5 },
     },
     exit: {
+      marginTop: 60,
       opacity: 0,
       transition: {
         duration: 0.45,
@@ -68,7 +73,7 @@ export default function Navbar() {
   };
 
   const childVariants = {
-    initial: { opacity: 0 },
+    initial: { opacity: 0,  },
     enter: { opacity: 1, transition: { duration: 0.5 } },
     exit: (custom) => ({
       opacity: 0,

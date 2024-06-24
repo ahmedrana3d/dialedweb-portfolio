@@ -2,7 +2,6 @@
 
 .navButton {
   position: relative;
-
   width: 100px;
   height: 40px;
   border-radius: 25px;
@@ -68,6 +67,8 @@
   position: absolute;
   margin-top: 10px;
   width: 18rem;
+  height: 30rem;
+  /* background-color: #f10404; */
   display: flex;
   flex-direction: column;
   gap: 5px;
