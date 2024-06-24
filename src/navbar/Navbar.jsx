@@ -10,19 +10,13 @@ import { FaInstagram } from "react-icons/fa";
 import { BsLinkedin, BsTwitterX } from "react-icons/bs";
 import MobileNav from "./MobileNav.jsx";
 import { NavLink } from "react-router-dom";
+import { FaLongArrowAltRight } from "react-icons/fa";
+
+import "./navbar.css";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navbar() {
-  const [menuOpened, setMenuOpened] = useState(false);
-  const menuRef = useRef();
-  const tl = useRef();
-
-  const snapshot = useSnapshot(state);
-
-  const [contact, setContact] = useState(false);
-
-  const handleMenu = () => {
-    setMenuOpened(!menuOpened);
-  };
+  const [menu, setMenu] = useState(false);
 
   const navLinks = [
     {
@@ -43,272 +37,144 @@ export default function Navbar() {
     },
   ];
 
-  useEffect(() => {
-    if (snapshot.step === 0) {
-      const tl = gsap.timeline();
-      gsap.to(".secPage", {
-        display: "none",
-        opacity: 0,
-      });
-      tl.to(".nav", {
-        display: "flex",
-        opacity: 1,
-      }).from(".nav", {
-        y: -200,
-        duration: 3,
-      });
-    } else if (snapshot.step === 1) {
-      gsap.to(".nav", {
-        display: "none",
-      });
-      gsap.to(".secPage", {
-        display: "flex",
-        opacity: 1,
-        duration: 2,
-      });
-    }
+  const varitants = {
+    open: {
+      width: "18rem",
+      transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+    },
+    closed: {
+      width: 0,
+      transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+    },
+  };
 
-    // gsap.set(menuRef.current, { right: "-120%" });
-    // gsap.set(".navLinks", { opacity: 0, y: 100 });
+  const linkVariants = {
+    initial: {
+      opacity: 0,
+      transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+    },
+    enter: {
+      opacity: 1,
+      transition: { delay: 0.5 },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.45,
+        ease: [0.76, 0, 0.24, 1],
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
-    if (!menuOpened) {
-      const tl = gsap.timeline();
-      tl.to(menuRef.current, {
-        right: "-100%",
-        duration: 0.7,
-        ease: "sine.inOut",
-      });
-
-      tl.to(menuRef.current, {
-        opacity: 0,
-        duration: 0.2,
-        ease: "sine.inOut",
-      });
-
-      // Reset background and text color
-      tl.to(menuRef.current, {
-        backgroundColor: "transparent", // Change background to transparent
-        color: "#000000", // Change text color to black
-        duration: 0.4,
-        ease: "sine.inOut",
-      });
-
-      tl.to(
-        ".navLinks",
-        {
-          opacity: 0,
-          y: 100,
-          ease: "power4.out",
-          duration: 2,
-          stagger: 0.5,
-        },
-        "-=0.5"
-      );
-    }
-
-    if (menuOpened) {
-      const tl = gsap.timeline();
-
-      // Slide in from left to right
-      tl.fromTo(
-        menuRef.current,
-        { right: "-100%" }, // Start position off-screen to the left
-        { right: 0, duration: 1.2, ease: "power4.out" } // Smooth easing
-      );
-
-      // Fade in with a slight scale-up effect
-      tl.fromTo(
-        menuRef.current,
-        { opacity: 0, scale: 0.9 },
-        { opacity: 1, scale: 1, duration: 0.6, ease: "power4.out" }
-      );
-
-      // Change background and text color with a subtle pulse effect
-      tl.to(menuRef.current, {
-        color: "#ffffff",
-        backgroundColor: "#000000",
-        duration: 0.4,
-        ease: "power4.out",
-        onStart: () =>
-          gsap.to(menuRef.current, {
-            scale: 1.05,
-            yoyo: true,
-            repeat: 1,
-            duration: 0.2,
-          }), // Subtle pulse effect
-      });
-
-      // Animate nav links with stagger
-      tl.to(
-        ".navLinks",
-        {
-          opacity: 1,
-          y: 0,
-          ease: "power4.out",
-          duration: 0.8,
-          stagger: 0.2,
-        },
-        "-=1.2" // Overlap with the initial slide-in animation
-      );
-    }
-  }, [snapshot.step, menuOpened]);
-
-  const [xPosition, setXPosition] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const screenWidth = window.innerWidth;
-      if (screenWidth < 768) {
-        setXPosition(screenWidth < 768);
-      }
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const childVariants = {
+    initial: { opacity: 0 },
+    enter: { opacity: 1, transition: { duration: 0.5 } },
+    exit: (custom) => ({
+      opacity: 0,
+      rotate: custom === "left" ? 10 : -10,
+      transition: { duration: 0.5 },
+    }),
+  };
 
   return (
     <>
-      {xPosition ? null : (
-        <>
-          <div className="nav hidden absolute z-40 w-full h-20  p-6 lg:flex items-center justify-between">
-            <p className="text-2xl text-center font-horizon text-white hover:-translate-y-1 transition-all duration-300">
-              DIALED<span className="text-[#AAA3FF]">WEB</span>
-            </p>
-            <div>
-              <ul className="flex text-2xl text-white gap-6 items-center justify-center font-Helvetic font-semibold ">
-                {navLinks.map((link, i) => {
-                  return (
-                    <div key={i}>
-                      <NavLink
-                        to={link.path}
-                        target={link.title === "PROJECTS" ? "_blank" : "_self"}
-                      >
-                        <AnimatedLinks title={link.title} />
-                      </NavLink>
+      <div className="fixed top-[50px] left-[50px] z-10 ">
+        {/* --!? */}
+        <div onClick={() => setMenu(!menu)} className="navButton">
+          <motion.div
+            className="navSlider"
+            animate={{ top: menu ? "-100%" : "0" }}
+            transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+          >
+            <div className="navText">
+              <PerspectiveText text="MENU" />
+            </div>
+            <div className="navText">
+              <PerspectiveText text="CLOSE" />
+            </div>
+          </motion.div>
+        </div>
+        {/* --!? */}
+        <motion.div
+          className="menu"
+          variants={varitants}
+          animate={menu ? "open" : "closed"}
+          initial="closed"
+        >
+          <AnimatePresence>
+            {menu && (
+              <motion.div
+                key="menuContent"
+                variants={linkVariants}
+                animate="enter"
+                initial="initial"
+                exit="exit"
+              >
+                <motion.div
+                  className="menuNav"
+                  variants={childVariants}
+                  custom="left"
+                >
+                  {/* <FaLongArrowAltRight className="showIcon" /> */}
+                  {navLinks.map((link, i) => (
+                      <AnimText key={i} title={link.title} />
+                    // <div key={i} className="navlinks">
+                    // </div>
+                  ))}
+                </motion.div>
+                <motion.div variants={childVariants} custom="right">
+                  <div className="menuContainer mt-2">
+                    <h1 className="emailText">LETS TALK TOGETHER </h1>
+                    <div className="inputContainer">
+                      <input
+                        type="email"
+                        placeholder="Your email"
+                        className="emailinput"
+                      />
+                      <FaLongArrowAltRight className="arrowIcon" />
                     </div>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-          {/* MENU */}
-          <div className=" hidden secPage absolute top-3 left-1  h-14 px-4  z-10 lg:flex items-center ">
-            <div className="z-50 ">
-              <button onClick={handleMenu} className="menuButton ">
-                {menuOpened ? (
-                  <AnimText title="CLOSE" />
-                ) : (
-                  <AnimText title="MENU" />
-                )}
-              </button>
-            </div>
-            <div
-              ref={menuRef}
-              className={` w-full h-full fixed top-0   transition-all overflow-hidden duration-1000  text-white z-10 opacity-0`}
-            >
-              <div className=" w-full h-screen  flex flex-col justify-between items-center ">
-                <div className="w-full lg:h-20 h-16   flex justify-between items-center ">
-                  <div className="flex-1 flex justify-center items-center text-center    ">
-                    <p className="text-5xl font-horizon text-white hover:-translate-y-1 transition-all duration-300">
-                      DIALED<span className="text-[#AAA3FF]">WEB</span>
-                    </p>
                   </div>
-                </div>
-
-                <div className=" w-full  text-center flex flex-col sm:flex sm:flex-col lg:items-center lg:justify-between gap-10 ">
-                  <div className="overflow-hidden">
-                    <p
-                      onClick={() => setMenuOpened(false)}
-                      className="navLinks text-4xl lg:text-6xl cursor-pointer tracking-wider "
-                    >
-                      <NavLink to="/">
-                        <AniNavLink title="HOME" />
-                      </NavLink>
-                    </p>
+                  <div className="menuSocial mt-2">
+                    <Icons />
                   </div>
-                  <div className="overflow-hidden">
-                    <p
-                      onClick={() => setMenuOpened(false)}
-                      className="navLinks text-4xl lg:text-6xl cursor-pointer tracking-tight "
-                    >
-                      <NavLink to="/projects">
-                        <AniNavLink title="PROJECTS" />
-                      </NavLink>
-                    </p>
-                  </div>
-                  <div className="overflow-hidden">
-                    <p
-                      onClick={() => setMenuOpened(false)}
-                      className=" navLinks text-4xl lg:text-6xl   lg:text-start cursor-pointer "
-                    >
-                      <NavLink to="/learn">
-                        <AniNavLink title="LEARN" />
-                      </NavLink>
-                    </p>
-                  </div>
-                  <div className="overflow-hidden">
-                    <p
-                      onClick={() => setMenuOpened(false)}
-                      className="navLinks text-4xl lg:text-6xl  cursor-pointer "
-                    >
-                      <NavLink to="/contact">
-                        <AniNavLink title="GET IN TOUCH" />
-                      </NavLink>
-                    </p>
-                  </div>
-                </div>
-                <div className="w-full flex items-end justify-end text-center  ">
-                  <div className="flex items-center justify-center pb-6 pr-6 gap-6 ">
-                    <h1 className="text-sm text-cyan-50 text-opacity-40">
-                      FIND US
-                    </h1>
-                    <ul className="flex justify-center text-center gap-6  ">
-                      <div className="socialButton ">
-                        <a
-                          href="http://"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <FaInstagram size="35" />
-                        </a>
-                      </div>
-                      <div className="socialButton  ">
-                        <a
-                          href="http://"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <BsTwitterX size="35" />
-                        </a>
-                      </div>
-                      <div className="socialButton ">
-                        <a
-                          href="http://"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <BsLinkedin size="35" />
-                        </a>
-                      </div>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-
-      {/* BELOW CODE FOR SMALLER DEVICE */}
-      <MobileNav
-        contact={contact}
-        setContact={setContact}
-        menuOpened={menuOpened}
-        setMenuOpened={setMenuOpened}
-      />
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </div>
     </>
+  );
+}
+
+function PerspectiveText({ text }) {
+  return (
+    <div className="perspectiveText">
+      <p className="navP">{text}</p>
+      <p className="navP">{text}</p>
+    </div>
+  );
+}
+
+function Icons() {
+  return (
+    <ul className="flex justify-center text-center gap-6  ">
+      <div className="socialButton ">
+        <a href="http://" target="_blank" rel="noopener noreferrer">
+          <FaInstagram size="35" />
+        </a>
+      </div>
+      <div className="socialButton  ">
+        <a href="http://" target="_blank" rel="noopener noreferrer">
+          <BsTwitterX size="35" />
+        </a>
+      </div>
+      <div className="socialButton ">
+        <a href="http://" target="_blank" rel="noopener noreferrer">
+          <BsLinkedin size="35" />
+        </a>
+      </div>
+    </ul>
   );
 }
