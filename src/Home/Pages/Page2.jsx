@@ -89,7 +89,7 @@ const Page2 = ({ sec2 }) => {
     <Section>
       <div
         ref={sec2}
-        className="section2 fontHorizon z-[2] lg:text-7xl text-2xl w-full pt-40 lg:pt-20 text-white  font-bold uppercase opacity-0 "
+        className="section2 fontHorizon z-[2] lg:text-7xl text-3xl w-full pt-40 lg:pt-20 text-white  font-bold uppercase opacity-0 "
       >
         <div ref={page2Text} className=" text-center flex flex-col justify-center items-center">
           <h1>DElVE INTO THE</h1>

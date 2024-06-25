@@ -4,13 +4,16 @@ import SplitType from "split-type";
 import { useSnapshot } from "valtio";
 import state from "../../state/state";
 import gsap from "gsap";
+import { SplitText } from "gsap/all";
 
 function Page4() {
   const snapshot = useSnapshot(state);
 
+  gsap.registerPlugin(SplitText);
+
   const page4text = useRef();
 
-  const mySplitText = new SplitType(page4text.current, { types: "chars" });
+  const mySplitText = new SplitType(page4text.current, { type: "chars" });
   const chars = mySplitText.chars;
 
   const Section4In = () => {
@@ -19,7 +22,7 @@ function Page4() {
       transformOrigin: "center bottom",
       rotationX: 70,
     });
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({});
 
     tl.to(".section3", { autoAlpha: 0, duration: 1 }).to(".section4", {
       autoAlpha: 1,
@@ -68,6 +71,17 @@ function Page4() {
   useEffect(() => {
     let tl;
 
+    if (snapshot.step === 4) {
+      gsap.set(".mainsection", {
+        display: "none",
+        delay: 2,
+      });
+    } else {
+      gsap.set(".mainsection", {
+        display: "block",
+      });
+    }
+
     if (snapshot.step === 4 && !snapshot.reverse) {
       tl = Section4In();
     }
@@ -88,17 +102,30 @@ function Page4() {
   }, [snapshot.step, snapshot.enterClicked, snapshot.reverse]);
 
   return (
-    <Section>
-      <div className="section4 w-full lg:h-36 h-64 flex items-center justify-center text-start gap-2 fontHorizon text-white  opacity-0">
-        <div ref={page4text} className="">
-          <h1 className="lg:text-8xl text-4xl text-[#AAA3FF] ">90%</h1>
-          <h1 className="lg:w-[750px] lg:text-3xl lg:tracking-[0.09em] tracking-[0.1em]">
-            of users cite poor design as a primary reason for
-            <span className="text-[#AAA3FF] ml-1 ">not</span> trusting a website
-          </h1>
-        </div>
+    <div className=" absolute top-0 left-0 section4 w-full lg:h-36 h-64 flex items-center justify-center   gap-2 fontHorizon text-white  opacity-0">
+      <div
+        ref={page4text}
+        className="flex flex-col justify-center items-center text-center lg:flex-row lg:space-x-4"
+      >
+        <h1 className="lg:text-8xl text-4xl text-[#AAA3FF] ">90%</h1>
+        <h1 className="lg:max-w-[750px]  lg:text-3xl  ">
+          <span className="mr-3">of</span>
+          <span className="mr-3">users</span>
+          <span className="mr-3">cite</span>
+          <span className="mr-3">poor</span>
+          <span className="mr-3">design</span>
+          <span className="mr-3">as</span>
+          <span className="mr-3">a</span>
+          <span className="mr-3">primary</span>
+          <span className="mr-3">reason</span>
+          <span className="mr-3">for</span>
+          <span className="text-[#AAA3FF] mr-10 underline">not</span>
+          <span className="mr-3">trusting</span>
+          <span className="mr-3">a</span>
+          <span className="mr-3">website</span>
+        </h1>
       </div>
-    </Section>
+    </div>
   );
 }
 

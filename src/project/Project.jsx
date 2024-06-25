@@ -53,17 +53,17 @@ function Project() {
         <span className="project-span">
           <p className="flex justify-center items-center gap-2">
             <em>{open ? "Close Projects" : "View Projects"}</em>
-            <span className="arrowIcon">
+            {/* <span className="arrowIcon">
               <FaLongArrowAltRight />
-            </span>
+            </span> */}
           </p>
         </span>
         <span className="project-span">
           <p className="flex justify-center items-center gap-2">
             <em>{open ? "Close Projects" : "View Projects"}</em>
-            <span className="arrowIcon">
+            {/* <span className="arrowIcon">
               <FaLongArrowAltRight />
-            </span>
+            </span> */}
           </p>
         </span>
       </button>

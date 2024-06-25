@@ -36,14 +36,23 @@ function Page6() {
     }).to(".section6", {
       opacity: 1,
       duration: 1,
-    })
-    tl.from(".text6", {
-      y: 200,
-      duration: 1.5,
-      ease: "power3.out",
-      stagger: 0.3,
-      delay: 3.3,
     });
+    tl.fromTo(
+      ".text6",
+      {
+        y: 200,
+        duration: 1.5,
+        ease: "power3.out",
+        stagger: 0.3,
+      },
+      {
+        y: 0,
+        duration: 1.5,
+        ease: "power3.out",
+        stagger: 0.3,
+        delay: 2.5,
+      }
+    );
   };
   const Section6Out = () => {
     const tl = gsap.timeline();
@@ -72,14 +81,19 @@ function Page6() {
       <div className="section6 w-full h-screen flex  justify-center items-center text-start  text-white fontHorizon opacity-0 ">
         <div className=" text-center">
           <div className="overflow-hidden">
-          <p ref={page6Text1} className="lg:text-8xl text-5xl text-[#AAA3FF]   ">
-            {play ? <AnimatedCounter from={0} to={252000} /> : "000000"}
-          </p>
+            <p
+              ref={page6Text1}
+              className="lg:text-8xl text-5xl text-[#AAA3FF]   "
+            >
+              {play ? <AnimatedCounter from={0} to={252000} /> : ""}
+              {snapshot.step === 6 && !play ? "000000" : ""}
+              {snapshot.step !== 6 && !play ? "252000" : ""}
+            </p>
           </div>
           <div className="overflow-hidden">
-          <p ref={page6Text2} className="pt-3 text-2xl  text6">
-            New sites are created every day - make yours stand out{" "}
-          </p>
+            <p ref={page6Text2} className="pt-3 text-2xl  text6">
+              New sites are created every day - make yours stand out{" "}
+            </p>
           </div>
         </div>
       </div>

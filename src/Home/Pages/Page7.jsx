@@ -8,7 +8,6 @@ import AnimatedCounter from "./AnimatedNum";
 export default function Page7() {
   const snapshot = useSnapshot(state);
 
-
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
@@ -44,6 +43,22 @@ export default function Page7() {
       opacity: 1,
       duration: 1,
     });
+    tl.fromTo(
+      ".text6",
+      {
+        y: 200,
+        duration: 1.5,
+        ease: "power3.out",
+        stagger: 0.3,
+      },
+      {
+        y: 0,
+        duration: 1.5,
+        ease: "power3.out",
+        stagger: 0.3,
+        delay: 2.5,
+      }
+    );
   };
 
   useEffect(() => {
@@ -60,8 +75,8 @@ export default function Page7() {
   return (
     <Section>
       <div className="section7 w-full h-screen flex lg:flex-row flex-col justify-between items-center font-horizon  text-white opacity-0">
-        <div className=" h-full lg:w-1/2 flex flex-col justify-center items-center px-3">
-          <h1 className=" lg:text-3xl text-center">
+        <div className=" h-full lg:w-1/2 flex flex-col justify-center items-center px-3 mt-10 lg:mt-0">
+          <h1 className=" lg:text-3xl text-center mb-10 lg:mb-0 ">
             Impact of UI and UX Design on Website Conversions
           </h1>
           <img className="" src="/meteor.png" alt="" />
@@ -73,13 +88,25 @@ export default function Page7() {
               A well-designed user interface (UI) could boost website
               conversions by:
             </h1>
-            <h2 className="lg:text-5xl text-[#AAA3FF]"> {play ? <AnimatedCounter from={0} to={200} /> : "0"}%</h2>
+            <h2 className="lg:text-5xl text-3xl text-[#AAA3FF]">
+              {" "}
+              {play ? <AnimatedCounter from={0} to={200} /> : ""}
+              {play ? "% " : ""}
+              {snapshot.step === 7 && !play ? "0%" : ""}
+              {snapshot.step !== 7 && !play ? "200%" : ""}
+            </h2>
           </div>
           <div className="flex flex-col justify-center items-center text-center">
             <h1 className="lg:text-2xl">
               Better user experience (UX) design could lead to an increase of:
             </h1>
-            <h2 className="lg:text-5xl text-[#AAA3FF]">{play ? <AnimatedCounter from={0} to={400} /> : "0"}%</h2>
+            <h2 className="lg:text-5xl text-3xl text-[#AAA3FF]">
+              {play ? <AnimatedCounter from={0} to={400} /> : ""}
+              {play ? "% " : ""}
+
+              {snapshot.step === 7 && !play ? "0%" : ""}
+              {snapshot.step !== 7 && !play ? "400%" : ""}
+            </h2>
           </div>
         </div>
       </div>

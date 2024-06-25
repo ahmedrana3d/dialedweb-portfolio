@@ -6,6 +6,8 @@ import { BsLinkedin, BsTwitterX } from "react-icons/bs";
 import "./navbar.css";
 import AnimText from "./components/AnimText";
 import { PiArrowRight } from "react-icons/pi";
+import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 
 // Register CustomEase plugin with GSAP
 gsap.registerPlugin(CustomEase);
@@ -25,6 +27,20 @@ export default function Navbar() {
 
   useEffect(() => {
     const tl = gsap.timeline({ paused: true });
+
+    tl.fromTo(
+      ".menu",
+      { display: "none"},
+      { display: "block",  duration: 0.5, ease: customEase },
+      0
+    );
+
+    tl.fromTo(
+      bgRef.current,
+      { zIndex: 0 },
+      { zIndex: 1,  duration: 0.5, ease: customEase },
+      0
+    );
 
     tl.fromTo(
       bgRef.current,
@@ -85,23 +101,23 @@ export default function Navbar() {
     handleOpen(menu);
 
     return () => {
-      tl.kill(); // Clean up the timeline when the component unmounts
+      tl.kill();
     };
   }, [menu]);
 
   const navLinks = [
-    { title: "HOME", path: "/home" },
+    { title: "HOME", path: "/" },
     { title: "PROJECTS", path: "/project" },
-    { title: "LEARN", path: "/learn" },
+    { title: "LEARN", path: "/" },
     { title: "GET IN TOUCH", path: "/contact" },
   ];
 
   return (
     <>
-      {/* <div
+      <div
         ref={bgRef}
         className="flex lg:hidden absolute top-0 left-0  bg-gradient-to-r from-blue-800 to-indigo-900 w-[100%] h-[100%]  z-[1]"
-      ></div> */}
+      ></div>
 
       <div className="fixed left-0 w-full py-[25px] px-[25px] z-10  ">
         <div
@@ -110,14 +126,18 @@ export default function Navbar() {
           }}
           className="navButton"
         >
-          <div className="navSlider">
+          <motion.div
+            className="navSlider"
+            animate={{ top: menu ? "-100%" : "0" }}
+            transition={{ duration: 0.5, ease: customEase }}
+          >
             <div className="navText">
               <PerspectiveText text="MENU" />
             </div>
             <div className="navText">
               <PerspectiveText text="CLOSE" />
             </div>
-          </div>
+          </motion.div>
         </div>
 
         <div className="menu ">
@@ -128,7 +148,9 @@ export default function Navbar() {
           >
             <div className="menuNav" ref={menuNavRef}>
               {navLinks.map((link, i) => (
-                <AnimText key={i} title={link.title} />
+                <NavLink key={i} to={link.path} onClick={() => setMenu(!menu)}>
+                  <AnimText key={i} title={link.title} />
+                </NavLink>
               ))}
             </div>
             <div ref={menuContainerRef}>
