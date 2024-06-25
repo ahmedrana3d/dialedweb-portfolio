@@ -3,9 +3,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase"; // Import CustomEase for custom bezier ease
 import { FaInstagram } from "react-icons/fa";
 import { BsLinkedin, BsTwitterX } from "react-icons/bs";
-import { FaLongArrowAltRight } from "react-icons/fa";
 import "./navbar.css";
-import { AnimatePresence, motion } from "framer-motion";
 import AnimText from "./components/AnimText";
 import { PiArrowRight } from "react-icons/pi";
 
@@ -23,12 +21,21 @@ export default function Navbar() {
   const menuContainerRef = useRef(null);
   const menuSocialRef = useRef(null);
 
+  const bgRef = useRef(null);
+
   useEffect(() => {
     const tl = gsap.timeline({ paused: true });
 
     tl.fromTo(
+      bgRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: customEase },
+      0
+    );
+
+    tl.fromTo(
       menuContentRef.current,
-      { opacity: 0, gap: "70px" },
+      { opacity: 0, gap: "150px" },
       { opacity: 1, duration: 0.5, gap: "10px", ease: customEase },
       0
     );
@@ -91,58 +98,56 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="fixed top-[50px] left-[50px] z-10">
+      {/* <div
+        ref={bgRef}
+        className="flex lg:hidden absolute top-0 left-0  bg-gradient-to-r from-blue-800 to-indigo-900 w-[100%] h-[100%]  z-[1]"
+      ></div> */}
+
+      <div className="fixed left-0 w-full py-[25px] px-[25px] z-10  ">
         <div
           onClick={() => {
-            // const newClosedState = !closed;
-            // setClosed(newClosedState);
             setMenu(!menu);
           }}
           className="navButton"
         >
-          <motion.div
-            className="navSlider"
-            animate={{ top: menu ? "-100%" : "0" }}
-            transition={{ duration: 0.5, ease: customEase }}
-          >
+          <div className="navSlider">
             <div className="navText">
               <PerspectiveText text="MENU" />
             </div>
             <div className="navText">
               <PerspectiveText text="CLOSE" />
             </div>
-          </motion.div>
+          </div>
         </div>
-        <div className="menu">
-          <AnimatePresence>
-            <div
-              key="menuContent"
-              className="menuContent flex flex-col"
-              ref={menuContentRef}
-            >
-              <div className="menuNav" ref={menuNavRef}>
-                {navLinks.map((link, i) => (
-                  <AnimText key={i} title={link.title} />
-                ))}
+
+        <div className="menu ">
+          <div
+            key="menuContent"
+            className="menuContent flex flex-col"
+            ref={menuContentRef}
+          >
+            <div className="menuNav" ref={menuNavRef}>
+              {navLinks.map((link, i) => (
+                <AnimText key={i} title={link.title} />
+              ))}
+            </div>
+            <div ref={menuContainerRef}>
+              <div className="menuContainer mt-2">
+                <h1 className="emailText">Book Your Consultation</h1>
+                <div className="inputContainer">
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    className="emailinput"
+                  />
+                  <PiArrowRight className="arrowIcon" />
+                </div>
               </div>
-              <div ref={menuContainerRef}>
-                <div className="menuContainer mt-2">
-                  <h1 className="emailText">Book Your Consultation</h1>
-                  <div className="inputContainer">
-                    <input
-                      type="email"
-                      placeholder="Your email"
-                      className="emailinput"
-                    />
-                    <PiArrowRight className="arrowIcon" />
-                  </div>
-                </div>
-                <div className="menuSocial mt-2" ref={menuSocialRef}>
-                  <Icons />
-                </div>
+              <div className="menuSocial mt-2" ref={menuSocialRef}>
+                <Icons />
               </div>
             </div>
-          </AnimatePresence>
+          </div>
         </div>
       </div>
     </>

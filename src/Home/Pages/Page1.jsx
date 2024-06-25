@@ -82,7 +82,7 @@ export default function Page1() {
         <div className="overflow-hidden p-10">
           <h1
             ref={page1Text}
-            className="lg:text-7xl text-3xl  text-white font-horizon m-0  "
+            className="lg:text-7xl text-3xl text-center lg:text-nowrap text-white font-horizon m-0  "
           >
             BEGIN YOUR{" "}
             <span ref={epRef} className="text-[#AAA3FF]">EXPERIENCE</span>

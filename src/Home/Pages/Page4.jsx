@@ -21,8 +21,7 @@ function Page4() {
     });
     const tl = gsap.timeline();
 
-    tl.to(".section3", { autoAlpha: 0, duration: 1 })
-    .to(".section4", {
+    tl.to(".section3", { autoAlpha: 0, duration: 1 }).to(".section4", {
       autoAlpha: 1,
       duration: 1,
     });
@@ -90,12 +89,12 @@ function Page4() {
 
   return (
     <Section>
-      <div className="section4 w-full h-36 flex items-center justify-center text-start gap-2 fontHorizon text-white  opacity-0">
+      <div className="section4 w-full lg:h-36 h-64 flex items-center justify-center text-start gap-2 fontHorizon text-white  opacity-0">
         <div ref={page4text} className="">
-          <h1 className="text-8xl text-[#AAA3FF]">90%</h1>
-          <h1 className="w-[600px]">
+          <h1 className="lg:text-8xl text-4xl text-[#AAA3FF] ">90%</h1>
+          <h1 className="lg:w-[750px] lg:text-3xl lg:tracking-[0.09em] tracking-[0.1em]">
             of users cite poor design as a primary reason for
-            <span className="text-[#AAA3FF]">not</span> trusting a website{" "}
+            <span className="text-[#AAA3FF] ml-1 ">not</span> trusting a website
           </h1>
         </div>
       </div>

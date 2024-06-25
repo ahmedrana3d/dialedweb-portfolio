@@ -66,6 +66,7 @@ export default function Page8() {
       duration: 1,
     });
   };
+  
 
   useEffect(() => {
     if (snapshot.step === 8 && !snapshot.reverse) {
