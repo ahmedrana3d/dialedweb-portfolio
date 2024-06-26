@@ -295,7 +295,7 @@ export default function Page3() {
           <h1 ref={text90} className="lg:text-8xl text-3xl text-[#AAA3FF] opacity-0 ">
             94%
           </h1>
-          <h1 ref={page3Text3} className="text-2xl opacity-0 ">
+          <h1 ref={page3Text3} className="text-2xl opacity-0 text-white">
             <span className="mr-2">Increase</span>
             <span className="lg:mr-3">in</span>
             <span className="lg:mr-3">Conversions</span>
