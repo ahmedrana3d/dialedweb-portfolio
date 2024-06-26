@@ -28,7 +28,7 @@ export default function Navbar() {
 
     tl.fromTo(
       menuContentRef.current,
-      { opacity: 0, gap: "70px" },
+      { opacity: 0, gap: "150px" },
       { opacity: 1, duration: 0.5, gap: "10px", ease: customEase },
       0
     );

@@ -64,12 +64,15 @@ export default function Page5() {
     <Section>
       <div className="section5 flex flex-col justify-end lg:justify-center lg:ml-12 lg:pb-52 items-center lg:items-start text-center lg:text-start h-[400px] lg:h-full lg:w-[90vh] text-white fontHorizon opacity-0  ">
         <div className="overflow-hidden">
+          <div className=" ">
+          
           <h1
             ref={page5Text1}
-            className="text-[#AAA3FF] text-start text5 text-6xl lg:text-9xl glow3d   "
-          >
+            className="headline-purple text-start text5 text-6xl lg:text-9xl glow3d   "
+            >
             89%
           </h1>
+            </div>
         </div>
         <div className="overflow-hidden">
           <h3

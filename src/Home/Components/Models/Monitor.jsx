@@ -7,6 +7,7 @@ import {
 } from "@react-three/drei";
 import { MathUtils } from "three";
 import { extend, useFrame, useThree } from "@react-three/fiber";
+import { easing } from "maath";
 
 // Define shader material outside the component to avoid recreation on each render
 const ImageFadeMaterial = shaderMaterial(
@@ -59,6 +60,8 @@ export default function Monitor(props) {
   texture1.flipY = false;
   texture2.flipY = false;
 
+  const [targetRotation, setTargetRotation] = useState({ x: 0, y: 0 });
+
   useFrame(() => {
     if (ref.current) {
       ref.current.dispFactor = MathUtils.lerp(
@@ -67,28 +70,28 @@ export default function Monitor(props) {
         0.055
       );
     }
+    if (ref2.current) {
+      easing.damp(ref2.current.rotation, 'x', targetRotation.x, 4, 0.1);
+      easing.damp(ref2.current.rotation, 'y', targetRotation.y, 4, 0.1);
+    }
   });
 
-  // useEffect(() => {
-  //   const handleMouseMove = (event) => {
-  //     if (size.width !== 0 && size.height !== 0) {
-  //       const x = (event.clientX / size.width) * 2 - 1;
-  //       const y = -(event.clientY / size.height) * 2 + 1;
-  //       ref2.current.rotation.set(-y * 0.1, x * 0.1, 0);
-  //     }
-  //   };
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      if (size.width !== 0 && size.height !== 0) {
+        const x = (event.clientX / size.width) * 2 - 1;
+        const y = -(event.clientY / size.height) * 2 + 1;
+        setTargetRotation({ x: y * 0.1, y: x * 0.1 });
+      }
+    };
 
-  //   window.addEventListener("mousemove", handleMouseMove);
-  //   return () => window.removeEventListener("mousemove", handleMouseMove);
-  // }, [size.width, size.height]);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [size.width, size.height]);
 
   function setBG(value) {
     hover(value);
   }
-
-  useEffect(() => {
-    if (ref2.current) console.log(ref2.current);
-  }, []);
 
   const { nodes, materials } = useGLTF("./models/monitor_simple.glb");
 
@@ -100,6 +103,7 @@ export default function Monitor(props) {
 
   return (
     <group
+      ref={ref2}
       {...props}
       dispose={null}
       scale={[30, 30, 30]}
@@ -111,7 +115,7 @@ export default function Monitor(props) {
           receiveShadow
           geometry={nodes.Object_5.geometry}
         >
-     <meshStandardMaterial {...matConfig} />
+          <meshStandardMaterial {...matConfig} />
         </mesh>
         <mesh
           onPointerEnter={() => setBG(true)}

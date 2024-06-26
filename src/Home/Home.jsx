@@ -84,8 +84,18 @@ const Home = () => {
   useEffect(() => {
     state.step = currentItem;
     state.reverse = currentReverse;
-    console.log(state.step, state.reverse);
+    // console.log(state.step, state.reverse);
   }, [currentItem, currentReverse]);
+
+  useEffect(() => {
+    const handleTouchMove = (e) => {
+      e.preventDefault();
+    };
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    return () => {
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, []);
 
   return (
     <div {...wheel()} {...drag()} style={{ touchAction: "none" }}>

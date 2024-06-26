@@ -8,6 +8,7 @@ import { useControls } from 'leva'
 import { useSnapshot } from 'valtio'
 import state from "../../../state/state";
 import { LoopOnce } from 'three';
+import { useFrame } from '@react-three/fiber';
 export default function ChessBoard(props) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('models/chess_board.glb')
@@ -29,7 +30,9 @@ useEffect(() => {
     }
   }, [snapshot.step, snapshot.reverse, actions]);  // Include necessary dependencies
 
-
+useFrame(()=>{
+  group.current.rotation.y += 0.0005
+})
 
   const [Position, setPosition] = useState([7,0,5]);
   const [chessScale, setChessScale] = useState([0.7,0.7,0.7])
@@ -60,8 +63,8 @@ useEffect(() => {
 
 
   return (
-    <group ref={group} {...props} dispose={null} position={Position} scale={chessScale}>
-      <group name="Scene">
+    <group  {...props} dispose={null} position={Position} scale={chessScale}>
+      <group ref={group} name="Scene">
         <group name="RootNode" scale={0.024}>
           <group name="B_Bishop_1" position={[-4.418, 0, 9.582]} rotation={[-Math.PI / 2, 0, 0]}>
             <mesh
