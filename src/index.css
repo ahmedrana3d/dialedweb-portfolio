@@ -99,63 +99,33 @@ canvas {
   -webkit-background-clip: text;
   color: transparent;
   background-image: linear-gradient(
-    90deg,
+    120deg,
     #0d0b38,
-    /* coral */ #aaa3ff,
-    /* peach */ #0d0b38,
-    /* coral */ #aaa3ff,
-    /* peach */ #0d0b38,
-    /* coral */ #aaa3ff,
-    /* peach */ #0d0b38 /* coral */
+    #3e3690,
+    #e1e1e1,
+    #aaa3ff,
+    #0d0b38,
+    #cdcbe1,
+    #545358
   );
   background-size: 400% 400%;
-  animation: backgroundChange 4s linear infinite alternate;
+  animation: backgroundChange 8s linear infinite;
   display: inline;
   font-size: inherit;
-}
-
-.headline-dark {
-  line-height: 80%;
-  font-weight: 900;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  cursor: auto;
-  overflow: hidden;
-  -webkit-background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(
-    90deg,
-    #111111,
-    #bb87fd,
-    #bb87fd,
-    #111111,
-    #bb87fd,
-    #bb87fd,
-    #111111
-  );
-  background-size: 400% 400%;
-  animation: backgroundChange 4s linear infinite alternate;
-  display: inline;
 }
 
 @keyframes backgroundChange {
   0% {
     background-position: 0% 50%;
   }
-  100% {
+  50% {
     background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-@keyframes backgroundChange {
-  0% {
-    background-position: 100% 100%;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
 
 .menuButton {
   /* position: relative; */
