@@ -66,9 +66,11 @@ export default function Page5() {
         <div className="overflow-hidden">
           <h1
             ref={page5Text1}
-            className="text-[#AAA3FF] text-start text5 text-6xl lg:text-9xl glow3d  "
+            className="text-[#AAA3FF] text-start text5 text-6xl lg:text-9xl "
           >
+            <p className="headline-orange">
             89%
+            </p>
           </h1>
         </div>
         <div className="overflow-hidden">

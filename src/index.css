@@ -111,6 +111,7 @@ canvas {
   background-size: 400% 400%;
   animation: backgroundChange 4s linear infinite alternate;
   display: inline;
+  font-size: inherit;
 }
 
 .headline-dark {
