@@ -156,7 +156,7 @@ export default function Page3() {
   const Section4In = () => {
     const tl = gsap.timeline();
 
-    tl.to(".section3", { autoAlpha: 1, duration: 1 }, "baby");
+    tl.to(".section3", { autoAlpha: 1, duration: 1 });
     // tl.fromTo(
     //   page3Text1.current,
     //   { autoAlpha: 0, duration: 1 },
@@ -171,9 +171,19 @@ export default function Page3() {
 
     //   "baby"
     // );
+    tl.fromTo(
+      ".baba",
+      { opacity: 0 },
+      { opacity: 1, duration: .5, ease: "power3.out" }
+    );
 
     tl.fromTo(
       byRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 1.5, ease: "power3.out" }
+    );
+    tl.fromTo(
+      text90.current,
       { opacity: 0 },
       { opacity: 1, duration: 1.5, ease: "power3.out" }
     );
@@ -189,7 +199,7 @@ export default function Page3() {
         duration: 1.5,
         ease: "back.out",
       },
-      
+      "-=3"
     );
 
     tl.from(
@@ -209,8 +219,10 @@ export default function Page3() {
 
   const Section4Out = () => {
     const tl = gsap.timeline();
+    tl.to(".baba",{opacity: 0, duration: 1},"baby")
     tl.to(byRef.current, { opacity: 0, duration: 1 }, "baby");
-    tl.to(page3Text3.current, { opacity: 0, duration: 0.3 }, "baby");
+    // tl.to(text90.current, { opacity: 0,  duration: 1 }, "baby");
+    // tl.to(page3Text3.current, { opacity: 0, duration: 0.3 }, "baby");
     tl.to(".section3", { autoAlpha: 1, duration: 2 }, "baby");
 
     return tl;
@@ -236,7 +248,7 @@ export default function Page3() {
 
     if (snapshot.step === 2 && snapshot.reverse) {
       tl = Section4Out();
-      tl = Section3In();
+      tl = Section3In().delay(2);
       console.log("Section4Out");
     }
 
@@ -279,11 +291,11 @@ export default function Page3() {
         >
           by:
         </h1>
-        <div className="flex flex-col justify-center items-center p-10 opacity-0 ">
-          <h1 ref={text90} className="lg:text-8xl text-3xl text-[#AAA3FF]">
+        <div className="baba flex flex-col justify-center items-center p-10  ">
+          <h1 ref={text90} className="lg:text-8xl text-3xl text-[#AAA3FF] opacity-0 ">
             94%
           </h1>
-          <h1 ref={page3Text3} className="text-2xl ">
+          <h1 ref={page3Text3} className="text-2xl opacity-0 ">
             <span className="mr-2">Increase</span>
             <span className="lg:mr-3">in</span>
             <span className="lg:mr-3">Conversions</span>
