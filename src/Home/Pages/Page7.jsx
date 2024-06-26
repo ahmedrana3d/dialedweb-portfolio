@@ -88,7 +88,7 @@ export default function Page7() {
               A well-designed user interface (UI) could boost website
               conversions by:
             </h1>
-            <h2 className="lg:text-5xl text-3xl text-[#AAA3FF]">
+            <h2 className="lg:text-5xl text-3xl text-[#AAA3FF] headline-orange">
               {" "}
               {play ? <AnimatedCounter from={0} to={200} /> : ""}
               {play ? "% " : ""}
@@ -100,7 +100,7 @@ export default function Page7() {
             <h1 className="lg:text-2xl">
               Better user experience (UX) design could lead to an increase of:
             </h1>
-            <h2 className="lg:text-5xl text-3xl text-[#AAA3FF]">
+            <h2 className="lg:text-5xl text-3xl text-[#AAA3FF] headline-orange">
               {play ? <AnimatedCounter from={0} to={400} /> : ""}
               {play ? "% " : ""}
 

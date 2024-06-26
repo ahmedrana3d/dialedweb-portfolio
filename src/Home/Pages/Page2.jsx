@@ -10,11 +10,25 @@ const Page2 = ({ sec2 }) => {
 
   const page2Text = useRef();
 
+  const textFuture = useRef();
+
   const mySplitText = new SplitType(page2Text.current, { types: "chars" });
   const chars = mySplitText.chars;
 
+  const mySplitText1 = new SplitType(textFuture.current, { types: "chars" });
+  const chars1 = mySplitText1.chars;
+
+  chars1.forEach((char) => {
+    char.classList.add("headline-orange");
+  });
+
   const Section2In = () => {
     gsap.set(page2Text.current, {
+      transformPerspective: 500,
+      transformOrigin: "center bottom",
+      rotationX: 70,
+    });
+    gsap.set(textFuture.current, {
       transformPerspective: 500,
       transformOrigin: "center bottom",
       rotationX: 70,
@@ -27,7 +41,7 @@ const Page2 = ({ sec2 }) => {
     }).to(".section2", { autoAlpha: 1, duration: 1 });
 
     tl.fromTo(
-      page2Text.current,
+      [page2Text.current, textFuture.current],
       {
         rotationX: 70,
         opacity: 0,
@@ -41,7 +55,7 @@ const Page2 = ({ sec2 }) => {
     );
 
     tl.from(
-      chars,
+      [chars, chars1],
       {
         yPercent: 100,
         stagger: 0.04,
@@ -91,9 +105,15 @@ const Page2 = ({ sec2 }) => {
         ref={sec2}
         className="section2 fontHorizon z-[2] lg:text-7xl text-3xl w-full pt-40 lg:pt-20 text-white  font-bold uppercase opacity-0 "
       >
-        <div ref={page2Text} className=" text-center flex flex-col justify-center items-center">
-          <h1>DElVE INTO THE</h1>
-          <h1 className="text-[#AAA3FF]">FUTURE</h1>
+        <div className=" text-center flex flex-col justify-center items-center ">
+          <div>
+            <h1 ref={page2Text}>DElVE INTO THE</h1>
+          </div>
+          <div>
+            <h1 ref={textFuture} className="text-[#AAA3FF]">
+              FUTURE
+            </h1>
+          </div>
         </div>
       </div>
     </Section>

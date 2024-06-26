@@ -16,7 +16,7 @@ export default function AnimText({ title }) {
         animation={letterAnimation}
         isHovered={isHovered}
       />
-      <div className="absolute top-0  ">
+      <div className="absolute top-0 w-full pr-6 ">
         <AnimatedWord3
           title={title}
           animation={letterAnimationTwo}
@@ -90,7 +90,7 @@ const AnimatedWord3 = ({ title, animation, isHovered }) => {
     >
       <motion.span
         variants={animation}
-        className="relative whitespace-nowrap flex justify-between items-center min-w-[260px] "
+        className="relative whitespace-nowrap flex justify-between items-center  "
       >
         {title}
       <PiArrowRight />

@@ -13,11 +13,26 @@ function Page4() {
 
   const page4text = useRef();
 
+  const text90 = useRef();
+
   const mySplitText = new SplitType(page4text.current, { type: "chars" });
   const chars = mySplitText.chars;
 
+  const mySplitText1 = new SplitType(text90.current, { types: "chars" });
+  const chars1 = mySplitText1.chars;
+
+  chars1.forEach((char) => {
+    char.classList.add("headline-orange");
+  });
+
   const Section4In = () => {
     gsap.set(page4text.current, {
+      transformPerspective: 500,
+      transformOrigin: "center bottom",
+      rotationX: 70,
+    });
+    
+    gsap.set(text90.current, {
       transformPerspective: 500,
       transformOrigin: "center bottom",
       rotationX: 70,
@@ -30,7 +45,7 @@ function Page4() {
     });
 
     tl.fromTo(
-      page4text.current,
+      [page4text.current, text90.current],
       {
         rotationX: 70,
         opacity: 0,
@@ -44,7 +59,7 @@ function Page4() {
     );
 
     tl.from(
-      chars,
+      [chars, chars1],
       {
         yPercent: 100,
         stagger: 0.04,
@@ -99,31 +114,34 @@ function Page4() {
         tl.kill();
       }
     };
-  }, [snapshot.step, snapshot.enterClicked, snapshot.reverse]);
+  }, [snapshot.step,  snapshot.reverse]);
 
   return (
     <div className=" absolute top-0 left-0 section4 w-full lg:h-36 h-64 flex items-center justify-center   gap-2 fontHorizon text-white  opacity-0">
-      <div
-        ref={page4text}
-        className="flex flex-col justify-center items-center text-center lg:flex-row lg:space-x-4"
-      >
-        <h1 className="lg:text-8xl text-4xl text-[#AAA3FF] ">90%</h1>
-        <h1 className="lg:max-w-[750px]  lg:text-3xl  ">
-          <span className="mr-3">of</span>
-          <span className="mr-3">users</span>
-          <span className="mr-3">cite</span>
-          <span className="mr-3">poor</span>
-          <span className="mr-3">design</span>
-          <span className="mr-3">as</span>
-          <span className="mr-3">a</span>
-          <span className="mr-3">primary</span>
-          <span className="mr-3">reason</span>
-          <span className="mr-3">for</span>
-          <span className="text-[#AAA3FF] mr-10 underline">not</span>
-          <span className="mr-3">trusting</span>
-          <span className="mr-3">a</span>
-          <span className="mr-3">website</span>
-        </h1>
+      <div className="flex flex-col justify-center items-center text-center lg:flex-row lg:space-x-4">
+        <div>
+          <h1 ref={text90} className="lg:text-8xl text-4xl text-[#AAA3FF] ">
+            90%
+          </h1>
+        </div>
+        <div>
+          <h1 ref={page4text} className="lg:max-w-[750px]  lg:text-3xl  ">
+            <span className="mr-3">of</span>
+            <span className="mr-3">users</span>
+            <span className="mr-3">cite</span>
+            <span className="mr-3">poor</span>
+            <span className="mr-3">design</span>
+            <span className="mr-3">as</span>
+            <span className="mr-3">a</span>
+            <span className="mr-3">primary</span>
+            <span className="mr-3">reason</span>
+            <span className="mr-3">for</span>
+            <span className="text-[#AAA3FF] mr-10 ">not</span>
+            <span className="mr-3">trusting</span>
+            <span className="mr-3">a</span>
+            <span className="mr-3">website</span>
+          </h1>
+        </div>
       </div>
     </div>
   );

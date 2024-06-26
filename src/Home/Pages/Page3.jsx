@@ -15,6 +15,29 @@ export default function Page3() {
 
   const byRef = useRef();
 
+  const elecRef = useRef();
+  const shineRef = useRef();
+  const text90 = useRef();
+
+  const mySplitText4 = new SplitType(elecRef.current, { types: "chars" });
+  const chars4 = mySplitText4.chars;
+
+  const mySplitText5 = new SplitType(shineRef.current, { types: "chars" });
+  const chars5 = mySplitText5.chars;
+
+  const mySplitText6 = new SplitType(text90.current, { types: "chars" });
+  const chars6 = mySplitText6.chars;
+
+  chars4.forEach((char) => {
+    char.classList.add("headline-orange");
+  });
+  chars5.forEach((char) => {
+    char.classList.add("headline-orange");
+  });
+  chars6.forEach((char) => {
+    char.classList.add("headline-orange");
+  });
+
   const mySplitText = new SplitType(page3Text1.current, { types: "chars" });
   const chars = mySplitText.chars;
 
@@ -42,6 +65,22 @@ export default function Page3() {
       rotationX: 70,
     });
 
+    gsap.set(elecRef.current, {
+      transformPerspective: 500,
+      transformOrigin: "center bottom",
+      rotationX: 70,
+    });
+    gsap.set(shineRef.current, {
+      transformPerspective: 500,
+      transformOrigin: "center bottom",
+      rotationX: 70,
+    });
+    gsap.set(text90.current, {
+      transformPerspective: 500,
+      transformOrigin: "center bottom",
+      rotationX: 70,
+    });
+
     const tl = gsap.timeline();
 
     tl.to(".section2", { autoAlpha: 0, duration: 1 }).to(".section3", {
@@ -50,7 +89,7 @@ export default function Page3() {
     });
 
     tl.fromTo(
-      page3Text1.current,
+      [page3Text1.current,elecRef.current],
       {
         rotationX: 70,
         opacity: 0,
@@ -64,7 +103,7 @@ export default function Page3() {
     );
 
     tl.from(
-      chars,
+      [chars,chars4],
       {
         yPercent: 100,
         stagger: 0.04,
@@ -75,7 +114,7 @@ export default function Page3() {
       "<"
     );
     tl.fromTo(
-      page3Text2.current,
+      [page3Text2.current,shineRef.current],
       {
         rotationX: 70,
         opacity: 0,
@@ -90,7 +129,7 @@ export default function Page3() {
     );
 
     tl.from(
-      chars2,
+      [chars2,chars5],
       {
         yPercent: 100,
         stagger: 0.04,
@@ -118,20 +157,20 @@ export default function Page3() {
     const tl = gsap.timeline();
 
     tl.to(".section3", { autoAlpha: 1, duration: 1 }, "baby");
-    tl.fromTo(
-      page3Text1.current,
-      { autoAlpha: 0, duration: 1 },
-      { autoAlpha: 1, duration: 1, ease: "power3.out" },
+    // tl.fromTo(
+    //   page3Text1.current,
+    //   { autoAlpha: 0, duration: 1 },
+    //   { autoAlpha: 1, duration: 1, ease: "power3.out" },
 
-      "baby"
-    );
-    tl.fromTo(
-      page3Text2.current,
-      { autoAlpha: 0, duration: 1 },
-      { autoAlpha: 1, duration: 1, ease: "power3.out" },
+    //   "baby"
+    // );
+    // tl.fromTo(
+    //   page3Text2.current,
+    //   { autoAlpha: 0, duration: 1 },
+    //   { autoAlpha: 1, duration: 1, ease: "power3.out" },
 
-      "baby"
-    );
+    //   "baby"
+    // );
 
     tl.fromTo(
       byRef.current,
@@ -139,7 +178,7 @@ export default function Page3() {
       { opacity: 1, duration: 1.5, ease: "power3.out" }
     );
     tl.fromTo(
-      page3Text3.current,
+      [page3Text3.current,text90.current],
       {
         rotationX: 70,
         opacity: 0,
@@ -150,11 +189,11 @@ export default function Page3() {
         duration: 1.5,
         ease: "back.out",
       },
-      "-=0.5"
+      
     );
 
     tl.from(
-      chars3,
+      [chars3,chars6],
       {
         yPercent: 100,
         stagger: 0.04,
@@ -172,7 +211,7 @@ export default function Page3() {
     const tl = gsap.timeline();
     tl.to(byRef.current, { opacity: 0, duration: 1 }, "baby");
     tl.to(page3Text3.current, { opacity: 0, duration: 0.3 }, "baby");
-    tl.to(".section3", { autoAlpha: 1, duration: 1 }, "baby");
+    tl.to(".section3", { autoAlpha: 1, duration: 2 }, "baby");
 
     return tl;
   };
@@ -219,18 +258,19 @@ export default function Page3() {
         className="section3 w-full h-screen font-horizon  flex flex-col justify-between items-center text-center  text-white opacity-0"
       >
         <div className=" lg:text-6xl text-3xl  mt-32 lg:mt-10">
+          <h1 ref={elecRef} className="text-[#AAA3FF] ">
+            elevate
+          </h1>{" "}
           <h1 ref={page3Text1}>
-            <span className="text-[#AAA3FF] ">elevate</span>{" "}
             <span className="">your</span> <span>business</span>
           </h1>
         </div>
 
-        <div
-          ref={page3Text2}
-          className=" lg:text-6xl text-2xl flex flex-col justify-center items-center text-center"
-        >
-          <h1 className="text-[#AAA3FF]">Outshine </h1>
-          <h1>your competitors</h1>
+        <div className=" lg:text-6xl text-2xl flex flex-col justify-center items-center text-center">
+          <h1 ref={shineRef} className="text-[#AAA3FF]">
+            Outshine{" "}
+          </h1>
+          <h1 ref={page3Text2}>your competitors</h1>
         </div>
 
         <h1
@@ -239,12 +279,11 @@ export default function Page3() {
         >
           by:
         </h1>
-        <div
-          ref={page3Text3}
-          className="flex flex-col justify-center items-center p-10 opacity-0 "
-        >
-          <h1 className="lg:text-8xl text-3xl text-[#AAA3FF]">94%</h1>
-          <h1 className="text-2xl ">
+        <div className="flex flex-col justify-center items-center p-10 opacity-0 ">
+          <h1 ref={text90} className="lg:text-8xl text-3xl text-[#AAA3FF]">
+            94%
+          </h1>
+          <h1 ref={page3Text3} className="text-2xl ">
             <span className="mr-2">Increase</span>
             <span className="lg:mr-3">in</span>
             <span className="lg:mr-3">Conversions</span>
