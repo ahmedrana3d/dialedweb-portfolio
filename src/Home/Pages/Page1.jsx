@@ -15,6 +15,10 @@ export default function Page1() {
   const mySplitText = new SplitType(page1Text.current, { types: "chars" });
   const chars = mySplitText.chars;
 
+  chars.forEach((char) => {
+    char.classList.add("headline-orange");
+  });
+
   const Section1In = () => {
     gsap.set(page1Text.current, {
       transformPerspective: 500,
@@ -49,12 +53,10 @@ export default function Page1() {
         duration: 1.5,
         onComplete: () => {
           epRef.current.classList.add("baba");
-        }
+        },
       },
       "<"
     );
-
-  
 
     return tl;
   };
@@ -62,6 +64,14 @@ export default function Page1() {
   useEffect(() => {
     let tl;
 
+    // if (epRef.current) {
+    //   const mySplitText1 = new SplitType(epRef.current, { types: "chars" });
+    //   const chars1 = mySplitText1.chars;
+
+    //   chars1.forEach((char) => {
+    //     char.classList.add("headline-orange");
+    //   });
+    // }
 
     if (snapshot.step === 0 && snapshot.enterClicked && !snapshot.reverse) {
       tl = Section1In();
@@ -82,10 +92,12 @@ export default function Page1() {
         <div className="overflow-hidden p-10">
           <h1
             ref={page1Text}
-            className="lg:text-7xl text-3xl  text-white font-horizon m-0  "
+            className="lg:text-7xl text-3xl text-center lg:text-nowrap text-white font-horizon m-0  "
           >
             BEGIN YOUR{" "}
-            <span ref={epRef} className="text-[#AAA3FF]">EXPERIENCE</span>
+            <span ref={epRef} className="">
+              EXPERIENCE
+            </span>
           </h1>
         </div>
       </div>

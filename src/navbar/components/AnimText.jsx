@@ -90,7 +90,7 @@ const AnimatedWord3 = ({ title, animation, isHovered }) => {
     >
       <motion.span
         variants={animation}
-        className="relative whitespace-nowrap flex justify-between items-center min-w-[240px] "
+        className="relative whitespace-nowrap flex justify-between items-center min-w-[260px] "
       >
         {title}
       <PiArrowRight />

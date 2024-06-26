@@ -89,6 +89,39 @@ export default function Monitor(props) {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [size.width, size.height]);
 
+
+
+  const [Position, setPosition] = useState([0, -30, 0]);
+  const [monitorScale, setMonitorScale] = useState([30, 30, 30])
+    useEffect(() => {
+      const handleResize = () => {
+        // Adjust xPosition based on screen size
+        const screenWidth = window.innerWidth;
+        if (screenWidth < 800) {
+          // Adjust this breakpoint according to your design
+         setPosition([0,-35,0])
+         setMonitorScale([18,18,18])
+        } else {
+            setPosition([0,-30,0])
+            setMonitorScale([30,30,30])
+        }
+  
+  
+  
+  
+  
+      };
+  
+      handleResize(); // Call it once to set initial position
+  
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+
+
+
+
   function setBG(value) {
     hover(value);
   }
@@ -106,8 +139,8 @@ export default function Monitor(props) {
       ref={ref2}
       {...props}
       dispose={null}
-      scale={[30, 30, 30]}
-      position={[0, -30, 0]}
+      scale={monitorScale}
+      position={Position}
     >
       <group position={[0, -0.055, 0.027]}>
         <mesh

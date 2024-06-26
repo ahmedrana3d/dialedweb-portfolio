@@ -12,7 +12,7 @@ import state from "../state/state";
 import SkySphere from "./Components/SkySphere";
 import Stars from "./Components/Stars";
 import { editable as e, SheetProvider } from "@theatre/r3f";
-// import studio from "@theatre/studio";
+import studio from "@theatre/studio";
 import Monitor from "./Components/Models/Monitor";
 
 import ChessBoard from "./Components/Models/ChessBoard";
@@ -25,7 +25,7 @@ import Ufo_Animated from "./Components/Models/Ufo_Animated";
 //   state.enterClicked = CLICKED_ENTER
 
 const Experience = () => {
-  // studio.initialize()
+  studio.initialize()
 
   const snapshot = useSnapshot(state);
   const enterExpClicked = snapshot.enterClicked;
@@ -211,6 +211,10 @@ const [monitorScale, setMonitorScale] = useState(1)
           >
             <group position={[0, 0, xPosition]}>
               <SheetProvider sheet={sheet}>
+
+
+
+                
                 <e.group theatreKey="Ufo">
                   <Ufo ref={ufoRef} position={[0,0 , 0]} >
                   </Ufo>
@@ -220,9 +224,6 @@ const [monitorScale, setMonitorScale] = useState(1)
                 </e.group>
 
 
-{/* <e.group theatreKey="Globe" position={[-8.1299, -22 , 0]} scale={[0.45,0.45,0.45]}>
-<Globe/>
-</e.group> */}
 
 <group scale={[monitorScale,monitorScale,monitorScale]}>
 <e.group theatreKey="Monitors"  scale={[0,0,0]}>
@@ -265,9 +266,8 @@ const [monitorScale, setMonitorScale] = useState(1)
           <Stars posY={starsPosY} opacity={starsOpacity} StarSize={starsSize} starsColor={new Color(starsColor.r, starsColor.g, starsColor.b)}/>
 
 
-{/* <OrbitControls/> */}
 
-          {/* <StatsGl/> */}
+
         </Canvas>
       </Suspense>
     </div>

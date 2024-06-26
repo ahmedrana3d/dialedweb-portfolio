@@ -3,11 +3,11 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase"; // Import CustomEase for custom bezier ease
 import { FaInstagram } from "react-icons/fa";
 import { BsLinkedin, BsTwitterX } from "react-icons/bs";
-import { FaLongArrowAltRight } from "react-icons/fa";
 import "./navbar.css";
-import { AnimatePresence, motion } from "framer-motion";
 import AnimText from "./components/AnimText";
 import { PiArrowRight } from "react-icons/pi";
+import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 
 // Register CustomEase plugin with GSAP
 gsap.registerPlugin(CustomEase);
@@ -23,8 +23,31 @@ export default function Navbar() {
   const menuContainerRef = useRef(null);
   const menuSocialRef = useRef(null);
 
+  const bgRef = useRef(null);
+
   useEffect(() => {
     const tl = gsap.timeline({ paused: true });
+
+    tl.fromTo(
+      ".menu",
+      { display: "none"},
+      { display: "block",  duration: 0.5, ease: customEase },
+      0
+    );
+
+    tl.fromTo(
+      bgRef.current,
+      { zIndex: 0 },
+      { zIndex: 1,  duration: 0.5, ease: customEase },
+      0
+    );
+
+    tl.fromTo(
+      bgRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: customEase },
+      0
+    );
 
     tl.fromTo(
       menuContentRef.current,
@@ -78,24 +101,27 @@ export default function Navbar() {
     handleOpen(menu);
 
     return () => {
-      tl.kill(); // Clean up the timeline when the component unmounts
+      tl.kill();
     };
   }, [menu]);
 
   const navLinks = [
-    { title: "HOME", path: "/home" },
+    { title: "HOME", path: "/" },
     { title: "PROJECTS", path: "/project" },
-    { title: "LEARN", path: "/learn" },
+    { title: "LEARN", path: "/" },
     { title: "GET IN TOUCH", path: "/contact" },
   ];
 
   return (
     <>
-      <div className="fixed top-[50px] left-[50px] z-10">
+      <div
+        ref={bgRef}
+        className="flex lg:hidden absolute top-0 left-0  bg-gradient-to-r from-blue-800 to-indigo-900 w-[100%] h-[100%]  z-[1]"
+      ></div>
+
+      <div className="fixed left-0 w-full py-[25px] px-[25px] z-10  ">
         <div
           onClick={() => {
-            // const newClosedState = !closed;
-            // setClosed(newClosedState);
             setMenu(!menu);
           }}
           className="navButton"
@@ -113,36 +139,37 @@ export default function Navbar() {
             </div>
           </motion.div>
         </div>
-        <div className="menu">
-          <AnimatePresence>
-            <div
-              key="menuContent"
-              className="menuContent flex flex-col"
-              ref={menuContentRef}
-            >
-              <div className="menuNav" ref={menuNavRef}>
-                {navLinks.map((link, i) => (
+
+        <div className="menu ">
+          <div
+            key="menuContent"
+            className="menuContent flex flex-col"
+            ref={menuContentRef}
+          >
+            <div className="menuNav" ref={menuNavRef}>
+              {navLinks.map((link, i) => (
+                <NavLink key={i} to={link.path} onClick={() => setMenu(!menu)}>
                   <AnimText key={i} title={link.title} />
-                ))}
+                </NavLink>
+              ))}
+            </div>
+            <div ref={menuContainerRef}>
+              <div className="menuContainer mt-2">
+                <h1 className="emailText">Book Your Consultation</h1>
+                <div className="inputContainer">
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    className="emailinput"
+                  />
+                  <PiArrowRight className="arrowIcon" />
+                </div>
               </div>
-              <div ref={menuContainerRef}>
-                <div className="menuContainer mt-2">
-                  <h1 className="emailText">Book Your Consultation</h1>
-                  <div className="inputContainer">
-                    <input
-                      type="email"
-                      placeholder="Your email"
-                      className="emailinput"
-                    />
-                    <PiArrowRight className="arrowIcon" />
-                  </div>
-                </div>
-                <div className="menuSocial mt-2" ref={menuSocialRef}>
-                  <Icons />
-                </div>
+              <div className="menuSocial mt-2" ref={menuSocialRef}>
+                <Icons />
               </div>
             </div>
-          </AnimatePresence>
+          </div>
         </div>
       </div>
     </>

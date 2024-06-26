@@ -115,92 +115,28 @@ export default function Page3() {
   };
 
   const Section4In = () => {
-   
-
     const tl = gsap.timeline();
 
-    // tl.to(section3Ref.current, {
-    //   scale: 8,
-    //   duration: 2,
-    //   ease: "power3.out",
-    // });
-
-    tl.to(".section3", {
-      opacity: 0,
-      duration: 1,
-    });
-
-    // tl.to(section3Ref.current, {
-    //   clearProps: "scale",
-    //   duration: 0,
-    // });
-
-    tl.to(".section3", {
-      autoAlpha: 1,
-      duration: 1,
-    });
-
-
-    //! Section 4 in from start
-
-
+    tl.to(".section3", { autoAlpha: 1, duration: 1 }, "baby");
     tl.fromTo(
       page3Text1.current,
-      {
-        rotationX: 70,
-        opacity: 0,
-      },
-      {
-        rotationX: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: "back.out",
-      }
-    );
+      { autoAlpha: 0, duration: 1 },
+      { autoAlpha: 1, duration: 1, ease: "power3.out" },
 
-    tl.from(
-      chars,
-      {
-        yPercent: 100,
-        stagger: 0.04,
-        opacity: 0,
-        ease: "power1.out",
-        duration: 1.5,
-      },
-      "<"
+      "baby"
     );
     tl.fromTo(
       page3Text2.current,
-      {
-        rotationX: 70,
-        opacity: 0,
-      },
-      {
-        rotationX: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: "back.out",
-      },
-      "-=2"
-    );
+      { autoAlpha: 0, duration: 1 },
+      { autoAlpha: 1, duration: 1, ease: "power3.out" },
 
-    tl.from(
-      chars2,
-      {
-        yPercent: 100,
-        stagger: 0.04,
-        opacity: 0,
-        ease: "power1.out",
-        duration: 1.5,
-      },
-      "<"
+      "baby"
     );
 
     tl.fromTo(
       byRef.current,
       { opacity: 0 },
-      { opacity: 1, duration: 1, ease: "power3.out" },
-      "-=2"
+      { opacity: 1, duration: 1.5, ease: "power3.out" }
     );
     tl.fromTo(
       page3Text3.current,
@@ -214,7 +150,7 @@ export default function Page3() {
         duration: 1.5,
         ease: "back.out",
       },
-      "-=2"
+      "-=0.5"
     );
 
     tl.from(
@@ -235,7 +171,7 @@ export default function Page3() {
   const Section4Out = () => {
     const tl = gsap.timeline();
     tl.to(byRef.current, { opacity: 0, duration: 1 }, "baby");
-    tl.to(page3Text3.current, {  opacity: 0, duration: .3 }, "baby");
+    tl.to(page3Text3.current, { opacity: 0, duration: 0.3 }, "baby");
     tl.to(".section3", { autoAlpha: 1, duration: 1 }, "baby");
 
     return tl;
@@ -282,9 +218,10 @@ export default function Page3() {
         ref={section3Ref}
         className="section3 w-full h-screen font-horizon  flex flex-col justify-between items-center text-center  text-white opacity-0"
       >
-        <div className=" lg:text-6xl text-4xl mt-10 ">
+        <div className=" lg:text-6xl text-3xl  mt-32 lg:mt-10">
           <h1 ref={page3Text1}>
-            <span className="text-[#AAA3FF]">elevate</span> your business
+            <span className="text-[#AAA3FF] ">elevate</span>{" "}
+            <span className="">your</span> <span>business</span>
           </h1>
         </div>
 
@@ -304,11 +241,15 @@ export default function Page3() {
         </h1>
         <div
           ref={page3Text3}
-          className="flex flex-col justify-center items-center p-20 opacity-0"
+          className="flex flex-col justify-center items-center p-10 opacity-0 "
         >
-          <h1 className="lg:text-8xl text-4xl text-[#AAA3FF]">94%</h1>
-          <h1 className="text-3xl  ">
-            Increase in Conversions after Implementing
+          <h1 className="lg:text-8xl text-3xl text-[#AAA3FF]">94%</h1>
+          <h1 className="text-2xl ">
+            <span className="mr-2">Increase</span>
+            <span className="lg:mr-3">in</span>
+            <span className="lg:mr-3">Conversions</span>
+            <span className="lg:mr-3">after</span>
+            <span className="lg:mr-3">Implementing</span>
             <span className="lg:text-6xl text-[#AAA3FF]">3D</span>
           </h1>
         </div>

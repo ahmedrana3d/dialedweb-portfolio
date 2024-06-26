@@ -39,7 +39,7 @@ const CloudsEnvironment = ({
       if (cloudsRef.current) {
         timeRef.current += 0.001; // Adjust speed of movement as needed
         cloudsRef.current.position.x = Math.sin(timeRef.current) * 10; // Adjust amplitude and direction for horizontal movement
-        cloudsRef.current.position.y = Math.sin(timeRef.current * 2) * 2.5 ; // Adjust amplitude and direction for vertical movement
+        cloudsRef.current.position.y = Math.sin(timeRef.current * 2) * 5 ; // Adjust amplitude and direction for vertical movement
       }
       requestAnimationFrame(animateClouds); // Ensure continuous animation
     };
@@ -73,7 +73,7 @@ const CloudsEnvironment = ({
 
       <EffectComposer>
         {/* <Bloom
-          enabled={false}
+          enabled={enabled}
           luminanceThreshold={luminanceThreshold}
           intensity={intensity}
           levels={6}

@@ -1,15 +1,11 @@
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useRef, useEffect } from 'react';
-import {MathUtils,BufferGeometry,Float32BufferAttribute,TextureLoader,PointsMaterial,AdditiveBlending,Points} from 'three';
+import { MathUtils, BufferGeometry, Float32BufferAttribute, TextureLoader, PointsMaterial, AdditiveBlending, Points } from 'three';
 
-export default function Stars({ posY, opacity , StarSize , starsColor}) {
+export default function Stars({ posY, opacity, StarSize, starsColor }) {
   const pointsRef = useRef();
   const starsRef = useRef();
   const { size } = useThree();
-
-
-
-
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -39,13 +35,13 @@ export default function Stars({ posY, opacity , StarSize , starsColor}) {
     const starTexture = new TextureLoader().load('/textures/star_07.png');
     const material = new PointsMaterial({
       color: starsColor,
-      size: size,
+      size: StarSize,
       map: starTexture,
       transparent: true,
       blending: AdditiveBlending,
       depthWrite: false,
       opacity: 0.8,
-      toneMapped : false,
+      toneMapped: false,
     });
 
     const points = new Points(geometry, material);
@@ -54,10 +50,18 @@ export default function Stars({ posY, opacity , StarSize , starsColor}) {
 
   useFrame((state) => {
     if (pointsRef.current) {
-      // pointsRef.current.material.color.setHSL((state.clock.getElapsedTime() * 0.1) % 1, 0.5, 0.5);
       pointsRef.current.material.opacity = opacity;
       pointsRef.current.material.size = StarSize;
-      pointsRef.current.material.color = starsColor;
+      pointsRef.current.material.color.set(starsColor);
+
+      const time = state.clock.getElapsedTime();
+      const positions = pointsRef.current.geometry.attributes.position.array;
+
+      for (let i = 0; i < positions.length; i += 3) {
+        positions[i] += Math.sin(time + i) * 0.01; // Adjust this value for the desired levitation effect in x
+        positions[i + 1] += Math.sin(time + i + Math.PI / 2) * 0.01; // Adjust this value for the desired levitation effect in y
+      }
+      pointsRef.current.geometry.attributes.position.needsUpdate = true;
     }
   });
 
