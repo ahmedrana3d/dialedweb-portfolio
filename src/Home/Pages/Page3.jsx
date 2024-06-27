@@ -274,7 +274,7 @@ export default function Page3() {
 
     if (snapshot.step === 2 && snapshot.reverse) {
       tl = Section4Out();
-      tl = Section3In().delay(2);
+      tl = Section3In().delay(1);
       console.log("Section4Out");
     }
 
