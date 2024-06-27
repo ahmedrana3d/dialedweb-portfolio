@@ -16,12 +16,12 @@ export default function Page5() {
 
     tl.to(".section4", {
       opacity: 0,
-      duration: 1,
+      duration: .5,
     });
 
     tl.to(".section5", {
       opacity: 1,
-      duration: 1,
+      duration: .5,
     });
 
     tl.from(".text5", {

@@ -41,16 +41,16 @@ function Page6() {
       ".text6",
       {
         y: 200,
-        duration: 1.5,
+        duration: 1,
         ease: "power3.out",
         stagger: 0.3,
       },
       {
         y: 0,
-        duration: 1.5,
+        duration: 1,
         ease: "power3.out",
         stagger: 0.3,
-        delay: 2.5,
+        delay: 2,
       }
     );
   };
