@@ -31,7 +31,7 @@ function Page4() {
       transformOrigin: "center bottom",
       rotationX: 70,
     });
-    
+
     gsap.set(text90.current, {
       transformPerspective: 500,
       transformOrigin: "center bottom",
@@ -39,7 +39,13 @@ function Page4() {
     });
     const tl = gsap.timeline({});
 
-    tl.to(".section3", { autoAlpha: 0, duration: 1 }).to(".section4", {
+    tl.fromTo(
+      ".section3",
+      { scale: 0, opacity: 1 },
+      { scale: 40, opacity: 0, duration: 1, ease: "power3.inOut" }
+    );
+    tl.to(".section3", { autoAlpha: 0, duration: 1 });
+    tl.to(".section3", { scale: 1 }).to(".section4", {
       autoAlpha: 1,
       duration: 1,
     });
@@ -114,7 +120,7 @@ function Page4() {
         tl.kill();
       }
     };
-  }, [snapshot.step,  snapshot.reverse]);
+  }, [snapshot.step, snapshot.reverse]);
 
   return (
     <div className=" absolute top-0 left-0 section4 w-full lg:h-36 h-64 flex items-center justify-center   gap-2 fontHorizon text-white  opacity-0">

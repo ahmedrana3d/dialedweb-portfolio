@@ -213,6 +213,32 @@ export default function Page3() {
       },
       "<"
     );
+    tl.fromTo(
+      text90.current,
+      {
+        rotationX: 70,
+        opacity: 0,
+      },
+      {
+        rotationX: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: "back.out",
+      },
+      "-=3"
+    );
+
+    tl.from(
+      chars6,
+      {
+        yPercent: 100,
+        stagger: 0.04,
+        opacity: 0,
+        ease: "power1.out",
+        duration: 1.5,
+      },
+      "<"
+    );
 
     return tl;
   };
@@ -248,7 +274,7 @@ export default function Page3() {
 
     if (snapshot.step === 2 && snapshot.reverse) {
       tl = Section4Out();
-      tl = Section3In().delay(2);
+      tl = Section3In().delay(1);
       console.log("Section4Out");
     }
 
