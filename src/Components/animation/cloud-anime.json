@@ -713,6 +713,19 @@
                     "value": false
                   },
                   {
+                    "id": "nMXW0Z6KOe",
+                    "position": 6,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": false
+                  },
+                  {
                     "id": "g4HWS_WfD4",
                     "position": 8,
                     "connectedRight": true,
@@ -757,6 +770,19 @@
                 "type": "BasicKeyframedTrack",
                 "__debugName": "Bloom:[\"luminanceThreshold\"]",
                 "keyframes": [
+                  {
+                    "id": "s6pRbsQVgp",
+                    "position": 8,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 1
+                  },
                   {
                     "id": "eu9-m_llYc",
                     "position": 9,
@@ -886,7 +912,7 @@
                       0
                     ],
                     "type": "bezier",
-                    "value": 1.680000000000001
+                    "value": 4.559999999999996
                   },
                   {
                     "id": "g6a2lQHtYK",
@@ -940,8 +966,8 @@
                 "__debugName": "Ufo:[\"rotation\",\"x\"]",
                 "keyframes": [
                   {
-                    "id": "-buSibH-yL",
-                    "position": 8,
+                    "id": "z2mXVu6PhY",
+                    "position": 6,
                     "connectedRight": true,
                     "handles": [
                       0.5,
@@ -951,27 +977,39 @@
                     ],
                     "type": "bezier",
                     "value": 0
+                  },
+                  {
+                    "id": "h7uDZS9Sua",
+                    "position": 7.167,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -0.31000000000000016
+                  },
+                  {
+                    "id": "hl1V0JPiDA",
+                    "position": 8,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0.11999999999999997
                   }
                 ]
               },
               "cwtg7yPBTP": {
                 "type": "BasicKeyframedTrack",
                 "__debugName": "Ufo:[\"rotation\",\"y\"]",
-                "keyframes": [
-                  {
-                    "id": "igyCUwWr8e",
-                    "position": 8,
-                    "connectedRight": true,
-                    "handles": [
-                      0.5,
-                      1,
-                      0.5,
-                      0
-                    ],
-                    "type": "bezier",
-                    "value": 0
-                  }
-                ]
+                "keyframes": []
               },
               "iilAR68KA_": {
                 "type": "BasicKeyframedTrack",
@@ -1422,6 +1460,7 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "gxzLlifyKzmubCth",
     "-0a5rq6xh32KKfhF",
     "eJBtHGXbv2IMQw3c",
     "Gil-ndJBUY8AB3uP",
