@@ -1,6 +1,5 @@
 import LoadingScreen from "./Components/LoadingScreen";
 import Experience from "./Experience";
-import MainSection from "./MainSection";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useWheel, useDrag } from "@use-gesture/react";
 import { Lethargy } from "lethargy";
@@ -91,7 +90,6 @@ const Home = () => {
     <div {...wheel()} {...drag()} style={{ touchAction: "none" }}>
       <LoadingScreen />
       <Experience />
-      <MainSection />
     </div>
   );
 };
