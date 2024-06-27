@@ -44,14 +44,39 @@ function Page4() {
       { scale: 1, opacity: 1 },
       { scale: 40, opacity: 0, duration: 1, ease: "power3.inOut" }
     );
-    tl.to(".section3", { autoAlpha: 0, duration: 1 });
+    tl.to(".section3", { autoAlpha: 0 });
     tl.to(".section3", { scale: 1 }).to(".section4", {
       autoAlpha: 1,
-      duration: 1,
     });
 
     tl.fromTo(
-      [page4text.current, text90.current],
+      text90.current,
+      {
+        rotationX: 70,
+        opacity: 0,
+      },
+      {
+        rotationX: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: "back.out",
+      },
+      "-=2"
+    );
+
+    tl.from(
+      chars1,
+      {
+        yPercent: 100,
+        stagger: 0.04,
+        opacity: 0,
+        ease: "power1.out",
+        duration: 1.5,
+      },
+      "<"
+    );
+    tl.fromTo(
+      page4text.current,
       {
         rotationX: 70,
         opacity: 0,
@@ -62,10 +87,11 @@ function Page4() {
         duration: 1.5,
         ease: "back.out",
       }
+      ,"-=1.5"
     );
 
     tl.from(
-      [chars, chars1],
+      chars,
       {
         yPercent: 100,
         stagger: 0.04,
@@ -124,9 +150,9 @@ function Page4() {
 
   return (
     <div className=" absolute top-0 left-0 section4 w-full lg:h-36 h-64 flex items-center justify-center   gap-2 fontHorizon text-white  opacity-0">
-      <div className="flex flex-col justify-center items-center text-center lg:flex-row lg:space-x-4">
+      <div className="flex p-20 flex-col justify-center items-center text-center lg:flex-row lg:space-x-4">
         <div>
-          <h1 ref={text90} className="lg:text-8xl text-4xl text-[#AAA3FF] ">
+          <h1 ref={text90} className="lg:text-8xl text-4xl  ">
             90%
           </h1>
         </div>
