@@ -41,7 +41,7 @@ function Page4() {
 
     tl.fromTo(
       ".section3",
-      { scale: 0, opacity: 1 },
+      { scale: 1, opacity: 1 },
       { scale: 40, opacity: 0, duration: 1, ease: "power3.inOut" }
     );
     tl.to(".section3", { autoAlpha: 0, duration: 1 });

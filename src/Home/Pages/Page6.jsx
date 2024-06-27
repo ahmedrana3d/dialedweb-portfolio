@@ -83,7 +83,7 @@ function Page6() {
           <div className="overflow-hidden">
             <p
               ref={page6Text1}
-              className="lg:text-8xl text-5xl text-[#AAA3FF] headline-orange  "
+              className="lg:text-8xl text-5xl headline-orange  "
             >
               {play ? <AnimatedCounter from={0} to={252000} /> : ""}
               {snapshot.step === 6 && !play ? "000000" : ""}
